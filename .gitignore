@@ -40,3 +40,8 @@ desktop.ini
 .vercel/
 .netlify/
 
+# ─── Claude / agent-only files (not part of the project) ───
+memory/
+.claude/
+CLAUDE.md
+docs
