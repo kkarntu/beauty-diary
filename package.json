@@ -1,0 +1,34 @@
+{
+  "name": "beauty-diary",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Beauty Diary — women-oriented blog (Next.js + NestJS monorepo)",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "pnpm --filter=@beauty-diary/shared run build && pnpm -r --parallel --stream run dev",
+    "dev:api": "pnpm --filter=@beauty-diary/shared run build && pnpm --filter=...@beauty-diary/api --parallel --stream run dev",
+    "dev:web": "pnpm --filter=@beauty-diary/shared run build && pnpm --filter=...@beauty-diary/web --parallel --stream run dev",
+    "build": "pnpm --filter=@beauty-diary/shared run build && pnpm -r --filter=!@beauty-diary/shared run build",
+    "test": "pnpm -r run test",
+    "typecheck": "pnpm -r run typecheck",
+    "lint": "pnpm -r run lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "infra:up": "docker compose -f infra/docker-compose.yml up -d",
+    "infra:down": "docker compose -f infra/docker-compose.yml down",
+    "infra:reset": "docker compose -f infra/docker-compose.yml down -v && pnpm infra:up",
+    "db:migrate": "pnpm --filter=@beauty-diary/api run migration:run",
+    "db:revert": "pnpm --filter=@beauty-diary/api run migration:revert",
+    "db:generate": "pnpm --filter=@beauty-diary/api run migration:generate",
+    "db:seed": "pnpm --filter=@beauty-diary/api run db:seed"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "typescript": "^5.7.3"
+  }
+}

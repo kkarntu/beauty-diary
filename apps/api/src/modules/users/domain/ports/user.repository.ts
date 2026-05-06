@@ -1,0 +1,14 @@
+import type { User } from '../user.entity';
+
+/**
+ * Domain port. Implemented by the infrastructure layer (TypeORM).
+ * The application layer depends on this interface only.
+ */
+export interface UserRepository {
+  findById(id: string): Promise<User | null>;
+  findByEmail(email: string): Promise<User | null>;
+  findByNickname(nickname: string): Promise<User | null>;
+  save(user: User): Promise<void>;
+}
+
+export const USER_REPOSITORY = Symbol('USER_REPOSITORY');

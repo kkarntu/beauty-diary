@@ -1,0 +1,587 @@
+{
+  "metadata": {
+    "title": "Beauty Diary",
+    "description": "Women's blog about beauty, skincare, style, and wellness."
+  },
+  "home": {
+    "phaseLabel": "Phase F1 · foundation",
+    "title": "Beauty Diary",
+    "intro": "Temporary page that verifies design tokens, fonts, and dark mode. Click the moon icon in the top right to switch themes.",
+    "tokens": {
+      "background": "background",
+      "surface": "surface",
+      "surfaceMuted": "surface-muted",
+      "primary": "primary",
+      "accent": "accent",
+      "foregroundMuted": "foreground-muted"
+    },
+    "buttons": {
+      "primary": "Primary button",
+      "secondary": "Secondary",
+      "accent": "Accent"
+    }
+  },
+  "navigation": {
+    "skipToContent": "Skip to main content",
+    "scrollToTop": "Scroll to top",
+    "searchPlaceholder": "Search...",
+    "newPost": "Create new post",
+    "userMenu": "User menu",
+    "openMenu": "Open menu",
+    "categories": "Categories",
+    "profile": "Profile",
+    "settings": "Settings",
+    "myPosts": "My posts",
+    "favorites": "Favorites",
+    "logout": "Log out",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "feed": "Feed"
+  },
+  "categories": {
+    "skincare": "Skincare",
+    "makeup": "Makeup",
+    "hair": "Hair",
+    "wellness": "Wellness",
+    "fashion": "Fashion",
+    "lifestyle": "Lifestyle"
+  },
+  "feed": {
+    "title": "Feed",
+    "subtitle": "The latest from our community.",
+    "allCategories": "All",
+    "sort": {
+      "recent": "Recent",
+      "popular": "Popular"
+    },
+    "empty": {
+      "title": "Nothing here yet",
+      "subtitle": "Published posts from the community will show up here."
+    },
+    "error": {
+      "title": "Couldn't load the feed",
+      "subtitle": "Something went wrong while fetching posts. Try refreshing the page.",
+      "retry": "Try again"
+    },
+    "pagination": {
+      "label": "Feed pagination",
+      "previous": "Previous",
+      "next": "Next",
+      "pageOf": "Page {page} of {total}"
+    },
+    "filteredByTag": "Filtered by tag: #{tag}",
+    "sidebar": {
+      "trendingTitle": "Trending topics",
+      "tags": {
+        "beauty-routine": "Beauty routine",
+        "k-beauty": "K-beauty",
+        "spring-2026": "Spring 2026",
+        "anti-aging": "Anti-aging",
+        "minimalism": "Minimalism",
+        "organic": "Organic beauty",
+        "lip-care": "Lip care",
+        "spf-protection": "SPF protection"
+      },
+      "newsletter": {
+        "title": "Newsletter",
+        "description": "Get the best posts in your inbox every week.",
+        "placeholder": "your@email.com",
+        "submit": "Subscribe",
+        "submitting": "Subscribing...",
+        "success": "Thanks for subscribing!",
+        "error": "Couldn't subscribe"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your Beauty Diary account",
+      "emailLabel": "Email",
+      "emailPlaceholder": "your@email.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign in",
+      "submitting": "Signing in...",
+      "noAccount": "Don't have an account?",
+      "register": "Sign up",
+      "errors": {
+        "invalidCredentials": "Wrong email or password",
+        "blocked": "This account is blocked",
+        "unknown": "Something went wrong. Please try again."
+      }
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Join the Beauty Diary community",
+      "emailLabel": "Email",
+      "emailPlaceholder": "your@email.com",
+      "nicknameLabel": "Nickname",
+      "nicknamePlaceholder": "your_nickname",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "At least 8 characters",
+      "submit": "Sign up",
+      "submitting": "Creating account...",
+      "haveAccount": "Already have an account?",
+      "login": "Sign in",
+      "errors": {
+        "emailTaken": "This email is already registered",
+        "nicknameTaken": "This nickname is taken",
+        "unknown": "Something went wrong. Please try again."
+      }
+    },
+    "illustration": {
+      "login": {
+        "title": "Your personal beauty diary",
+        "body": "Write posts, share your experience, save favorites, and connect with a community of women who care about beauty and self-care."
+      },
+      "register": {
+        "title": "Start your beauty journey",
+        "body": "Create posts, comment, save favorites, and share your beauty knowledge with others."
+      },
+      "forgotPassword": {
+        "title": "No worries",
+        "body": "We'll email you a reset link in seconds. Quick and secure."
+      }
+    },
+    "forgotPassword": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we'll send you a reset link",
+      "emailLabel": "Email",
+      "emailPlaceholder": "your@email.com",
+      "submit": "Send link",
+      "submitting": "Sending...",
+      "successTitle": "Check your inbox",
+      "success": "If an account with that email exists, we've sent a password reset link.",
+      "back": "Back to sign in"
+    }
+  },
+  "editor": {
+    "placeholder": "Tell your story...",
+    "bold": "Bold",
+    "italic": "Italic",
+    "bulletList": "Bullet list",
+    "orderedList": "Numbered list",
+    "blockquote": "Quote",
+    "image": "Insert image",
+    "undo": "Undo",
+    "redo": "Redo"
+  },
+  "postDetail": {
+    "readingMinutes": "{count, plural, one {# min read} other {# min read}}",
+    "backToFeed": "Back to feed",
+    "actions": {
+      "save": "Save",
+      "saved": "Saved",
+      "share": "Share",
+      "shareCopied": "Link copied",
+      "shareFailed": "Couldn't copy link",
+      "liked": "Liked!",
+      "unliked": "Like removed",
+      "favoriteAdded": "Saved!",
+      "favoriteRemoved": "Removed from saved",
+      "likeAria": "Like post",
+      "unlikeAria": "Remove like",
+      "favoriteAria": "Save post",
+      "unfavoriteAria": "Remove from saved",
+      "shareAria": "Share post",
+      "errorLike": "Couldn't update like",
+      "errorFavorite": "Couldn't update saved"
+    },
+    "requiresAuth": {
+      "title": "Sign in required",
+      "description": "Sign in to like and save posts.",
+      "cta": "Sign in"
+    },
+    "comments": {
+      "title": "{count, plural, =0 {No comments yet} one {# comment} other {# comments}}",
+      "placeholder": "Leave a comment...",
+      "replyPlaceholder": "Write a reply...",
+      "submit": "Send",
+      "submitting": "Sending...",
+      "reply": "Reply",
+      "delete": "Delete",
+      "empty": "Be the first to comment.",
+      "signInToComment": "Sign in to comment",
+      "edit": "Edit",
+      "edited": "edited",
+      "saveEdit": "Save",
+      "savingEdit": "Saving...",
+      "cancel": "Cancel",
+      "disabledByAuthor": "The author disabled comments on this post.",
+      "errorCreate": "Couldn't post comment",
+      "errorDelete": "Couldn't delete comment",
+      "errorUpdate": "Couldn't save the edit"
+    },
+    "notFound": {
+      "title": "Post not found",
+      "subtitle": "It may have been deleted or moved.",
+      "backToFeed": "Back to feed"
+    }
+  },
+  "category": {
+    "label": "Category",
+    "postsCount": "{count, plural, =0 {No posts yet} one {# post} other {# posts}}",
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {page} of {total}",
+    "empty": {
+      "title": "No posts in this category yet",
+      "subtitle": "Check back later or browse another category."
+    }
+  },
+  "admin": {
+    "title": "Admin",
+    "nav": {
+      "users": "Users",
+      "auditLog": "Audit log",
+      "outbox": "Email failures"
+    },
+    "outbox": {
+      "title": "Failed email sends",
+      "subtitle": "Emails that hit the retry cap and stopped cycling",
+      "empty": "No failed emails",
+      "retry": "Retry",
+      "saving": "Saving...",
+      "requeued": "Email requeued",
+      "retryFailed": "Couldn't requeue the email",
+      "table": {
+        "when": "When",
+        "recipient": "Recipient",
+        "subject": "Subject",
+        "attempts": "Attempts",
+        "error": "Error",
+        "actions": "Actions"
+      }
+    },
+    "users": {
+      "title": "Users",
+      "subtitle": "Manage account roles and blocks",
+      "filters": {
+        "all": "All",
+        "active": "Active",
+        "blocked": "Blocked",
+        "admins": "Admins"
+      },
+      "search": "Search by email or nickname...",
+      "table": {
+        "user": "User",
+        "email": "Email",
+        "role": "Role",
+        "status": "Status",
+        "joined": "Joined",
+        "actions": "Actions"
+      },
+      "role": {
+        "user": "User",
+        "admin": "Admin"
+      },
+      "status": {
+        "active": "Active",
+        "blocked": "Blocked"
+      },
+      "actions": {
+        "block": "Block",
+        "unblock": "Unblock",
+        "makeAdmin": "Make admin",
+        "makeUser": "Revoke admin",
+        "saving": "Saving..."
+      },
+      "toast": {
+        "saved": "Changes saved",
+        "failed": "Couldn't save changes"
+      },
+      "empty": "No users found"
+    },
+    "audit": {
+      "title": "Audit log",
+      "subtitle": "Who did what, and when",
+      "table": {
+        "actor": "Actor",
+        "action": "Action",
+        "target": "Target",
+        "metadata": "Details",
+        "when": "When"
+      },
+      "system": "System",
+      "empty": "Audit log is empty"
+    },
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {page} of {total}",
+    "forbidden": {
+      "title": "Access denied",
+      "subtitle": "You don't have admin privileges.",
+      "back": "Go home"
+    }
+  },
+  "myPosts": {
+    "title": "My posts",
+    "subtitle": "Manage your published posts and drafts",
+    "newPost": "New post",
+    "filters": {
+      "all": "All",
+      "published": "Published",
+      "draft": "Drafts",
+      "archived": "Archived"
+    },
+    "status": {
+      "draft": "Draft",
+      "published": "Published",
+      "archived": "Archived"
+    },
+    "actions": {
+      "edit": "Edit",
+      "view": "View"
+    },
+    "empty": {
+      "title": "Nothing here",
+      "subtitle": "Write a new post or change the filter.",
+      "cta": "Write a post"
+    },
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {page} of {total}"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search posts...",
+    "submit": "Search",
+    "resultsFor": "Results for: \"{query}\"",
+    "resultsCount": "{count, plural, =0 {No results} one {# result} other {# results}}",
+    "empty": {
+      "title": "Nothing found",
+      "subtitle": "Try a different query or browse the feed."
+    },
+    "intro": {
+      "title": "Find a post",
+      "subtitle": "Enter a query to search published posts."
+    }
+  },
+  "favorites": {
+    "title": "Saved posts",
+    "subtitle": "Your personal collection of favorite beauty stories",
+    "empty": {
+      "title": "No saved posts yet",
+      "subtitle": "Tap the bookmark icon on any post to save it here.",
+      "cta": "Browse the feed"
+    },
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {page} of {total}"
+  },
+  "profile": {
+    "title": "Profile settings",
+    "section": {
+      "info": "Profile",
+      "account": "Account",
+      "notifications": "Notifications"
+    },
+    "infoTitle": "Profile info",
+    "accountTitle": "Account settings",
+    "notificationsTitle": "Notifications",
+    "account": {
+      "emailHint": "Email cannot be changed from this screen.",
+      "changePassword": "Change password",
+      "passwordHint": "We'll email you a link to change your password.",
+      "sendingReset": "Sending...",
+      "resetSent": "Email sent — check your inbox.",
+      "resetFailed": "Couldn't send the email"
+    },
+    "notifications": {
+      "newFollower": "New followers",
+      "newFollowerHint": "Notify me when someone follows me.",
+      "newComment": "Comments on my posts",
+      "newCommentHint": "Notify me about new comments on my posts.",
+      "newLike": "Likes",
+      "newLikeHint": "Notify me about likes on my posts.",
+      "newsletter": "Newsletter",
+      "newsletterHint": "Weekly digest of the best posts.",
+      "saveError": "Couldn't save preferences"
+    },
+    "displayName": {
+      "label": "Display name",
+      "placeholder": "How should we introduce you?"
+    },
+    "bio": {
+      "label": "About",
+      "placeholder": "Tell us a bit about yourself...",
+      "hint": "Up to 200 characters"
+    },
+    "avatar": {
+      "label": "Avatar",
+      "upload": "Upload photo",
+      "uploading": "Uploading...",
+      "remove": "Remove",
+      "hint": "JPG, PNG, WebP or AVIF, up to 5 MB"
+    },
+    "email": {
+      "label": "Email"
+    },
+    "save": "Save changes",
+    "saving": "Saving...",
+    "saved": "Profile updated",
+    "saveFailed": "Couldn't save changes"
+  },
+  "authorProfile": {
+    "postsCount": "{count, plural, =0 {No published posts yet} one {# published post} other {# published posts}}",
+    "postsLabel": "Posts",
+    "followersLabel": "Followers",
+    "followingLabel": "Following",
+    "follow": {
+      "follow": "Follow",
+      "unfollow": "Unfollow",
+      "saving": "Saving...",
+      "error": "Couldn't update follow"
+    },
+    "empty": {
+      "title": "No posts yet",
+      "subtitle": "This author hasn't published anything yet."
+    }
+  },
+  "postEditor": {
+    "headerNew": "New post",
+    "headerEdit": "Edit post",
+    "subheading": "Fill in the fields and publish, or save as a draft.",
+    "title": {
+      "label": "Title",
+      "placeholder": "Give your post a title..."
+    },
+    "category": {
+      "label": "Category",
+      "placeholder": "Pick a category",
+      "required": "Please pick a category"
+    },
+    "settings": {
+      "title": "Settings",
+      "allowComments": "Allow comments",
+      "showInFeed": "Show in feed"
+    },
+    "cover": {
+      "label": "Cover image",
+      "upload": "Click or drag an image here",
+      "uploading": "Uploading...",
+      "hint": "JPG, PNG, WebP or AVIF, up to 5 MB",
+      "remove": "Remove cover",
+      "previewAlt": "Cover preview",
+      "errors": {
+        "mime": "Only JPG, PNG, WebP, and AVIF are supported",
+        "size": "File too large (max 5 MB)",
+        "upload": "Couldn't upload image"
+      }
+    },
+    "excerpt": {
+      "label": "Excerpt (optional)",
+      "placeholder": "A short summary...",
+      "description": "Shown in the feed under the title."
+    },
+    "tabs": {
+      "edit": "Edit",
+      "preview": "Preview"
+    },
+    "preview": {
+      "empty": "Your post preview will appear here."
+    },
+    "stats": {
+      "words": "words",
+      "minutes": "min read"
+    },
+    "backToMyPosts": "Back to my posts",
+    "tags": {
+      "label": "Tags",
+      "placeholder": "skincare, winter, ritual",
+      "description": "Comma-separated. Up to 10 tags."
+    },
+    "content": {
+      "label": "Content",
+      "placeholder": "Tell your story..."
+    },
+    "actions": {
+      "saveDraft": "Save draft",
+      "saving": "Saving...",
+      "publish": "Publish",
+      "publishShort": "Publish",
+      "publishing": "Publishing..."
+    },
+    "autosave": {
+      "saving": "Auto-saving...",
+      "savedAt": "Saved · {time}",
+      "error": "Auto-save failed"
+    },
+    "toast": {
+      "savedDraft": "Draft saved",
+      "published": "Post published!",
+      "slugConflict": "A post with this title already exists",
+      "validation": "Please fill in the required fields",
+      "unknown": "Couldn't save the post"
+    }
+  },
+  "notifications": {
+    "aria": "Notifications",
+    "title": "Notifications",
+    "empty": "No notifications yet",
+    "emptyHint": "New comments, likes and followers will show up here.",
+    "markAllRead": "Mark all read",
+    "viewAll": "View all",
+    "error": "Couldn't load notifications",
+    "commentBody": "{name} commented on your post \"{title}\"",
+    "followBody": "{name} started following you",
+    "likeBody": "{name} liked your post \"{title}\""
+  },
+  "themeToggle": {
+    "switchToDark": "Switch to dark theme",
+    "switchToLight": "Switch to light theme"
+  },
+  "languageSwitcher": {
+    "label": "Switch language"
+  },
+  "landing": {
+    "hero": {
+      "title": "Your personal beauty diary",
+      "subtitle": "Write, share, and discover beauty secrets together with a community of like-minded women.",
+      "ctaPrimary": "Get started — free",
+      "ctaSecondary": "Browse the feed"
+    },
+    "featured": {
+      "title": "Trending now",
+      "readMore": "Read more"
+    },
+    "features": {
+      "title": "Why Beauty Diary?",
+      "subtitle": "A platform built for those who live and breathe beauty and want to share what they know.",
+      "write": {
+        "title": "Write articles",
+        "body": "Create your own content about beauty, makeup, skincare, and lifestyle."
+      },
+      "community": {
+        "title": "Connect",
+        "body": "Discuss, comment, and find your tribe in the community."
+      },
+      "inspire": {
+        "title": "Get inspired",
+        "body": "Save your favorite posts and build your own collection of ideas."
+      }
+    },
+    "cta": {
+      "title": "Join Beauty Diary today",
+      "subtitle": "Free sign-up · Unlimited articles · An active community",
+      "button": "Create an account"
+    }
+  },
+  "footer": {
+    "tagline": "A women's blog about beauty, skincare, style, and wellness — by the community, for the community.",
+    "explore": "Explore",
+    "account": "Account",
+    "copyright": "All rights reserved.",
+    "madeWith": "Made with love in Ukraine",
+    "links": {
+      "feed": "Feed",
+      "skincare": "Skincare",
+      "wellness": "Wellness",
+      "signIn": "Sign in",
+      "signUp": "Sign up",
+      "write": "Write a post"
+    }
+  }
+}

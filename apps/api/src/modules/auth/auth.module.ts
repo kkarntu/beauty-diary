@@ -1,0 +1,53 @@
+import { Module } from '@nestjs/common';
+import { CqrsModule } from '@nestjs/cqrs';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from '../users/users.module';
+import { LoginUserHandler } from './application/commands/login-user.handler';
+import { LogoutUserHandler } from './application/commands/logout-user.handler';
+import { RefreshTokensHandler } from './application/commands/refresh-tokens.handler';
+import { RegisterUserHandler } from './application/commands/register-user.handler';
+import { RequestPasswordResetHandler } from './application/commands/request-password-reset.handler';
+import { ResetPasswordHandler } from './application/commands/reset-password.handler';
+import { GetCurrentUserHandler } from './application/queries/get-current-user.handler';
+import { AuthSharedModule } from './auth-shared.module';
+import { MAILER } from './domain/ports/mailer';
+import { PASSWORD_HASHER } from './domain/ports/password-hasher';
+import { PASSWORD_RESET_TOKEN_REPOSITORY } from './domain/ports/password-reset-token.repository';
+import { REFRESH_TOKEN_REPOSITORY } from './domain/ports/refresh-token.repository';
+import { Argon2PasswordHasher } from './infrastructure/argon2-password-hasher';
+import { NodemailerMailer } from './infrastructure/nodemailer-mailer';
+import { PasswordResetTokenOrmEntity } from './infrastructure/persistence/password-reset-token.orm-entity';
+import { RefreshTokenOrmEntity } from './infrastructure/persistence/refresh-token.orm-entity';
+import { TypeOrmPasswordResetTokenRepository } from './infrastructure/persistence/typeorm-password-reset-token.repository';
+import { TypeOrmRefreshTokenRepository } from './infrastructure/persistence/typeorm-refresh-token.repository';
+import { AuthController } from './presentation/auth.controller';
+
+const commandHandlers = [
+  RegisterUserHandler,
+  LoginUserHandler,
+  RefreshTokensHandler,
+  LogoutUserHandler,
+  RequestPasswordResetHandler,
+  ResetPasswordHandler,
+];
+const queryHandlers = [GetCurrentUserHandler];
+
+@Module({
+  imports: [
+    CqrsModule,
+    AuthSharedModule,
+    UsersModule,
+    TypeOrmModule.forFeature([RefreshTokenOrmEntity, PasswordResetTokenOrmEntity]),
+  ],
+  controllers: [AuthController],
+  providers: [
+    ...commandHandlers,
+    ...queryHandlers,
+    { provide: PASSWORD_HASHER, useClass: Argon2PasswordHasher },
+    { provide: MAILER, useClass: NodemailerMailer },
+    { provide: REFRESH_TOKEN_REPOSITORY, useClass: TypeOrmRefreshTokenRepository },
+    { provide: PASSWORD_RESET_TOKEN_REPOSITORY, useClass: TypeOrmPasswordResetTokenRepository },
+  ],
+  exports: [REFRESH_TOKEN_REPOSITORY],
+})
+export class AuthModule {}
