@@ -9,9 +9,13 @@ services:
     plan: free
     region: frankfurt
     rootDir: .
+    # `--prod=false` forces devDependencies to install even though
+    # NODE_ENV=production — we need @nestjs/cli (provides the `nest`
+    # binary) to compile the app. The compiled output ships only what
+    # NestJS bundles into dist/, so this doesn't bloat the runtime.
     buildCommand: |
       corepack enable && \
-      pnpm install --frozen-lockfile && \
+      pnpm install --frozen-lockfile --prod=false && \
       pnpm --filter=@beauty-diary/shared build && \
       pnpm --filter=@beauty-diary/api build
     # Free tier doesn't support `preDeployCommand`, so migrations run at
