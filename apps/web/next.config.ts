@@ -5,18 +5,25 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // Allow @beauty-diary/shared (workspace package, raw TS) to be transpiled.
   transpilePackages: ['@beauty-diary/shared'],
   images: {
     remotePatterns: [
-      // Unsplash for placeholder cover images while the editor's R2 uploader
-      // isn't wired through every screen.
       { protocol: 'https', hostname: 'images.unsplash.com' },
-      // R2 / LocalStack public URLs for real uploads.
       { protocol: 'https', hostname: '*.r2.cloudflarestorage.com' },
       { protocol: 'https', hostname: '*.r2.dev' },
       { protocol: 'http', hostname: 'localhost' },
     ],
+  },
+  // Proxy API + Socket.IO through Next so Set-Cookie lands on this origin
+  // — that lets RSC pages read the auth cookie and the WS handshake carry
+  // it without cross-site cookie gymnastics.
+  async rewrites() {
+    const apiOrigin = process.env.API_PROXY_TARGET ?? process.env.API_INTERNAL_URL;
+    if (!apiOrigin) return [];
+    return [
+      { source: '/api/:path*', destination: `${apiOrigin}/api/:path*` },
+      { source: '/socket.io/:path*', destination: `${apiOrigin}/socket.io/:path*` },
+    ];
   },
 };
 

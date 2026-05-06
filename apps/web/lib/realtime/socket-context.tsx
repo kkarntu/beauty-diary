@@ -29,14 +29,18 @@ export function SocketProvider({ children }: { children: ReactNode }) {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
+    // Empty string = same-origin; the request rides through Next's
+    // /socket.io rewrite, so the handshake carries first-party cookies.
     const url = process.env.NEXT_PUBLIC_API_URL ?? '';
     // `autoConnect: false` + a microtask connect lets a quick mount →
     // cleanup → re-mount cycle (e.g. React Strict Mode in dev) tear
     // down before the WS handshake starts, instead of opening and
     // immediately closing a half-established socket.
+    // Long-polling only: Vercel's edge does not proxy WS upgrades through
+    // rewrites, so we trade pure-WS for HTTP polling that works first-party.
     const next = io(url, {
       withCredentials: true,
-      transports: ['websocket', 'polling'],
+      transports: ['polling'],
       autoConnect: false,
     });
     let cancelled = false;

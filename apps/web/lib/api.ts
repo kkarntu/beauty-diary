@@ -20,8 +20,11 @@ import axios, {
  * would re-use the just-rotated refresh token and trigger the
  * server-side reuse-detection that revokes the entire session.
  */
+// Empty baseURL = same-origin. Requests go to /api/* on the web origin
+// and Next's rewrites proxy them to the actual API. This keeps cookies
+// first-party so SSR (and the WS handshake) can read them.
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL ?? '',
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });
