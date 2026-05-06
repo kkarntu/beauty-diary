@@ -28,16 +28,16 @@ export function AccountSection({ email }: Props) {
   return (
     <div className="space-y-8">
       <div>
-        <p className="block text-sm font-medium text-foreground mb-2">{t('email.label')}</p>
+        <p className="text-foreground mb-2 block text-sm font-medium">{t('email.label')}</p>
         <p className="text-foreground-muted mb-2">{email}</p>
-        <p className="text-xs text-foreground-muted">{t('account.emailHint')}</p>
+        <p className="text-foreground-muted text-xs">{t('account.emailHint')}</p>
       </div>
 
-      <div className="border-t border-border pt-6">
-        <p className="block text-sm font-medium text-foreground mb-2">
+      <div className="border-border border-t pt-6">
+        <p className="text-foreground mb-2 block text-sm font-medium">
           {t('account.changePassword')}
         </p>
-        <p className="text-xs text-foreground-muted mb-3">{t('account.passwordHint')}</p>
+        <p className="text-foreground-muted mb-3 text-xs">{t('account.passwordHint')}</p>
         <Button
           type="button"
           variant="outline"

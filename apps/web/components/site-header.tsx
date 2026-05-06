@@ -16,25 +16,25 @@ export function SiteHeader() {
   const t = useTranslations('navigation');
 
   return (
-    <nav className="sticky top-0 z-50 bg-surface/95 backdrop-blur-sm border-b border-border">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-20">
-        <div className="flex items-center justify-between h-16 gap-3">
+    <nav className="bg-surface/95 border-border sticky top-0 z-50 border-b backdrop-blur-sm">
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-20">
+        <div className="flex h-16 items-center justify-between gap-3">
           <Link href={routes.feed}>
             <h1
               style={{ fontFamily: 'var(--font-display)' }}
-              className="text-xl md:text-2xl font-semibold text-foreground cursor-pointer hover:text-primary transition-colors"
+              className="text-foreground hover:text-primary cursor-pointer text-xl font-semibold transition-colors md:text-2xl"
             >
               Beauty Diary
             </h1>
           </Link>
 
           <div className="flex items-center gap-2">
-            <div className="hidden lg:flex items-center relative">
-              <Search className="absolute left-3 w-4 h-4 text-foreground-muted pointer-events-none z-10" />
+            <div className="relative hidden items-center lg:flex">
+              <Search className="text-foreground-muted pointer-events-none absolute left-3 z-10 h-4 w-4" />
               <Link href={routes.search} className="w-full">
                 <Input
                   placeholder={t('searchPlaceholder')}
-                  className="pl-9 w-64 bg-surface-muted border-0 focus-visible:ring-1 focus-visible:ring-ring cursor-pointer"
+                  className="bg-surface-muted focus-visible:ring-ring w-64 cursor-pointer border-0 pl-9 focus-visible:ring-1"
                   readOnly
                 />
               </Link>
@@ -49,7 +49,7 @@ export function SiteHeader() {
                 className="text-foreground-muted hover:text-foreground"
                 aria-label={t('newPost')}
               >
-                <PenSquare className="w-5 h-5" />
+                <PenSquare className="h-5 w-5" />
               </Button>
             </Link>
 

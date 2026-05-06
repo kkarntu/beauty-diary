@@ -18,16 +18,14 @@ export async function FeedPagination({ page, pageSize, total, buildHref }: Props
   return (
     <nav
       aria-label={t('label')}
-      className="flex items-center justify-center gap-3 pt-8 mt-8 border-t border-border"
+      className="border-border mt-8 flex items-center justify-center gap-3 border-t pt-8"
     >
       <Link
         href={buildHref(Math.max(1, page - 1))}
         aria-disabled={page <= 1}
         className={cn(
-          'inline-flex items-center gap-1 h-9 px-3 rounded-md text-sm font-medium border border-border bg-surface',
-          page <= 1
-            ? 'pointer-events-none opacity-40'
-            : 'hover:bg-surface-muted text-foreground',
+          'border-border bg-surface inline-flex h-9 items-center gap-1 rounded-md border px-3 text-sm font-medium',
+          page <= 1 ? 'pointer-events-none opacity-40' : 'hover:bg-surface-muted text-foreground',
         )}
       >
         <ChevronLeft className="h-4 w-4" />
@@ -42,7 +40,7 @@ export async function FeedPagination({ page, pageSize, total, buildHref }: Props
         href={buildHref(Math.min(totalPages, page + 1))}
         aria-disabled={page >= totalPages}
         className={cn(
-          'inline-flex items-center gap-1 h-9 px-3 rounded-md text-sm font-medium border border-border bg-surface',
+          'border-border bg-surface inline-flex h-9 items-center gap-1 rounded-md border px-3 text-sm font-medium',
           page >= totalPages
             ? 'pointer-events-none opacity-40'
             : 'hover:bg-surface-muted text-foreground',

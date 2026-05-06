@@ -40,11 +40,7 @@ import {
   GetCurrentUserQuery,
   type GetCurrentUserResult,
 } from '../application/queries/get-current-user.query';
-import {
-  REFRESH_COOKIE_NAME,
-  clearAuthCookies,
-  writeAuthCookies,
-} from './cookies/auth-cookies';
+import { REFRESH_COOKIE_NAME, clearAuthCookies, writeAuthCookies } from './cookies/auth-cookies';
 import { AuthGuard } from './guards/auth.guard';
 import { EnvService } from '../../../config/env.service';
 
@@ -100,10 +96,7 @@ export class AuthController {
 
   @Post('logout')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async logout(
-    @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
-  ): Promise<void> {
+  async logout(@Req() req: Request, @Res({ passthrough: true }) res: Response): Promise<void> {
     const raw = (req.cookies as Record<string, string> | undefined)?.[REFRESH_COOKIE_NAME];
     await this.commandBus.execute(new LogoutUserCommand(raw));
     clearAuthCookies(res, this.env);

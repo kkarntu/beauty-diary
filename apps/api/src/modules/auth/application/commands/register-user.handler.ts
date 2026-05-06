@@ -1,15 +1,9 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, type ICommandHandler } from '@nestjs/cqrs';
 import { v7 as uuidv7 } from 'uuid';
-import {
-  USER_REPOSITORY,
-  type UserRepository,
-} from '../../../users/domain/ports/user.repository';
+import { USER_REPOSITORY, type UserRepository } from '../../../users/domain/ports/user.repository';
 import { User } from '../../../users/domain/user.entity';
-import {
-  EmailAlreadyTakenError,
-  NicknameAlreadyTakenError,
-} from '../../domain/auth.errors';
+import { EmailAlreadyTakenError, NicknameAlreadyTakenError } from '../../domain/auth.errors';
 import { PASSWORD_HASHER, type PasswordHasher } from '../../domain/ports/password-hasher';
 import {
   REFRESH_TOKEN_REPOSITORY,
@@ -20,7 +14,10 @@ import { RefreshToken } from '../../domain/refresh-token.entity';
 import { RegisterUserCommand, type RegisterUserResult } from './register-user.command';
 
 @CommandHandler(RegisterUserCommand)
-export class RegisterUserHandler implements ICommandHandler<RegisterUserCommand, RegisterUserResult> {
+export class RegisterUserHandler implements ICommandHandler<
+  RegisterUserCommand,
+  RegisterUserResult
+> {
   constructor(
     @Inject(USER_REPOSITORY) private readonly users: UserRepository,
     @Inject(REFRESH_TOKEN_REPOSITORY) private readonly refreshTokens: RefreshTokenRepository,

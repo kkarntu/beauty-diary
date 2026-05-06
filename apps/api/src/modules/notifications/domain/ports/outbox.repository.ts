@@ -43,10 +43,7 @@ export interface EmailOutboxRepository {
   markFailed(id: string, error: string): Promise<void>;
 
   /** Lists rows in `status='failed'`, newest first. Used by the admin UI. */
-  listFailed(
-    limit: number,
-    offset: number,
-  ): Promise<{ items: FailedOutboxRow[]; total: number }>;
+  listFailed(limit: number, offset: number): Promise<{ items: FailedOutboxRow[]; total: number }>;
 
   /**
    * Resurrects a `failed` row: status='pending', attempts=0, last_error=null,

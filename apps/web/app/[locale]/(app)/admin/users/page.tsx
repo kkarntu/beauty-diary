@@ -35,8 +35,7 @@ export default async function AdminUsersPage({
 
   const me = await fetchCurrentUser();
   const sp = await searchParams;
-  const filter: FilterId =
-    sp.filter && FILTERS.includes(sp.filter) ? sp.filter : 'all';
+  const filter: FilterId = sp.filter && FILTERS.includes(sp.filter) ? sp.filter : 'all';
   const page = Math.max(1, Number(sp.page ?? 1) || 1);
   const search = sp.q && sp.q.trim().length > 0 ? sp.q.trim() : undefined;
 
@@ -70,11 +69,11 @@ export default async function AdminUsersPage({
       <div>
         <h2
           style={{ fontFamily: 'var(--font-display)' }}
-          className="text-2xl font-medium text-foreground mb-1"
+          className="text-foreground mb-1 text-2xl font-medium"
         >
           {tU('title')}
         </h2>
-        <p className="text-sm text-foreground-muted">{tU('subtitle')}</p>
+        <p className="text-foreground-muted text-sm">{tU('subtitle')}</p>
       </div>
 
       {/* Search + filters */}
@@ -85,20 +84,20 @@ export default async function AdminUsersPage({
           name="q"
           defaultValue={search ?? ''}
           placeholder={tU('search')}
-          className="flex-1 h-9 rounded-md border border-border bg-input-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
+          className="border-border bg-input-background focus-visible:ring-primary/20 h-9 flex-1 rounded-md border px-3 text-sm outline-none focus-visible:ring-2"
         />
       </form>
 
-      <div className="flex gap-2 overflow-x-auto pb-2 -mb-2 scrollbar-hide">
+      <div className="scrollbar-hide -mb-2 flex gap-2 overflow-x-auto pb-2">
         {FILTERS.map((f) => (
           <Link
             key={f}
             href={filterHref(f)}
             className={cn(
-              'px-3 h-9 inline-flex items-center text-sm font-medium rounded-md whitespace-nowrap transition-colors',
+              'inline-flex h-9 items-center whitespace-nowrap rounded-md px-3 text-sm font-medium transition-colors',
               filter === f
                 ? 'bg-primary text-primary-foreground'
-                : 'border border-border text-foreground-muted hover:text-foreground hover:bg-surface-muted',
+                : 'border-border text-foreground-muted hover:text-foreground hover:bg-surface-muted border',
             )}
           >
             {tU(`filters.${f}`)}
@@ -107,9 +106,9 @@ export default async function AdminUsersPage({
       </div>
 
       {items.length === 0 ? (
-        <p className="py-12 text-center text-foreground-muted">{tU('empty')}</p>
+        <p className="text-foreground-muted py-12 text-center">{tU('empty')}</p>
       ) : (
-        <div className="bg-surface rounded-xl border border-border overflow-hidden">
+        <div className="bg-surface border-border overflow-hidden rounded-xl border">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="bg-surface-muted text-foreground-muted">
@@ -124,14 +123,12 @@ export default async function AdminUsersPage({
               </thead>
               <tbody>
                 {items.map((u) => (
-                  <tr key={u.id} className="border-t border-border align-top">
+                  <tr key={u.id} className="border-border border-t align-top">
                     <td className="px-4 py-3">
-                      <p className="font-medium text-foreground">
-                        {u.displayName ?? u.nickname}
-                      </p>
-                      <p className="text-xs text-foreground-muted">@{u.nickname}</p>
+                      <p className="text-foreground font-medium">{u.displayName ?? u.nickname}</p>
+                      <p className="text-foreground-muted text-xs">@{u.nickname}</p>
                     </td>
-                    <td className="px-4 py-3 text-foreground-muted">{u.email}</td>
+                    <td className="text-foreground-muted px-4 py-3">{u.email}</td>
                     <td className="px-4 py-3">
                       <Badge
                         variant="secondary"
@@ -156,7 +153,7 @@ export default async function AdminUsersPage({
                         {u.isBlocked ? tU('status.blocked') : tU('status.active')}
                       </Badge>
                     </td>
-                    <td className="px-4 py-3 text-foreground-muted">
+                    <td className="text-foreground-muted px-4 py-3">
                       {formatLongDate(u.createdAt, locale)}
                     </td>
                     <td className="px-4 py-3">
@@ -180,18 +177,18 @@ export default async function AdminUsersPage({
           {page > 1 ? (
             <Link
               href={pageHref(page - 1)}
-              className="text-sm font-medium text-foreground hover:text-primary"
+              className="text-foreground hover:text-primary text-sm font-medium"
             >
               ← {t('previous')}
             </Link>
           ) : null}
-          <span className="text-sm text-foreground-muted tabular-nums">
+          <span className="text-foreground-muted text-sm tabular-nums">
             {t('pageOf', { page, total: totalPages })}
           </span>
           {page < totalPages ? (
             <Link
               href={pageHref(page + 1)}
-              className="text-sm font-medium text-foreground hover:text-primary"
+              className="text-foreground hover:text-primary text-sm font-medium"
             >
               {t('next')} →
             </Link>

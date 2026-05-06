@@ -34,7 +34,7 @@ export function CoverUploader({ value, onChange, hasError }: Props) {
 
   if (value) {
     return (
-      <div className="relative h-64 md:h-80 rounded-lg overflow-hidden bg-surface-muted group">
+      <div className="bg-surface-muted group relative h-64 overflow-hidden rounded-lg md:h-80">
         <Image
           src={value}
           alt={t('previewAlt')}
@@ -48,7 +48,7 @@ export function CoverUploader({ value, onChange, hasError }: Props) {
           size="icon"
           onClick={() => onChange('')}
           aria-label={t('remove')}
-          className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
+          className="absolute right-3 top-3 opacity-0 shadow-md transition-opacity group-hover:opacity-100"
         >
           <X className="h-4 w-4" />
         </Button>
@@ -58,7 +58,7 @@ export function CoverUploader({ value, onChange, hasError }: Props) {
 
   return (
     <label
-      className={`block border-2 border-dashed rounded-lg p-12 text-center hover:border-primary transition-colors cursor-pointer space-y-3 ${
+      className={`hover:border-primary block cursor-pointer space-y-3 rounded-lg border-2 border-dashed p-12 text-center transition-colors ${
         hasError ? 'border-destructive' : 'border-border'
       }`}
       onDrop={(e) => {
@@ -81,11 +81,11 @@ export function CoverUploader({ value, onChange, hasError }: Props) {
         }}
       />
       {upload.isPending ? (
-        <Loader2 className="w-12 h-12 mx-auto text-primary animate-spin" />
+        <Loader2 className="text-primary mx-auto h-12 w-12 animate-spin" />
       ) : (
-        <ImageIcon className="w-12 h-12 mx-auto text-foreground-muted" />
+        <ImageIcon className="text-foreground-muted mx-auto h-12 w-12" />
       )}
-      <p className="text-sm text-foreground-muted">
+      <p className="text-foreground-muted text-sm">
         {upload.isPending ? t('uploading') : t('upload')}
       </p>
       <p className="caption text-foreground-muted">{t('hint')}</p>

@@ -57,19 +57,14 @@ export class NotificationsController {
   }
 
   @Get('unread-count')
-  async unread(
-    @CurrentUser() user: AuthenticatedUser,
-  ): Promise<{ unreadCount: number }> {
+  async unread(@CurrentUser() user: AuthenticatedUser): Promise<{ unreadCount: number }> {
     const unreadCount = await this.notifications.unreadCount(user.id);
     return { unreadCount };
   }
 
   @Patch(':id/read')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async markRead(
-    @CurrentUser() user: AuthenticatedUser,
-    @Param('id') id: string,
-  ): Promise<void> {
+  async markRead(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string): Promise<void> {
     await this.notifications.markRead(user.id, id);
   }
 

@@ -37,12 +37,12 @@ infra/           docker-compose, render Blueprint, LocalStack init
 
 ## Common commands
 
-| Command | What it does |
-|---|---|
-| `pnpm dev` | Run api + web in parallel |
-| `pnpm test` | Run unit + integration tests across the workspace |
-| `pnpm typecheck` | TypeScript check across all workspaces |
-| `pnpm lint` | ESLint across all workspaces |
-| `pnpm db:migrate` | Apply TypeORM migrations |
-| `pnpm db:generate` | Generate a new migration from entity diff |
-| `pnpm infra:reset` | Wipe local DB / S3 and restart |
+| Command            | What it does                                      |
+| ------------------ | ------------------------------------------------- |
+| `pnpm dev`         | Run api + web in parallel                         |
+| `pnpm test`        | Run unit + integration tests across the workspace |
+| `pnpm typecheck`   | TypeScript check across all workspaces            |
+| `pnpm lint`        | ESLint across all workspaces                      |
+| `pnpm db:migrate`  | Apply TypeORM migrations                          |
+| `pnpm db:generate` | Generate a new migration from entity diff         |
+| `pnpm infra:reset` | Wipe local DB / S3 and restart                    |

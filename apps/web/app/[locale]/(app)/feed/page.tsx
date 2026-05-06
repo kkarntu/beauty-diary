@@ -51,29 +51,24 @@ export default async function FeedPage({
   };
 
   return (
-    <main className="max-w-[1280px] mx-auto px-6 lg:px-20 py-8">
+    <main className="mx-auto max-w-[1280px] px-6 py-8 lg:px-20">
       <FeedFilters categories={categories} activeSlug={categorySlug} activeSort={sort} />
 
       {tagSlug ? (
-        <p className="text-sm text-foreground-muted mb-6">
-          {t('filteredByTag', { tag: tagSlug })}
-        </p>
+        <p className="text-foreground-muted mb-6 text-sm">{t('filteredByTag', { tag: tagSlug })}</p>
       ) : null}
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div className="lg:col-span-9 space-y-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+        <div className="space-y-8 lg:col-span-9">
           {postsResponse.items.length === 0 ? (
-            <div className="text-center py-20 space-y-3">
-              <h2
-                style={{ fontFamily: 'var(--font-display)' }}
-                className="text-2xl font-medium"
-              >
+            <div className="space-y-3 py-20 text-center">
+              <h2 style={{ fontFamily: 'var(--font-display)' }} className="text-2xl font-medium">
                 {t('empty.title')}
               </h2>
               <p className="text-foreground-muted">{t('empty.subtitle')}</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {postsResponse.items.map((post) => (
                 <PostCard key={post.id} post={post} />
               ))}

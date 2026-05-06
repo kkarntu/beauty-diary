@@ -1,11 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  type CurrentUserDto,
-  UpdateProfileDto,
-  type PublicUserDto,
-} from '@beauty-diary/shared';
+import { type CurrentUserDto, UpdateProfileDto, type PublicUserDto } from '@beauty-diary/shared';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
@@ -98,9 +94,9 @@ export function ProfileForm({ user }: Props) {
       <form onSubmit={onSubmit} className="space-y-6">
         {/* Avatar */}
         <div>
-          <p className="block text-sm font-medium text-foreground mb-3">{t('avatar.label')}</p>
+          <p className="text-foreground mb-3 block text-sm font-medium">{t('avatar.label')}</p>
           <div className="flex items-center gap-4">
-            <div className="w-20 h-20 rounded-full bg-surface-muted flex items-center justify-center text-2xl font-medium text-foreground overflow-hidden relative">
+            <div className="bg-surface-muted text-foreground relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-full text-2xl font-medium">
               {avatarUrl ? (
                 <Image src={avatarUrl} alt="" fill sizes="80px" className="object-cover" />
               ) : (
@@ -128,9 +124,7 @@ export function ProfileForm({ user }: Props) {
                   onClick={() => fileInputRef.current?.click()}
                   className="gap-2"
                 >
-                  {upload.isPending ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                  ) : null}
+                  {upload.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
                   {upload.isPending ? t('avatar.uploading') : t('avatar.upload')}
                 </Button>
                 {avatarUrl ? (
@@ -144,7 +138,7 @@ export function ProfileForm({ user }: Props) {
                   </Button>
                 ) : null}
               </div>
-              <p className="text-xs text-foreground-muted">{t('avatar.hint')}</p>
+              <p className="text-foreground-muted text-xs">{t('avatar.hint')}</p>
             </div>
           </div>
         </div>

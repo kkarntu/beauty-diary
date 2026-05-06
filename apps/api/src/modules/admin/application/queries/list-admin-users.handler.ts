@@ -3,10 +3,7 @@ import { type IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import type { AdminUserDto, UserRole } from '@beauty-diary/shared';
-import {
-  ListAdminUsersQuery,
-  type ListAdminUsersResult,
-} from './list-admin-users.query';
+import { ListAdminUsersQuery, type ListAdminUsersResult } from './list-admin-users.query';
 
 interface SqlRow {
   id: string;
@@ -25,9 +22,10 @@ interface CountRow {
 
 @QueryHandler(ListAdminUsersQuery)
 @Injectable()
-export class ListAdminUsersHandler
-  implements IQueryHandler<ListAdminUsersQuery, ListAdminUsersResult>
-{
+export class ListAdminUsersHandler implements IQueryHandler<
+  ListAdminUsersQuery,
+  ListAdminUsersResult
+> {
   constructor(@InjectDataSource() private readonly dataSource: DataSource) {}
 
   async execute(query: ListAdminUsersQuery): Promise<ListAdminUsersResult> {

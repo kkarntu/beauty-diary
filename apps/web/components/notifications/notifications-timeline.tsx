@@ -24,12 +24,12 @@ export function NotificationsTimeline() {
 
   return (
     <div>
-      <header className="flex items-center justify-between gap-4 mb-6">
+      <header className="mb-6 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <Bell className="w-6 h-6 text-primary shrink-0" />
+          <Bell className="text-primary h-6 w-6 shrink-0" />
           <h1
             style={{ fontFamily: 'var(--font-display)' }}
-            className="text-2xl sm:text-3xl font-medium text-foreground"
+            className="text-foreground text-2xl font-medium sm:text-3xl"
           >
             {t('title')}
           </h1>
@@ -48,14 +48,14 @@ export function NotificationsTimeline() {
       </header>
 
       {isLoading ? (
-        <div className="py-12 flex items-center justify-center text-foreground-muted">
-          <Loader2 className="w-5 h-5 animate-spin" />
+        <div className="text-foreground-muted flex items-center justify-center py-12">
+          <Loader2 className="h-5 w-5 animate-spin" />
         </div>
       ) : isError ? (
-        <p className="py-12 text-center text-foreground-muted">{t('error')}</p>
+        <p className="text-foreground-muted py-12 text-center">{t('error')}</p>
       ) : items.length === 0 ? (
-        <div className="py-16 px-4 text-center space-y-3 text-foreground-muted">
-          <BellOff className="w-10 h-10 mx-auto" />
+        <div className="text-foreground-muted space-y-3 px-4 py-16 text-center">
+          <BellOff className="mx-auto h-10 w-10" />
           <p className="text-base">{t('empty')}</p>
           <p className="text-sm">{t('emptyHint')}</p>
         </div>

@@ -22,12 +22,10 @@ interface Options {
  * The hook is no-op for new posts (no postId) — auto-save only kicks in
  * after the first explicit "Save draft" creates the row.
  */
-export function useAutoSaveDraft({
-  postId,
-  payload,
-  enabled,
-  debounceMs = 2500,
-}: Options): { status: AutoSaveStatus; lastSavedAt: Date | null } {
+export function useAutoSaveDraft({ postId, payload, enabled, debounceMs = 2500 }: Options): {
+  status: AutoSaveStatus;
+  lastSavedAt: Date | null;
+} {
   const [status, setStatus] = useState<AutoSaveStatus>('idle');
   const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);

@@ -63,18 +63,18 @@ describe('RefreshTokensHandler', () => {
     tokens.verifyRefreshToken.mockImplementation(() => {
       throw new Error('bad jwt');
     });
-    await expect(
-      handler.execute(new RefreshTokensCommand('garbage')),
-    ).rejects.toBeInstanceOf(InvalidRefreshTokenError);
+    await expect(handler.execute(new RefreshTokensCommand('garbage'))).rejects.toBeInstanceOf(
+      InvalidRefreshTokenError,
+    );
   });
 
   it('rejects unknown jti', async () => {
     const { handler, refreshTokens, tokens } = make();
     tokens.verifyRefreshToken.mockReturnValue({ sub: 'u1', jti: 'rt-1' });
     refreshTokens.findById.mockResolvedValue(null);
-    await expect(
-      handler.execute(new RefreshTokensCommand('jwt')),
-    ).rejects.toBeInstanceOf(InvalidRefreshTokenError);
+    await expect(handler.execute(new RefreshTokensCommand('jwt'))).rejects.toBeInstanceOf(
+      InvalidRefreshTokenError,
+    );
   });
 
   it('rejects when stored hash mismatches (DB-leak protection)', async () => {
@@ -82,9 +82,9 @@ describe('RefreshTokensHandler', () => {
     tokens.verifyRefreshToken.mockReturnValue({ sub: 'u1', jti: 'rt-1' });
     tokens.hashRefreshToken.mockReturnValue('different-hash');
     refreshTokens.findById.mockResolvedValue(validStored());
-    await expect(
-      handler.execute(new RefreshTokensCommand('jwt')),
-    ).rejects.toBeInstanceOf(InvalidRefreshTokenError);
+    await expect(handler.execute(new RefreshTokensCommand('jwt'))).rejects.toBeInstanceOf(
+      InvalidRefreshTokenError,
+    );
   });
 
   it('detects reuse: revoked token presented again revokes all sessions', async () => {
@@ -93,9 +93,9 @@ describe('RefreshTokensHandler', () => {
     tokens.hashRefreshToken.mockReturnValue('stored-hash');
     refreshTokens.findById.mockResolvedValue(validStored({ revokedAt: new Date() }));
 
-    await expect(
-      handler.execute(new RefreshTokensCommand('jwt')),
-    ).rejects.toBeInstanceOf(RefreshTokenReusedError);
+    await expect(handler.execute(new RefreshTokensCommand('jwt'))).rejects.toBeInstanceOf(
+      RefreshTokenReusedError,
+    );
     expect(refreshTokens.revokeAllForUser).toHaveBeenCalledWith('u1');
   });
 
@@ -116,9 +116,9 @@ describe('RefreshTokensHandler', () => {
         createdAt: new Date(),
       }),
     );
-    await expect(
-      handler.execute(new RefreshTokensCommand('jwt')),
-    ).rejects.toBeInstanceOf(InvalidRefreshTokenError);
+    await expect(handler.execute(new RefreshTokensCommand('jwt'))).rejects.toBeInstanceOf(
+      InvalidRefreshTokenError,
+    );
   });
 
   it('rejects when user is blocked', async () => {
@@ -135,9 +135,9 @@ describe('RefreshTokensHandler', () => {
     user.block();
     users.findById.mockResolvedValue(user);
 
-    await expect(
-      handler.execute(new RefreshTokensCommand('jwt')),
-    ).rejects.toBeInstanceOf(AccountBlockedError);
+    await expect(handler.execute(new RefreshTokensCommand('jwt'))).rejects.toBeInstanceOf(
+      AccountBlockedError,
+    );
   });
 
   it('rotates tokens on success: issues new pair, revokes old', async () => {

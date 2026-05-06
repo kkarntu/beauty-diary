@@ -1,4 +1,4 @@
-import { EventBus } from '@nestjs/cqrs';
+import type { EventBus } from '@nestjs/cqrs';
 import { Comment } from '../../domain/comment.entity';
 import { CommentNotFoundError, NotCommentAuthorError } from '../../domain/comment.errors';
 import type { CommentRepository } from '../../domain/ports/comment.repository';

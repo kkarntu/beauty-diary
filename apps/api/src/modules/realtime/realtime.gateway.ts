@@ -98,12 +98,28 @@ export class RealtimeGateway implements OnGatewayInit, OnGatewayConnection {
   // EventEmitter2 bridge — application-layer code dispatches events into
   // this listener so it doesn't need to import the gateway directly.
   @OnEvent('realtime.post')
-  handleRealtimePost({ postId, event, data }: { postId: string; event: string; data: unknown }): void {
+  handleRealtimePost({
+    postId,
+    event,
+    data,
+  }: {
+    postId: string;
+    event: string;
+    data: unknown;
+  }): void {
     this.emitToPost(postId, event, data);
   }
 
   @OnEvent('realtime.user')
-  handleRealtimeUser({ userId, event, data }: { userId: string; event: string; data: unknown }): void {
+  handleRealtimeUser({
+    userId,
+    event,
+    data,
+  }: {
+    userId: string;
+    event: string;
+    data: unknown;
+  }): void {
     this.emitToUser(userId, event, data);
   }
 }

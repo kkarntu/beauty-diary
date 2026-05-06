@@ -1,4 +1,4 @@
-import { EventBus } from '@nestjs/cqrs';
+import type { EventBus } from '@nestjs/cqrs';
 import type { UserRepository } from '../../../users/domain/ports/user.repository';
 import { User } from '../../../users/domain/user.entity';
 import { UserNotFoundError } from '../../../users/domain/user.errors';
@@ -6,10 +6,7 @@ import { CannotFollowSelfError } from '../../domain/follow.errors';
 import type { FollowRepository } from '../../domain/ports/follow.repository';
 import { UserFollowedEvent } from '../events/user-followed.event';
 import { FollowUserCommand, UnfollowUserCommand } from './follow-user.command';
-import {
-  FollowUserHandler,
-  UnfollowUserHandler,
-} from './follow-user.handler';
+import { FollowUserHandler, UnfollowUserHandler } from './follow-user.handler';
 
 function makeUser(id: string, nickname: string) {
   return User.rehydrate({
@@ -34,9 +31,9 @@ describe('FollowUserHandler', () => {
   function setup({ insertedNew = true } = {}) {
     const followee = makeUser('00000000-0000-7000-8000-0000000000aa', 'alice');
     const users: Pick<UserRepository, 'findByNickname'> = {
-      findByNickname: jest.fn().mockImplementation((nick: string) =>
-        Promise.resolve(nick === 'alice' ? followee : null),
-      ),
+      findByNickname: jest
+        .fn()
+        .mockImplementation((nick: string) => Promise.resolve(nick === 'alice' ? followee : null)),
     };
     const follows: FollowRepository = {
       follow: jest.fn().mockResolvedValue(insertedNew),
@@ -62,9 +59,7 @@ describe('FollowUserHandler', () => {
 
   it('does not publish the event for duplicate follow attempts', async () => {
     const { handler, eventBus } = setup({ insertedNew: false });
-    await handler.execute(
-      new FollowUserCommand('00000000-0000-7000-8000-0000000000bb', 'alice'),
-    );
+    await handler.execute(new FollowUserCommand('00000000-0000-7000-8000-0000000000bb', 'alice'));
     expect(eventBus.publish).not.toHaveBeenCalled();
   });
 
@@ -78,9 +73,9 @@ describe('FollowUserHandler', () => {
 
   it('throws when the target user does not exist', async () => {
     const { handler } = setup();
-    await expect(
-      handler.execute(new FollowUserCommand('any', 'ghost')),
-    ).rejects.toBeInstanceOf(UserNotFoundError);
+    await expect(handler.execute(new FollowUserCommand('any', 'ghost'))).rejects.toBeInstanceOf(
+      UserNotFoundError,
+    );
   });
 });
 

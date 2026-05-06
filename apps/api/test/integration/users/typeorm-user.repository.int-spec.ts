@@ -1,5 +1,5 @@
 import { v7 as uuidv7 } from 'uuid';
-import { Repository } from 'typeorm';
+import type { Repository } from 'typeorm';
 import { User } from '../../../src/modules/users/domain/user.entity';
 import { UserOrmEntity } from '../../../src/modules/users/infrastructure/persistence/user.orm-entity';
 import { TypeOrmUserRepository } from '../../../src/modules/users/infrastructure/persistence/typeorm-user.repository';

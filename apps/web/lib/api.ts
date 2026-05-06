@@ -1,6 +1,10 @@
 'use client';
 
-import axios, { type AxiosError, type AxiosRequestConfig, type InternalAxiosRequestConfig } from 'axios';
+import axios, {
+  type AxiosError,
+  type AxiosRequestConfig,
+  type InternalAxiosRequestConfig,
+} from 'axios';
 
 /**
  * Browser-side API client.
@@ -26,7 +30,12 @@ interface RetriableConfig extends InternalAxiosRequestConfig {
   _retried?: boolean;
 }
 
-const SHOULD_NOT_RETRY = ['/api/auth/login', '/api/auth/register', '/api/auth/refresh', '/api/auth/logout'];
+const SHOULD_NOT_RETRY = [
+  '/api/auth/login',
+  '/api/auth/register',
+  '/api/auth/refresh',
+  '/api/auth/logout',
+];
 
 const REFRESH_TIMESTAMP_KEY = 'bd:lastRefreshAt';
 /** Skip refresh if another tab refreshed within this window. */
@@ -40,7 +49,8 @@ async function refreshOnce(): Promise<void> {
   // refresh token and the server treats it as a leak.
   const supportsLocks = typeof navigator !== 'undefined' && 'locks' in navigator;
   const work = async (): Promise<void> => {
-    const lastStr = typeof localStorage !== 'undefined' ? localStorage.getItem(REFRESH_TIMESTAMP_KEY) : null;
+    const lastStr =
+      typeof localStorage !== 'undefined' ? localStorage.getItem(REFRESH_TIMESTAMP_KEY) : null;
     const last = lastStr ? Number(lastStr) : 0;
     if (Date.now() - last < REFRESH_DEBOUNCE_MS) {
       // Cookies were just rotated by another tab — skip the network call.

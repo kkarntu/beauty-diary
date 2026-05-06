@@ -20,9 +20,7 @@ export interface AuditLogListRow {
 
 export interface AuditLogRepository {
   save(entry: AuditLogEntry): Promise<void>;
-  list(
-    filters: AuditLogListFilters,
-  ): Promise<{ items: AuditLogListRow[]; total: number }>;
+  list(filters: AuditLogListFilters): Promise<{ items: AuditLogListRow[]; total: number }>;
 }
 
 export const AUDIT_LOG_REPOSITORY = Symbol('AUDIT_LOG_REPOSITORY');

@@ -9,12 +9,12 @@ import { Link } from '@/i18n/navigation';
  */
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <header className="flex items-center justify-between px-6 py-4 border-b border-border">
+    <div className="bg-background flex min-h-screen flex-col">
+      <header className="border-border flex items-center justify-between border-b px-6 py-4">
         <Link href="/">
           <span
             style={{ fontFamily: 'var(--font-display)' }}
-            className="text-xl font-semibold text-foreground hover:text-primary transition-colors"
+            className="text-foreground hover:text-primary text-xl font-semibold transition-colors"
           >
             Beauty Diary
           </span>

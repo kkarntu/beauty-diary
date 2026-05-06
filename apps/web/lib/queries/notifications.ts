@@ -1,9 +1,6 @@
 'use client';
 
-import type {
-  NotificationDto,
-  NotificationListResponseDto,
-} from '@beauty-diary/shared';
+import type { NotificationDto, NotificationListResponseDto } from '@beauty-diary/shared';
 import {
   useMutation,
   useQuery,
@@ -37,9 +34,7 @@ export function useUnreadNotificationCount() {
   return useQuery({
     queryKey: notificationKeys.unread(),
     queryFn: async () => {
-      const res = await api.get<{ unreadCount: number }>(
-        '/api/me/notifications/unread-count',
-      );
+      const res = await api.get<{ unreadCount: number }>('/api/me/notifications/unread-count');
       return res.data.unreadCount;
     },
     staleTime: 30_000,
@@ -82,18 +77,15 @@ export function useNotificationStream(): void {
   useEffect(() => {
     if (!socket) return;
     const onCreated = (data: NotificationDto) => {
-      qc.setQueryData<NotificationListResponseDto | undefined>(
-        notificationKeys.list(),
-        (prev) => {
-          if (!prev) return prev;
-          return {
-            ...prev,
-            items: [data, ...prev.items].slice(0, prev.pageSize),
-            unreadCount: prev.unreadCount + 1,
-            total: prev.total + 1,
-          };
-        },
-      );
+      qc.setQueryData<NotificationListResponseDto | undefined>(notificationKeys.list(), (prev) => {
+        if (!prev) return prev;
+        return {
+          ...prev,
+          items: [data, ...prev.items].slice(0, prev.pageSize),
+          unreadCount: prev.unreadCount + 1,
+          total: prev.total + 1,
+        };
+      });
       qc.setQueryData<number | undefined>(notificationKeys.unread(), (prev) =>
         typeof prev === 'number' ? prev + 1 : prev,
       );

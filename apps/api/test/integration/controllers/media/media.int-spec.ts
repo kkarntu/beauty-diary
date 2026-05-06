@@ -1,7 +1,7 @@
 import type { INestApplication } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import request from 'supertest';
-import { createTestApp } from '../../support/app-factory';
+import { createTestApp } from '../../../support/app-factory';
 
 describe('Media — presigned upload (integration)', () => {
   let app: INestApplication;

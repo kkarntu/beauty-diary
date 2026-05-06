@@ -6,9 +6,7 @@ import type { NewsletterSubscriberRepository } from '../../domain/ports/subscrib
 import { NewsletterSubscriberOrmEntity } from './newsletter-subscriber.orm-entity';
 
 @Injectable()
-export class TypeOrmNewsletterSubscriberRepository
-  implements NewsletterSubscriberRepository
-{
+export class TypeOrmNewsletterSubscriberRepository implements NewsletterSubscriberRepository {
   constructor(
     @InjectRepository(NewsletterSubscriberOrmEntity)
     private readonly repo: Repository<NewsletterSubscriberOrmEntity>,

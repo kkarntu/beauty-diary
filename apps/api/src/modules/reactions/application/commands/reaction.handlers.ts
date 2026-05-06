@@ -15,10 +15,7 @@ import {
   UnlikePostCommand,
 } from './like-post.command';
 
-async function assertPublishedPostExists(
-  posts: PostRepository,
-  postId: string,
-): Promise<void> {
+async function assertPublishedPostExists(posts: PostRepository, postId: string): Promise<void> {
   const post = await posts.findById(postId);
   if (!post || !post.isPublished) {
     throw new PostNotFoundError();

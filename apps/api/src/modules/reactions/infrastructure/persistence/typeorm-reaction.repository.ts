@@ -1,10 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import type {
-  FavoriteListRow,
-  ReactionRepository,
-} from '../../domain/ports/reaction.repository';
+import type { FavoriteListRow, ReactionRepository } from '../../domain/ports/reaction.repository';
 import { PostFavoriteOrmEntity } from './post-favorite.orm-entity';
 import { PostLikeOrmEntity } from './post-like.orm-entity';
 

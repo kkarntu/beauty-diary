@@ -30,15 +30,15 @@ export function SettingsShell({ active, title, children }: Props) {
 
   return (
     <div className="bg-background">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-20 py-8">
+      <div className="mx-auto max-w-[1280px] px-6 py-8 lg:px-20">
         <h1
           style={{ fontFamily: 'var(--font-display)' }}
-          className="text-3xl font-medium text-foreground mb-8"
+          className="text-foreground mb-8 text-3xl font-medium"
         >
           {tProfile('title')}
         </h1>
 
-        <div className="grid lg:grid-cols-12 gap-8">
+        <div className="grid gap-8 lg:grid-cols-12">
           <aside className="lg:col-span-3">
             <nav className="space-y-2 lg:sticky lg:top-24">
               {items.map(({ id, href, label, Icon }) => (
@@ -46,13 +46,13 @@ export function SettingsShell({ active, title, children }: Props) {
                   key={id}
                   href={href}
                   className={cn(
-                    'w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors',
+                    'flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left transition-colors',
                     active === id
                       ? 'bg-primary text-primary-foreground'
                       : 'text-foreground-muted hover:bg-surface-muted hover:text-foreground',
                   )}
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="h-5 w-5" />
                   <span className="font-medium">{label}</span>
                 </Link>
               ))}
@@ -60,10 +60,10 @@ export function SettingsShell({ active, title, children }: Props) {
           </aside>
 
           <div className="lg:col-span-9">
-            <div className="bg-surface rounded-xl border border-border p-4 sm:p-6 lg:p-8 space-y-6">
+            <div className="bg-surface border-border space-y-6 rounded-xl border p-4 sm:p-6 lg:p-8">
               <h2
                 style={{ fontFamily: 'var(--font-display)' }}
-                className="text-2xl font-medium text-foreground"
+                className="text-foreground text-2xl font-medium"
               >
                 {title}
               </h2>

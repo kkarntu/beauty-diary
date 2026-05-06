@@ -13,7 +13,7 @@ export function CategoryChip({ label, active = false, onClick, className }: Cate
     <Badge
       variant={active ? 'default' : 'secondary'}
       className={cn(
-        'px-4 py-2 cursor-pointer transition-all border-0 rounded-full',
+        'cursor-pointer rounded-full border-0 px-4 py-2 transition-all',
         active
           ? 'bg-primary text-primary-foreground hover:bg-primary-hover'
           : 'bg-surface-muted text-foreground hover:bg-surface-muted/80 hover:text-primary',

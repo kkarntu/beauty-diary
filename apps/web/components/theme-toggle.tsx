@@ -27,7 +27,7 @@ export function ThemeToggle({ className }: Props) {
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       aria-label={isDark ? t('switchToLight') : t('switchToDark')}
       className={cn(
-        'inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-surface text-foreground hover:bg-surface-muted transition-colors',
+        'border-border bg-surface text-foreground hover:bg-surface-muted inline-flex h-9 w-9 items-center justify-center rounded-md border transition-colors',
         className,
       )}
     >

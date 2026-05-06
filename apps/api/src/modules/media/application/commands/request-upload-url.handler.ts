@@ -3,10 +3,7 @@ import { CommandHandler, type ICommandHandler } from '@nestjs/cqrs';
 import { v7 as uuidv7 } from 'uuid';
 import * as path from 'node:path';
 import { MEDIA_STORAGE, type MediaStorage } from '../../domain/ports/media-storage';
-import {
-  RequestUploadUrlCommand,
-  type RequestUploadUrlResult,
-} from './request-upload-url.command';
+import { RequestUploadUrlCommand, type RequestUploadUrlResult } from './request-upload-url.command';
 
 const UPLOAD_TTL_SECONDS = 600;
 
@@ -26,9 +23,10 @@ function sanitizeFilename(name: string): string {
 }
 
 @CommandHandler(RequestUploadUrlCommand)
-export class RequestUploadUrlHandler
-  implements ICommandHandler<RequestUploadUrlCommand, RequestUploadUrlResult>
-{
+export class RequestUploadUrlHandler implements ICommandHandler<
+  RequestUploadUrlCommand,
+  RequestUploadUrlResult
+> {
   constructor(@Inject(MEDIA_STORAGE) private readonly storage: MediaStorage) {}
 
   async execute(cmd: RequestUploadUrlCommand): Promise<RequestUploadUrlResult> {

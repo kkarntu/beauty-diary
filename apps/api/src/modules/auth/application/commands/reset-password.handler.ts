@@ -1,10 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, type ICommandHandler } from '@nestjs/cqrs';
 import { createHash } from 'node:crypto';
-import {
-  USER_REPOSITORY,
-  type UserRepository,
-} from '../../../users/domain/ports/user.repository';
+import { USER_REPOSITORY, type UserRepository } from '../../../users/domain/ports/user.repository';
 import { InvalidPasswordResetTokenError } from '../../domain/auth.errors';
 import { PASSWORD_HASHER, type PasswordHasher } from '../../domain/ports/password-hasher';
 import {

@@ -7,9 +7,10 @@ import {
 import { ListCategoriesQuery, type ListCategoriesResult } from './list-categories.query';
 
 @QueryHandler(ListCategoriesQuery)
-export class ListCategoriesHandler
-  implements IQueryHandler<ListCategoriesQuery, ListCategoriesResult>
-{
+export class ListCategoriesHandler implements IQueryHandler<
+  ListCategoriesQuery,
+  ListCategoriesResult
+> {
   constructor(@Inject(CATEGORY_REPOSITORY) private readonly categories: CategoryRepository) {}
 
   async execute(): Promise<ListCategoriesResult> {

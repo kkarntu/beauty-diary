@@ -18,10 +18,7 @@ export interface FailedOutboxResponse {
   pageSize: number;
 }
 
-export async function fetchFailedOutbox(
-  page = 1,
-  pageSize = 50,
-): Promise<FailedOutboxResponse> {
+export async function fetchFailedOutbox(page = 1, pageSize = 50): Promise<FailedOutboxResponse> {
   return serverFetch<FailedOutboxResponse>(
     `/api/admin/email-outbox/failed?page=${page}&pageSize=${pageSize}`,
   );

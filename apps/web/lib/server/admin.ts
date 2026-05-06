@@ -1,9 +1,6 @@
 import 'server-only';
 
-import type {
-  AdminUserListResponseDto,
-  AuditLogListResponseDto,
-} from '@beauty-diary/shared';
+import type { AdminUserListResponseDto, AuditLogListResponseDto } from '@beauty-diary/shared';
 import { serverFetch } from './fetch';
 
 export interface AdminUsersFilter {
@@ -14,9 +11,7 @@ export interface AdminUsersFilter {
   search?: string;
 }
 
-export async function fetchAdminUsers(
-  f: AdminUsersFilter = {},
-): Promise<AdminUserListResponseDto> {
+export async function fetchAdminUsers(f: AdminUsersFilter = {}): Promise<AdminUserListResponseDto> {
   const p = new URLSearchParams();
   if (f.page) p.set('page', String(f.page));
   if (f.pageSize) p.set('pageSize', String(f.pageSize));
@@ -34,9 +29,7 @@ export interface AuditLogFilter {
   targetType?: string;
 }
 
-export async function fetchAuditLog(
-  f: AuditLogFilter = {},
-): Promise<AuditLogListResponseDto> {
+export async function fetchAuditLog(f: AuditLogFilter = {}): Promise<AuditLogListResponseDto> {
   const p = new URLSearchParams();
   if (f.page) p.set('page', String(f.page));
   if (f.pageSize) p.set('pageSize', String(f.pageSize));

@@ -18,7 +18,7 @@ export default async function NotificationsPage({
 
   return (
     <div className="bg-background">
-      <div className="max-w-[760px] mx-auto px-6 lg:px-20 py-8">
+      <div className="mx-auto max-w-[760px] px-6 py-8 lg:px-20">
         <NotificationsTimeline />
       </div>
     </div>

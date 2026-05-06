@@ -78,10 +78,7 @@ export function LoginForm() {
             <FormItem>
               <div className="flex items-center justify-between">
                 <FormLabel>{t('passwordLabel')}</FormLabel>
-                <Link
-                  href={routes.forgotPassword}
-                  className="text-sm text-primary hover:underline"
-                >
+                <Link href={routes.forgotPassword} className="text-primary text-sm hover:underline">
                   {t('forgotPassword')}
                 </Link>
               </div>
@@ -102,9 +99,9 @@ export function LoginForm() {
           {login.isPending ? t('submitting') : t('submit')}
         </Button>
 
-        <p className="text-sm text-foreground-muted text-center">
+        <p className="text-foreground-muted text-center text-sm">
           {t('noAccount')}{' '}
-          <Link href={routes.register} className="text-primary hover:underline font-medium">
+          <Link href={routes.register} className="text-primary font-medium hover:underline">
             {t('register')}
           </Link>
         </p>

@@ -9,9 +9,6 @@ import { MediaController } from './presentation/media.controller';
 @Module({
   imports: [CqrsModule, AuthSharedModule],
   controllers: [MediaController],
-  providers: [
-    RequestUploadUrlHandler,
-    { provide: MEDIA_STORAGE, useClass: S3MediaStorage },
-  ],
+  providers: [RequestUploadUrlHandler, { provide: MEDIA_STORAGE, useClass: S3MediaStorage }],
 })
 export class MediaModule {}

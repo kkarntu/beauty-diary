@@ -1,7 +1,7 @@
 import type { INestApplication } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import request from 'supertest';
-import { createTestApp } from '../../support/app-factory';
+import { createTestApp } from '../../../support/app-factory';
 
 describe('Reactions (likes + favorites) (integration)', () => {
   let app: INestApplication;
@@ -213,10 +213,7 @@ describe('Reactions (likes + favorites) (integration)', () => {
         .set('Cookie', readerCookies)
         .expect(204);
 
-      const list = await request(server)
-        .get('/api/posts')
-        .set('Cookie', readerCookies)
-        .expect(200);
+      const list = await request(server).get('/api/posts').set('Cookie', readerCookies).expect(200);
       expect(list.body.items[0].isLikedByMe).toBe(true);
       expect(list.body.items[0].isFavoritedByMe).toBe(true);
 

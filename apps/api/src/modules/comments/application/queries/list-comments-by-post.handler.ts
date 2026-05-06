@@ -7,9 +7,10 @@ import {
 } from './list-comments-by-post.query';
 
 @QueryHandler(ListCommentsByPostQuery)
-export class ListCommentsByPostHandler
-  implements IQueryHandler<ListCommentsByPostQuery, ListCommentsByPostResult>
-{
+export class ListCommentsByPostHandler implements IQueryHandler<
+  ListCommentsByPostQuery,
+  ListCommentsByPostResult
+> {
   constructor(@Inject(COMMENT_REPOSITORY) private readonly comments: CommentRepository) {}
 
   async execute(query: ListCommentsByPostQuery): Promise<ListCommentsByPostResult> {

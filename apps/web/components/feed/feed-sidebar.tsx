@@ -14,11 +14,11 @@ export function FeedSidebar({ activeTag, trendingTags }: Props) {
   const t = useTranslations('feed.sidebar');
 
   return (
-    <aside className="lg:sticky lg:top-24 space-y-6 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
+    <aside className="space-y-6 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
       {trendingTags.length > 0 ? (
-        <div className="bg-surface rounded-lg border border-border p-6">
-          <div className="flex items-center gap-2 mb-4">
-            <TrendingUp className="w-5 h-5 text-primary" />
+        <div className="bg-surface border-border rounded-lg border p-6">
+          <div className="mb-4 flex items-center gap-2">
+            <TrendingUp className="text-primary h-5 w-5" />
             <h3 style={{ fontFamily: 'var(--font-display)' }} className="text-lg font-medium">
               {t('trendingTitle')}
             </h3>
@@ -32,7 +32,7 @@ export function FeedSidebar({ activeTag, trendingTags }: Props) {
                   href={isActive ? '/feed' : `/feed?tag=${slug}`}
                   scroll={false}
                   className={cn(
-                    'px-3 py-1.5 text-sm rounded-full transition-colors',
+                    'rounded-full px-3 py-1.5 text-sm transition-colors',
                     isActive
                       ? 'bg-primary text-primary-foreground'
                       : 'text-foreground-muted hover:text-primary hover:bg-surface-muted',

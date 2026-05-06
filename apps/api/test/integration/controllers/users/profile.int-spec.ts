@@ -1,7 +1,7 @@
 import type { INestApplication } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import request from 'supertest';
-import { createTestApp } from '../../support/app-factory';
+import { createTestApp } from '../../../support/app-factory';
 
 describe('Profile + categories (integration)', () => {
   let app: INestApplication;
@@ -65,10 +65,7 @@ describe('Profile + categories (integration)', () => {
   });
 
   it('rejects PATCH /me without auth', async () => {
-    await request(server)
-      .patch('/api/users/me')
-      .send({ bio: 'whatever' })
-      .expect(401);
+    await request(server).patch('/api/users/me').send({ bio: 'whatever' }).expect(401);
   });
 
   it('returns 404 for unknown nickname', async () => {

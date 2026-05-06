@@ -18,24 +18,17 @@ import { cn } from '@/lib/utils';
 
 interface Props {
   postId: string;
-  initialLikesCount: number;
   initialIsLiked: boolean;
   initialIsFavorited: boolean;
 }
 
-export function PostActions({
-  postId,
-  initialLikesCount,
-  initialIsLiked,
-  initialIsFavorited,
-}: Props) {
+export function PostActions({ postId, initialIsLiked, initialIsFavorited }: Props) {
   const t = useTranslations('postDetail.actions');
   const tAuth = useTranslations('postDetail.requiresAuth');
   const router = useRouter();
   const { data: user } = useCurrentUser();
 
   const [liked, setLiked] = useState(initialIsLiked);
-  const [count, setCount] = useState(initialLikesCount);
   const [favorited, setFavorited] = useState(initialIsFavorited);
 
   const like = useLikePost();
@@ -56,14 +49,12 @@ export function PostActions({
     if (requireLogin()) return;
     const wasLiked = liked;
     setLiked(!wasLiked);
-    setCount((n) => n + (wasLiked ? -1 : 1));
     try {
       if (wasLiked) await unlike.mutateAsync(postId);
       else await like.mutateAsync(postId);
       toast.success(wasLiked ? t('unliked') : t('liked'));
     } catch {
       setLiked(wasLiked);
-      setCount((n) => n + (wasLiked ? 1 : -1));
       toast.error(t('errorLike'));
     }
   };
@@ -101,7 +92,7 @@ export function PostActions({
         aria-label={liked ? t('unlikeAria') : t('likeAria')}
         className={cn(liked && 'text-destructive hover:text-destructive')}
       >
-        <Heart className={cn('w-5 h-5 transition-all', liked && 'fill-current scale-110')} />
+        <Heart className={cn('h-5 w-5 transition-all', liked && 'scale-110 fill-current')} />
       </Button>
       <Button
         variant="ghost"
@@ -111,17 +102,10 @@ export function PostActions({
         aria-label={favorited ? t('unfavoriteAria') : t('favoriteAria')}
         className={cn(favorited && 'text-primary hover:text-primary')}
       >
-        <Bookmark
-          className={cn('w-5 h-5 transition-all', favorited && 'fill-current scale-110')}
-        />
+        <Bookmark className={cn('h-5 w-5 transition-all', favorited && 'scale-110 fill-current')} />
       </Button>
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={onShare}
-        aria-label={t('shareAria')}
-      >
-        <Share2 className="w-5 h-5" />
+      <Button variant="ghost" size="icon" onClick={onShare} aria-label={t('shareAria')}>
+        <Share2 className="h-5 w-5" />
       </Button>
     </div>
   );

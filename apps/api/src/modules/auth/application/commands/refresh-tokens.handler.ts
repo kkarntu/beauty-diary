@@ -1,9 +1,6 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, type ICommandHandler } from '@nestjs/cqrs';
-import {
-  USER_REPOSITORY,
-  type UserRepository,
-} from '../../../users/domain/ports/user.repository';
+import { USER_REPOSITORY, type UserRepository } from '../../../users/domain/ports/user.repository';
 import {
   AccountBlockedError,
   InvalidRefreshTokenError,
@@ -18,9 +15,10 @@ import { RefreshToken } from '../../domain/refresh-token.entity';
 import { RefreshTokensCommand, type RefreshTokensResult } from './refresh-tokens.command';
 
 @CommandHandler(RefreshTokensCommand)
-export class RefreshTokensHandler
-  implements ICommandHandler<RefreshTokensCommand, RefreshTokensResult>
-{
+export class RefreshTokensHandler implements ICommandHandler<
+  RefreshTokensCommand,
+  RefreshTokensResult
+> {
   constructor(
     @Inject(USER_REPOSITORY) private readonly users: UserRepository,
     @Inject(REFRESH_TOKEN_REPOSITORY) private readonly refreshTokens: RefreshTokenRepository,

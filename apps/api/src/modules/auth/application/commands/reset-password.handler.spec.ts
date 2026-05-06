@@ -46,9 +46,7 @@ describe('ResetPasswordHandler', () => {
       id: 'prt-1',
       userId: 'u1',
       tokenHash: createHash('sha256').update('raw').digest('hex'),
-      expiresAt: overrides.expired
-        ? new Date(Date.now() - 1000)
-        : new Date(Date.now() + 60_000),
+      expiresAt: overrides.expired ? new Date(Date.now() - 1000) : new Date(Date.now() + 60_000),
       usedAt: overrides.used ? new Date() : null,
       createdAt: new Date(),
     });

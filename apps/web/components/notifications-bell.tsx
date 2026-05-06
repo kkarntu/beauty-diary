@@ -50,14 +50,14 @@ export function NotificationsBell() {
         <Button
           variant="ghost"
           size="icon"
-          className="relative text-foreground-muted hover:text-foreground"
+          className="text-foreground-muted hover:text-foreground relative"
           aria-label={t('aria')}
         >
-          <Bell className="w-5 h-5" />
+          <Bell className="h-5 w-5" />
           {unreadCount > 0 ? (
             <span
               aria-live="polite"
-              className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-primary text-primary-foreground text-[10px] font-medium leading-[18px] text-center tabular-nums"
+              className="bg-primary text-primary-foreground absolute -right-0.5 -top-0.5 h-[18px] min-w-[18px] rounded-full px-1 text-center text-[10px] font-medium tabular-nums leading-[18px]"
             >
               {unreadCount > 99 ? '99+' : unreadCount}
             </span>
@@ -70,7 +70,7 @@ export function NotificationsBell() {
           {items.some((n) => !n.readAt) ? (
             <button
               type="button"
-              className="text-xs text-foreground-muted hover:text-primary"
+              className="text-foreground-muted hover:text-primary text-xs"
               onClick={(e) => {
                 e.preventDefault();
                 markAll.mutate();
@@ -83,16 +83,14 @@ export function NotificationsBell() {
         <DropdownMenuSeparator />
 
         {isLoading ? (
-          <div className="py-6 flex items-center justify-center text-foreground-muted">
-            <Loader2 className="w-5 h-5 animate-spin" />
+          <div className="text-foreground-muted flex items-center justify-center py-6">
+            <Loader2 className="h-5 w-5 animate-spin" />
           </div>
         ) : isError ? (
-          <div className="py-6 px-4 text-center text-sm text-foreground-muted">
-            {t('error')}
-          </div>
+          <div className="text-foreground-muted px-4 py-6 text-center text-sm">{t('error')}</div>
         ) : items.length === 0 ? (
-          <div className="py-6 px-4 text-center space-y-2 text-foreground-muted">
-            <BellOff className="w-6 h-6 mx-auto" />
+          <div className="text-foreground-muted space-y-2 px-4 py-6 text-center">
+            <BellOff className="mx-auto h-6 w-6" />
             <p className="text-sm">{t('empty')}</p>
           </div>
         ) : (
@@ -114,7 +112,7 @@ export function NotificationsBell() {
             <DropdownMenuSeparator />
             <Link
               href={routes.notifications}
-              className="block px-3 py-2 text-center text-sm text-primary hover:bg-surface-muted"
+              className="text-primary hover:bg-surface-muted block px-3 py-2 text-center text-sm"
             >
               {t('viewAll')}
             </Link>

@@ -2,7 +2,7 @@ import type { INestApplication } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import request from 'supertest';
 import { createHash } from 'node:crypto';
-import { createTestApp } from '../../support/app-factory';
+import { createTestApp } from '../../../support/app-factory';
 
 /**
  * The refresh-rotation and password-reset flows aren't covered elsewhere.
@@ -54,9 +54,7 @@ describe('Auth — refresh rotation + password reset (integration)', () => {
       expect(replay.body.code).toBe('REFRESH_TOKEN_REUSED');
 
       // After reuse detection the new token is also revoked — user must re-login
-      const afterReuse = await request(server)
-        .post('/api/auth/refresh')
-        .set('Cookie', newCookies);
+      const afterReuse = await request(server).post('/api/auth/refresh').set('Cookie', newCookies);
       expect(afterReuse.status).toBe(401);
     });
 

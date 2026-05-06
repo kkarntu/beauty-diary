@@ -58,7 +58,7 @@ export function PostEditorForm({ categories, existingPost }: Props) {
   // Resolve categoryId: PostDetailDto carries category.slug/name but we need
   // the id for the form. Look it up against the categories list.
   const initialCategoryId = existingPost
-    ? categories.find((c) => c.slug === existingPost.category.slug)?.id ?? ''
+    ? (categories.find((c) => c.slug === existingPost.category.slug)?.id ?? '')
     : '';
 
   const form = useForm<FormValues>({
@@ -112,18 +112,14 @@ export function PostEditorForm({ categories, existingPost }: Props) {
 
       if (isEdit && existingPost) {
         await update.mutateAsync(payload);
-        toast.success(
-          status === 'published' ? t('toast.published') : t('toast.savedDraft'),
-        );
+        toast.success(status === 'published' ? t('toast.published') : t('toast.savedDraft'));
         // Slug may have changed if title changed; re-fetch by id is not in the
         // API, so navigate using the slug we already know.
         router.push(routes.postDetail(existingPost.slug));
         router.refresh();
       } else {
         const result = await create.mutateAsync(payload);
-        toast.success(
-          status === 'published' ? t('toast.published') : t('toast.savedDraft'),
-        );
+        toast.success(status === 'published' ? t('toast.published') : t('toast.savedDraft'));
         router.push(routes.postDetail(result.slug));
       }
     } catch (err) {
@@ -148,20 +144,18 @@ export function PostEditorForm({ categories, existingPost }: Props) {
     categoryId: watched.categoryId || undefined,
     tagSlugs: tagSlugsForAutosave,
     coverImageUrl:
-      watched.coverImageUrl && watched.coverImageUrl.length > 0
-        ? watched.coverImageUrl
-        : undefined,
+      watched.coverImageUrl && watched.coverImageUrl.length > 0 ? watched.coverImageUrl : undefined,
     allowComments: watched.allowComments,
     showInFeed: watched.showInFeed,
   };
   const autoSaveEnabled = Boolean(
     isEdit &&
-      existingPost &&
-      watched.title &&
-      watched.title.length >= 3 &&
-      watched.contentHtml &&
-      watched.contentHtml.length > 0 &&
-      watched.categoryId,
+    existingPost &&
+    watched.title &&
+    watched.title.length >= 3 &&
+    watched.contentHtml &&
+    watched.contentHtml.length > 0 &&
+    watched.categoryId,
   );
   const { status: autoSaveStatus, lastSavedAt } = useAutoSaveDraft({
     postId: existingPost?.id,
@@ -179,17 +173,17 @@ export function PostEditorForm({ categories, existingPost }: Props) {
     <Form {...form}>
       <form onSubmit={(e) => e.preventDefault()}>
         {/* Sticky action bar */}
-        <div className="sticky top-16 z-30 -mx-6 lg:-mx-20 px-6 lg:px-20 py-3 bg-background/80 backdrop-blur border-b border-border">
-          <div className="max-w-[1280px] mx-auto flex items-center justify-between gap-4">
+        <div className="bg-background/80 border-border sticky top-16 z-30 -mx-6 border-b px-6 py-3 backdrop-blur lg:-mx-20 lg:px-20">
+          <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-4">
             <Button asChild variant="ghost" size="sm" className="gap-2">
               <Link href={routes.myPosts}>
-                <ArrowLeft className="w-4 h-4" />
+                <ArrowLeft className="h-4 w-4" />
                 <span className="hidden sm:inline">{t('backToMyPosts')}</span>
               </Link>
             </Button>
             <div className="flex items-center gap-3">
               {isEdit && existingPost ? (
-                <span className="text-xs text-foreground-muted hidden md:inline">
+                <span className="text-foreground-muted hidden text-xs md:inline">
                   {autoSaveStatus === 'pending'
                     ? t('autosave.saving')
                     : autoSaveStatus === 'error'
@@ -212,7 +206,7 @@ export function PostEditorForm({ categories, existingPost }: Props) {
                 disabled={isSubmitting}
                 className="gap-2"
               >
-                <Save className="w-4 h-4" />
+                <Save className="h-4 w-4" />
                 <span className="hidden sm:inline">
                   {isSubmitting ? t('actions.saving') : t('actions.saveDraft')}
                 </span>
@@ -224,17 +218,17 @@ export function PostEditorForm({ categories, existingPost }: Props) {
                 disabled={isSubmitting}
                 className="gap-2"
               >
-                <Send className="w-4 h-4" />
+                <Send className="h-4 w-4" />
                 {isSubmitting ? t('actions.publishing') : t('actions.publishShort')}
               </Button>
             </div>
           </div>
         </div>
 
-        <div className="max-w-[1280px] mx-auto px-0 py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="mx-auto max-w-[1280px] px-0 py-8">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
             {/* Main column */}
-            <div className="lg:col-span-8 space-y-6">
+            <div className="space-y-6 lg:col-span-8">
               <FormField
                 control={form.control}
                 name="coverImageUrl"
@@ -265,7 +259,7 @@ export function PostEditorForm({ categories, existingPost }: Props) {
                         aria-invalid={!!form.formState.errors.title}
                         style={{ fontFamily: 'var(--font-display)' }}
                         className={cn(
-                          'w-full text-3xl md:text-4xl font-medium bg-transparent border-0 outline-none focus:outline-none placeholder:text-foreground-muted/50 text-foreground py-2 px-3',
+                          'placeholder:text-foreground-muted/50 text-foreground w-full border-0 bg-transparent px-3 py-2 text-3xl font-medium outline-none focus:outline-none md:text-4xl',
                           form.formState.errors.title && 'text-destructive',
                         )}
                       />
@@ -276,14 +270,14 @@ export function PostEditorForm({ categories, existingPost }: Props) {
               />
 
               {/* Edit / Preview tabs — underline style with primary accent */}
-              <div className="flex gap-6 border-b border-border">
+              <div className="border-border flex gap-6 border-b">
                 <button
                   type="button"
                   onClick={() => setShowPreview(false)}
                   className={cn(
-                    'pb-3 px-1 text-sm font-medium transition-colors',
+                    'px-1 pb-3 text-sm font-medium transition-colors',
                     !showPreview
-                      ? 'text-foreground border-b-2 border-primary -mb-px'
+                      ? 'text-foreground border-primary -mb-px border-b-2'
                       : 'text-foreground-muted hover:text-foreground',
                   )}
                 >
@@ -293,9 +287,9 @@ export function PostEditorForm({ categories, existingPost }: Props) {
                   type="button"
                   onClick={() => setShowPreview(true)}
                   className={cn(
-                    'pb-3 px-1 text-sm font-medium transition-colors',
+                    'px-1 pb-3 text-sm font-medium transition-colors',
                     showPreview
-                      ? 'text-foreground border-b-2 border-primary -mb-px'
+                      ? 'text-foreground border-primary -mb-px border-b-2'
                       : 'text-foreground-muted hover:text-foreground',
                   )}
                 >
@@ -311,11 +305,11 @@ export function PostEditorForm({ categories, existingPost }: Props) {
                     {showPreview ? (
                       contentHtml ? (
                         <div
-                          className="post-content min-h-[400px] py-4 px-6 border border-border rounded-lg bg-surface"
+                          className="post-content border-border bg-surface min-h-[400px] rounded-lg border px-6 py-4"
                           dangerouslySetInnerHTML={{ __html: contentHtml }}
                         />
                       ) : (
-                        <div className="min-h-[400px] py-4 px-6 border border-border rounded-lg bg-surface text-foreground-muted italic">
+                        <div className="border-border bg-surface text-foreground-muted min-h-[400px] rounded-lg border px-6 py-4 italic">
                           {t('preview.empty')}
                         </div>
                       )
@@ -336,9 +330,9 @@ export function PostEditorForm({ categories, existingPost }: Props) {
 
             {/* Sticky sidebar */}
             <aside className="lg:col-span-4">
-              <div className="lg:sticky lg:top-32 space-y-6">
-                <div className="bg-surface rounded-lg border border-border p-5">
-                  <h3 className="font-medium text-foreground mb-3">{t('category.label')}</h3>
+              <div className="space-y-6 lg:sticky lg:top-32">
+                <div className="bg-surface border-border rounded-lg border p-5">
+                  <h3 className="text-foreground mb-3 font-medium">{t('category.label')}</h3>
                   <FormField
                     control={form.control}
                     name="categoryId"
@@ -364,8 +358,8 @@ export function PostEditorForm({ categories, existingPost }: Props) {
                   />
                 </div>
 
-                <div className="bg-surface rounded-lg border border-border p-5">
-                  <h3 className="font-medium text-foreground mb-3">{t('tags.label')}</h3>
+                <div className="bg-surface border-border rounded-lg border p-5">
+                  <h3 className="text-foreground mb-3 font-medium">{t('tags.label')}</h3>
                   <Input
                     placeholder={t('tags.placeholder')}
                     value={tagsRaw}
@@ -379,22 +373,18 @@ export function PostEditorForm({ categories, existingPost }: Props) {
                     }}
                     className="text-sm"
                   />
-                  <p className="text-xs text-foreground-muted mt-2">{t('tags.description')}</p>
+                  <p className="text-foreground-muted mt-2 text-xs">{t('tags.description')}</p>
                 </div>
 
-                <div className="bg-surface rounded-lg border border-border p-5">
-                  <h3 className="font-medium text-foreground mb-3">{t('excerpt.label')}</h3>
+                <div className="bg-surface border-border rounded-lg border p-5">
+                  <h3 className="text-foreground mb-3 font-medium">{t('excerpt.label')}</h3>
                   <FormField
                     control={form.control}
                     name="excerpt"
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <Textarea
-                            {...field}
-                            placeholder={t('excerpt.placeholder')}
-                            rows={3}
-                          />
+                          <Textarea {...field} placeholder={t('excerpt.placeholder')} rows={3} />
                         </FormControl>
                         <FormDescription className="text-xs">
                           {t('excerpt.description')}
@@ -405,10 +395,10 @@ export function PostEditorForm({ categories, existingPost }: Props) {
                   />
                 </div>
 
-                <div className="bg-surface rounded-lg border border-border p-5">
-                  <h3 className="font-medium text-foreground mb-4">{t('settings.title')}</h3>
+                <div className="bg-surface border-border rounded-lg border p-5">
+                  <h3 className="text-foreground mb-4 font-medium">{t('settings.title')}</h3>
                   <div className="space-y-4">
-                    <label className="flex items-center gap-3 cursor-pointer group">
+                    <label className="group flex cursor-pointer items-center gap-3">
                       <Checkbox
                         checked={allowComments}
                         onCheckedChange={(checked) =>
@@ -417,11 +407,11 @@ export function PostEditorForm({ categories, existingPost }: Props) {
                           })
                         }
                       />
-                      <span className="text-sm text-foreground group-hover:text-primary transition-colors">
+                      <span className="text-foreground group-hover:text-primary text-sm transition-colors">
                         {t('settings.allowComments')}
                       </span>
                     </label>
-                    <label className="flex items-center gap-3 cursor-pointer group">
+                    <label className="group flex cursor-pointer items-center gap-3">
                       <Checkbox
                         checked={showInFeed}
                         onCheckedChange={(checked) =>
@@ -430,7 +420,7 @@ export function PostEditorForm({ categories, existingPost }: Props) {
                           })
                         }
                       />
-                      <span className="text-sm text-foreground group-hover:text-primary transition-colors">
+                      <span className="text-foreground group-hover:text-primary text-sm transition-colors">
                         {t('settings.showInFeed')}
                       </span>
                     </label>

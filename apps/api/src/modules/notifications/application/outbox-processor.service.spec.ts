@@ -1,10 +1,6 @@
 import type { Mailer } from '../../auth/domain/ports/mailer';
 import type { EmailOutboxRepository } from '../domain/ports/outbox.repository';
-import {
-  BACKOFF_MS,
-  MAX_ATTEMPTS,
-  OutboxProcessorService,
-} from './outbox-processor.service';
+import { BACKOFF_MS, MAX_ATTEMPTS, OutboxProcessorService } from './outbox-processor.service';
 
 function makeEnv(isTest = false) {
   return { isTest } as { isTest: boolean };
@@ -106,11 +102,7 @@ describe('OutboxProcessorService', () => {
 
     await svc.tick();
 
-    expect(outbox.scheduleRetry).toHaveBeenCalledWith(
-      'fail',
-      'temp glitch',
-      expect.any(Date),
-    );
+    expect(outbox.scheduleRetry).toHaveBeenCalledWith('fail', 'temp glitch', expect.any(Date));
     expect(outbox.markSent).toHaveBeenCalledWith('ok');
     expect(outbox.markFailed).not.toHaveBeenCalled();
   });

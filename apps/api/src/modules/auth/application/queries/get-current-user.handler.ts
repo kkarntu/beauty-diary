@@ -1,19 +1,14 @@
 import { Inject } from '@nestjs/common';
 import { type IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import {
-  USER_REPOSITORY,
-  type UserRepository,
-} from '../../../users/domain/ports/user.repository';
+import { USER_REPOSITORY, type UserRepository } from '../../../users/domain/ports/user.repository';
 import { UserNotFoundError } from '../../../users/domain/user.errors';
-import {
-  GetCurrentUserQuery,
-  type GetCurrentUserResult,
-} from './get-current-user.query';
+import { GetCurrentUserQuery, type GetCurrentUserResult } from './get-current-user.query';
 
 @QueryHandler(GetCurrentUserQuery)
-export class GetCurrentUserHandler
-  implements IQueryHandler<GetCurrentUserQuery, GetCurrentUserResult>
-{
+export class GetCurrentUserHandler implements IQueryHandler<
+  GetCurrentUserQuery,
+  GetCurrentUserResult
+> {
   constructor(@Inject(USER_REPOSITORY) private readonly users: UserRepository) {}
 
   async execute(query: GetCurrentUserQuery): Promise<GetCurrentUserResult> {

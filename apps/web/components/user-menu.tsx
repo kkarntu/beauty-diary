@@ -26,7 +26,7 @@ export function UserMenu() {
   if (isPending) {
     return (
       <Button variant="ghost" size="icon" disabled aria-label={t('userMenu')}>
-        <User className="w-5 h-5" />
+        <User className="h-5 w-5" />
       </Button>
     );
   }
@@ -53,13 +53,13 @@ export function UserMenu() {
           className="text-foreground-muted hover:text-foreground"
           aria-label={t('userMenu')}
         >
-          <User className="w-5 h-5" />
+          <User className="h-5 w-5" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col gap-0.5">
-            <span className="text-sm font-medium text-foreground">
+            <span className="text-foreground text-sm font-medium">
               {user.displayName ?? user.nickname}
             </span>
             <span className="caption text-foreground-muted truncate">{user.email}</span>
@@ -67,20 +67,20 @@ export function UserMenu() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href={routes.me} className="cursor-pointer flex items-center">
-            <Settings className="w-4 h-4 mr-2" />
+          <Link href={routes.me} className="flex cursor-pointer items-center">
+            <Settings className="mr-2 h-4 w-4" />
             {t('settings')}
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href={routes.myPosts} className="cursor-pointer flex items-center">
-            <FileText className="w-4 h-4 mr-2" />
+          <Link href={routes.myPosts} className="flex cursor-pointer items-center">
+            <FileText className="mr-2 h-4 w-4" />
             {t('myPosts')}
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href={routes.myFavorites} className="cursor-pointer flex items-center">
-            <Bookmark className="w-4 h-4 mr-2" />
+          <Link href={routes.myFavorites} className="flex cursor-pointer items-center">
+            <Bookmark className="mr-2 h-4 w-4" />
             {t('favorites')}
           </Link>
         </DropdownMenuItem>
@@ -88,9 +88,9 @@ export function UserMenu() {
         <DropdownMenuItem
           onClick={onLogout}
           disabled={logout.isPending}
-          className="cursor-pointer text-destructive focus:text-destructive"
+          className="text-destructive focus:text-destructive cursor-pointer"
         >
-          <LogOut className="w-4 h-4 mr-2" />
+          <LogOut className="mr-2 h-4 w-4" />
           {t('logout')}
         </DropdownMenuItem>
       </DropdownMenuContent>

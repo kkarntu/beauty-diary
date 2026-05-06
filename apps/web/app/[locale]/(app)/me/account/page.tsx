@@ -5,11 +5,7 @@ import { SettingsShell } from '@/components/me/settings-shell';
 import type { Locale } from '@/i18n/routing';
 import { fetchCurrentUser } from '@/lib/server/me';
 
-export default async function MeAccountPage({
-  params,
-}: {
-  params: Promise<{ locale: Locale }>;
-}) {
+export default async function MeAccountPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('profile');

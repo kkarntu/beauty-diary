@@ -1,13 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, type ICommandHandler } from '@nestjs/cqrs';
-import {
-  USER_REPOSITORY,
-  type UserRepository,
-} from '../../../users/domain/ports/user.repository';
-import {
-  AccountBlockedError,
-  InvalidCredentialsError,
-} from '../../domain/auth.errors';
+import { USER_REPOSITORY, type UserRepository } from '../../../users/domain/ports/user.repository';
+import { AccountBlockedError, InvalidCredentialsError } from '../../domain/auth.errors';
 import { PASSWORD_HASHER, type PasswordHasher } from '../../domain/ports/password-hasher';
 import {
   REFRESH_TOKEN_REPOSITORY,

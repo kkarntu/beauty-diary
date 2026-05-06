@@ -3,10 +3,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthSharedModule } from '../auth/auth-shared.module';
 import { UsersModule } from '../users/users.module';
-import {
-  FollowUserHandler,
-  UnfollowUserHandler,
-} from './application/commands/follow-user.handler';
+import { FollowUserHandler, UnfollowUserHandler } from './application/commands/follow-user.handler';
 import { FOLLOW_REPOSITORY } from './domain/ports/follow.repository';
 import { UserFollowOrmEntity } from './infrastructure/persistence/user-follow.orm-entity';
 import { TypeOrmFollowRepository } from './infrastructure/persistence/typeorm-follow.repository';

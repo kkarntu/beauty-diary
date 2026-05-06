@@ -1,9 +1,4 @@
-import {
-  type CanActivate,
-  type ExecutionContext,
-  Inject,
-  Injectable,
-} from '@nestjs/common';
+import { type CanActivate, type ExecutionContext, Inject, Injectable } from '@nestjs/common';
 import type { Request } from 'express';
 import { TOKEN_SERVICE, type TokenService } from '../../domain/ports/token-service';
 import { ACCESS_COOKIE_NAME } from '../cookies/auth-cookies';

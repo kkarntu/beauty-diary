@@ -43,44 +43,41 @@ export default async function CategoryPage({
     <div className="bg-background">
       {/* Category hero */}
       <div
-        className="relative h-[300px] mb-8 bg-gradient-to-br from-primary/30 via-primary/15 to-surface-muted"
+        className="from-primary/30 via-primary/15 to-surface-muted relative mb-8 h-[300px] bg-gradient-to-br"
         aria-hidden={!category.description ? 'true' : undefined}
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+        <div className="from-background via-background/40 absolute inset-0 bg-gradient-to-t to-transparent" />
         <div className="absolute bottom-0 left-0 right-0">
-          <div className="max-w-[1280px] mx-auto px-6 lg:px-20 pb-8">
-            <p className="text-xs uppercase tracking-wider text-foreground-muted mb-2">
+          <div className="mx-auto max-w-[1280px] px-6 pb-8 lg:px-20">
+            <p className="text-foreground-muted mb-2 text-xs uppercase tracking-wider">
               {t('label')}
             </p>
             <h1
               style={{ fontFamily: 'var(--font-display)' }}
-              className="text-4xl lg:text-5xl font-medium text-foreground mb-3"
+              className="text-foreground mb-3 text-4xl font-medium lg:text-5xl"
             >
               {label}
             </h1>
             {category.description ? (
-              <p className="text-lg text-foreground-muted max-w-2xl">{category.description}</p>
+              <p className="text-foreground-muted max-w-2xl text-lg">{category.description}</p>
             ) : null}
-            <p className="text-sm text-foreground-muted mt-3">
+            <p className="text-foreground-muted mt-3 text-sm">
               {t('postsCount', { count: total })}
             </p>
           </div>
         </div>
       </div>
 
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-20 pb-16">
+      <div className="mx-auto max-w-[1280px] px-6 pb-16 lg:px-20">
         {items.length === 0 ? (
-          <div className="text-center py-20 space-y-3">
-            <h2
-              style={{ fontFamily: 'var(--font-display)' }}
-              className="text-2xl font-medium"
-            >
+          <div className="space-y-3 py-20 text-center">
+            <h2 style={{ fontFamily: 'var(--font-display)' }} className="text-2xl font-medium">
               {t('empty.title')}
             </h2>
             <p className="text-foreground-muted">{t('empty.subtitle')}</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {items.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
@@ -88,22 +85,22 @@ export default async function CategoryPage({
         )}
 
         {totalPages > 1 ? (
-          <nav className="flex items-center justify-center gap-3 pt-8 mt-8 border-t border-border">
+          <nav className="border-border mt-8 flex items-center justify-center gap-3 border-t pt-8">
             {page > 1 ? (
               <Link
                 href={`${routes.category(slug)}${page > 2 ? `?page=${page - 1}` : ''}`}
-                className="text-sm font-medium text-foreground hover:text-primary"
+                className="text-foreground hover:text-primary text-sm font-medium"
               >
                 ← {t('previous')}
               </Link>
             ) : null}
-            <span className="text-sm text-foreground-muted tabular-nums">
+            <span className="text-foreground-muted text-sm tabular-nums">
               {t('pageOf', { page, total: totalPages })}
             </span>
             {page < totalPages ? (
               <Link
                 href={`${routes.category(slug)}?page=${page + 1}`}
-                className="text-sm font-medium text-foreground hover:text-primary"
+                className="text-foreground hover:text-primary text-sm font-medium"
               >
                 {t('next')} →
               </Link>

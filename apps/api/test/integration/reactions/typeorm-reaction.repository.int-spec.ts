@@ -121,7 +121,7 @@ describe('TypeOrmReactionRepository (integration)', () => {
       expect(list.total).toBe(0);
     });
 
-    it('does not surface another user\'s favorites', async () => {
+    it("does not surface another user's favorites", async () => {
       const otherUser = Object.assign(new UserOrmEntity(), {
         id: uuidv7(),
         email: 'o@bd.test',

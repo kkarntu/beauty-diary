@@ -6,13 +6,7 @@ import { api } from '@/lib/api';
 
 export function useUpdateUserState() {
   return useMutation({
-    mutationFn: async ({
-      userId,
-      patch,
-    }: {
-      userId: string;
-      patch: UpdateUserStateDto;
-    }) => {
+    mutationFn: async ({ userId, patch }: { userId: string; patch: UpdateUserStateDto }) => {
       await api.patch(`/api/admin/users/${userId}`, patch);
     },
   });

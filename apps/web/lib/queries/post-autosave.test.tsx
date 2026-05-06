@@ -35,8 +35,7 @@ describe('useAutoSaveDraft', () => {
 
   it('debounces — fires PATCH once after changes settle', async () => {
     const { rerender } = renderHook(
-      ({ payload }) =>
-        useAutoSaveDraft({ postId: 'p1', payload, enabled: true, debounceMs: 50 }),
+      ({ payload }) => useAutoSaveDraft({ postId: 'p1', payload, enabled: true, debounceMs: 50 }),
       { initialProps: { payload: { title: 'Hello', contentHtml: '<p>x</p>' } } },
     );
 

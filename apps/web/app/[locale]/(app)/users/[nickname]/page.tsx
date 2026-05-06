@@ -47,11 +47,11 @@ export default async function AuthorProfilePage({
 
   return (
     <div className="bg-background">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-20 py-12">
+      <div className="mx-auto max-w-[1280px] px-6 py-12 lg:px-20">
         {/* Author header card */}
-        <div className="bg-surface rounded-xl border border-border p-4 sm:p-6 lg:p-8 mb-8">
-          <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-start">
-            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-surface-muted flex items-center justify-center text-3xl sm:text-4xl font-medium text-foreground shrink-0 mx-auto sm:mx-0 overflow-hidden relative">
+        <div className="bg-surface border-border mb-8 rounded-xl border p-4 sm:p-6 lg:p-8">
+          <div className="flex flex-col items-start gap-6 sm:flex-row sm:gap-8">
+            <div className="bg-surface-muted text-foreground relative mx-auto flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full text-3xl font-medium sm:mx-0 sm:h-32 sm:w-32 sm:text-4xl">
               {user.avatarUrl ? (
                 <Image
                   src={user.avatarUrl}
@@ -65,16 +65,16 @@ export default async function AuthorProfilePage({
               )}
             </div>
 
-            <div className="flex-1 w-full min-w-0">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-1">
+            <div className="w-full min-w-0 flex-1">
+              <div className="mb-1 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="min-w-0">
                   <h1
                     style={{ fontFamily: 'var(--font-display)' }}
-                    className="text-2xl sm:text-3xl font-medium text-foreground"
+                    className="text-foreground text-2xl font-medium sm:text-3xl"
                   >
                     {user.displayName ?? user.nickname}
                   </h1>
-                  <p className="text-sm text-foreground-muted">@{user.nickname}</p>
+                  <p className="text-foreground-muted text-sm">@{user.nickname}</p>
                 </div>
                 <FollowButton
                   nickname={user.nickname}
@@ -84,36 +84,36 @@ export default async function AuthorProfilePage({
               </div>
 
               {user.bio ? (
-                <p className="text-foreground leading-relaxed mt-4 mb-6">{user.bio}</p>
+                <p className="text-foreground mb-6 mt-4 leading-relaxed">{user.bio}</p>
               ) : null}
 
               <div className="flex gap-8">
                 <div>
                   <p
                     style={{ fontFamily: 'var(--font-display)' }}
-                    className="text-2xl font-medium text-foreground tabular-nums"
+                    className="text-foreground text-2xl font-medium tabular-nums"
                   >
                     {total}
                   </p>
-                  <p className="text-sm text-foreground-muted">{t('postsLabel')}</p>
+                  <p className="text-foreground-muted text-sm">{t('postsLabel')}</p>
                 </div>
                 <div>
                   <p
                     style={{ fontFamily: 'var(--font-display)' }}
-                    className="text-2xl font-medium text-foreground tabular-nums"
+                    className="text-foreground text-2xl font-medium tabular-nums"
                   >
                     {user.followersCount}
                   </p>
-                  <p className="text-sm text-foreground-muted">{t('followersLabel')}</p>
+                  <p className="text-foreground-muted text-sm">{t('followersLabel')}</p>
                 </div>
                 <div>
                   <p
                     style={{ fontFamily: 'var(--font-display)' }}
-                    className="text-2xl font-medium text-foreground tabular-nums"
+                    className="text-foreground text-2xl font-medium tabular-nums"
                   >
                     {user.followingCount}
                   </p>
-                  <p className="text-sm text-foreground-muted">{t('followingLabel')}</p>
+                  <p className="text-foreground-muted text-sm">{t('followingLabel')}</p>
                 </div>
               </div>
             </div>
@@ -122,17 +122,14 @@ export default async function AuthorProfilePage({
 
         {/* Posts */}
         {items.length === 0 ? (
-          <div className="text-center py-20 space-y-3">
-            <h2
-              style={{ fontFamily: 'var(--font-display)' }}
-              className="text-2xl font-medium"
-            >
+          <div className="space-y-3 py-20 text-center">
+            <h2 style={{ fontFamily: 'var(--font-display)' }} className="text-2xl font-medium">
               {t('empty.title')}
             </h2>
             <p className="text-foreground-muted">{t('empty.subtitle')}</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {items.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}

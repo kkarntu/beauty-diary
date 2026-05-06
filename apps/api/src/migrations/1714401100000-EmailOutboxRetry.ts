@@ -21,9 +21,7 @@ export class EmailOutboxRetry1714401100000 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`DROP INDEX IF EXISTS "idx_email_outbox_due"`);
-    await queryRunner.query(
-      `ALTER TABLE "email_outbox" DROP COLUMN IF EXISTS "next_attempt_at"`,
-    );
+    await queryRunner.query(`ALTER TABLE "email_outbox" DROP COLUMN IF EXISTS "next_attempt_at"`);
     await queryRunner.query(
       `CREATE INDEX "idx_email_outbox_pending" ON "email_outbox" ("created_at") WHERE "status" = 'pending'`,
     );

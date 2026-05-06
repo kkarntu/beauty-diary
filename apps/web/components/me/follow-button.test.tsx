@@ -57,9 +57,7 @@ describe('FollowButton', () => {
     renderButton({ nickname: 'alice', initialIsFollowed: false });
     await userEvent.setup().click(screen.getByRole('button', { name: 'Follow' }));
 
-    await waitFor(() =>
-      expect(apiMock.post).toHaveBeenCalledWith('/api/users/alice/follow'),
-    );
+    await waitFor(() => expect(apiMock.post).toHaveBeenCalledWith('/api/users/alice/follow'));
     await waitFor(() => expect(refreshMock).toHaveBeenCalled());
   });
 
@@ -70,9 +68,7 @@ describe('FollowButton', () => {
     renderButton({ nickname: 'alice', initialIsFollowed: true });
     await userEvent.setup().click(screen.getByRole('button', { name: 'Unfollow' }));
 
-    await waitFor(() =>
-      expect(apiMock.delete).toHaveBeenCalledWith('/api/users/alice/follow'),
-    );
+    await waitFor(() => expect(apiMock.delete).toHaveBeenCalledWith('/api/users/alice/follow'));
   });
 
   it('renders nothing when hidden (own profile)', () => {

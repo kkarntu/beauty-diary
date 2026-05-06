@@ -59,7 +59,7 @@ export function FollowButton({ nickname, initialIsFollowed, hidden }: Props) {
       variant={isFollowed ? 'outline' : 'default'}
       onClick={onClick}
       disabled={busy}
-      className="shrink-0 w-full sm:w-auto"
+      className="w-full shrink-0 sm:w-auto"
     >
       {busy ? t('saving') : isFollowed ? t('unfollow') : t('follow')}
     </Button>

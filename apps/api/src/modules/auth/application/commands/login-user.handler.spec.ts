@@ -1,9 +1,6 @@
 import { User } from '../../../users/domain/user.entity';
 import type { UserRepository } from '../../../users/domain/ports/user.repository';
-import {
-  AccountBlockedError,
-  InvalidCredentialsError,
-} from '../../domain/auth.errors';
+import { AccountBlockedError, InvalidCredentialsError } from '../../domain/auth.errors';
 import type { PasswordHasher } from '../../domain/ports/password-hasher';
 import type { RefreshTokenRepository } from '../../domain/ports/refresh-token.repository';
 import type { TokenService } from '../../domain/ports/token-service';
@@ -65,9 +62,9 @@ describe('LoginUserHandler', () => {
     );
     hasher.verify.mockResolvedValueOnce(false);
 
-    await expect(
-      handler.execute(new LoginUserCommand('a@x.com', 'wrong')),
-    ).rejects.toBeInstanceOf(InvalidCredentialsError);
+    await expect(handler.execute(new LoginUserCommand('a@x.com', 'wrong'))).rejects.toBeInstanceOf(
+      InvalidCredentialsError,
+    );
   });
 
   it('rejects when account is blocked', async () => {

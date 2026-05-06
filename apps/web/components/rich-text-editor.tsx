@@ -54,8 +54,8 @@ export function RichTextEditor({ content, onChange, placeholder }: Props) {
   if (!editor) return null;
 
   return (
-    <div className="border border-border rounded-lg overflow-hidden bg-surface">
-      <div className="flex flex-wrap items-center gap-1 p-2 border-b border-border bg-surface-muted">
+    <div className="border-border bg-surface overflow-hidden rounded-lg border">
+      <div className="border-border bg-surface-muted flex flex-wrap items-center gap-1 border-b p-2">
         <ToolbarButton
           icon={Bold}
           label={t('bold')}
@@ -163,11 +163,11 @@ function ToolbarButton({
       onClick={() => onActivate(editor)}
       className={cn(isActive && 'bg-primary/10 text-primary')}
     >
-      <Icon className="w-4 h-4" />
+      <Icon className="h-4 w-4" />
     </Button>
   );
 }
 
 function Divider() {
-  return <div className="w-px h-6 bg-border mx-1" />;
+  return <div className="bg-border mx-1 h-6 w-px" />;
 }

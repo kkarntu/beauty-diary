@@ -41,11 +41,7 @@ import { NotificationPreferencesController } from './presentation/preferences.co
       NotificationOrmEntity,
     ]),
   ],
-  controllers: [
-    NotificationsController,
-    NotificationPreferencesController,
-    AdminOutboxController,
-  ],
+  controllers: [NotificationsController, NotificationPreferencesController, AdminOutboxController],
   providers: [
     CommentCreatedNotifyHandler,
     UserFollowedNotifyHandler,

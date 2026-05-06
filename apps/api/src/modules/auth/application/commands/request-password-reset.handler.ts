@@ -2,10 +2,7 @@ import { Inject, Logger } from '@nestjs/common';
 import { CommandHandler, type ICommandHandler } from '@nestjs/cqrs';
 import { randomBytes, createHash } from 'node:crypto';
 import { v7 as uuidv7 } from 'uuid';
-import {
-  USER_REPOSITORY,
-  type UserRepository,
-} from '../../../users/domain/ports/user.repository';
+import { USER_REPOSITORY, type UserRepository } from '../../../users/domain/ports/user.repository';
 import { MAILER, type Mailer } from '../../domain/ports/mailer';
 import {
   PASSWORD_RESET_TOKEN_REPOSITORY,
@@ -17,9 +14,10 @@ import { RequestPasswordResetCommand } from './request-password-reset.command';
 const RESET_TOKEN_TTL_MS = 60 * 60 * 1000; // 1 hour
 
 @CommandHandler(RequestPasswordResetCommand)
-export class RequestPasswordResetHandler
-  implements ICommandHandler<RequestPasswordResetCommand, void>
-{
+export class RequestPasswordResetHandler implements ICommandHandler<
+  RequestPasswordResetCommand,
+  void
+> {
   private readonly logger = new Logger(RequestPasswordResetHandler.name);
 
   constructor(

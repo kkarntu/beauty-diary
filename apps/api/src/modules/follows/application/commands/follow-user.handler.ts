@@ -3,10 +3,7 @@ import { CommandHandler, EventBus, type ICommandHandler } from '@nestjs/cqrs';
 import { USER_REPOSITORY, type UserRepository } from '../../../users/domain/ports/user.repository';
 import { UserNotFoundError } from '../../../users/domain/user.errors';
 import { CannotFollowSelfError } from '../../domain/follow.errors';
-import {
-  FOLLOW_REPOSITORY,
-  type FollowRepository,
-} from '../../domain/ports/follow.repository';
+import { FOLLOW_REPOSITORY, type FollowRepository } from '../../domain/ports/follow.repository';
 import { UserFollowedEvent } from '../events/user-followed.event';
 import { FollowUserCommand, UnfollowUserCommand } from './follow-user.command';
 

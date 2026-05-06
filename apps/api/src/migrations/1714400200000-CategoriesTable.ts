@@ -18,7 +18,12 @@ export class CategoriesTable1714400200000 implements MigrationInterface {
     // product spec, not editable by clients — this lives in a migration so
     // every environment (local, CI, prod) gets the same UUIDs and slugs.
     const seed = [
-      ['skincare', 'Догляд за шкірою', 'Усе про скінкер: рутини, інгредієнти, відгуки на засоби.', 10],
+      [
+        'skincare',
+        'Догляд за шкірою',
+        'Усе про скінкер: рутини, інгредієнти, відгуки на засоби.',
+        10,
+      ],
       ['makeup', 'Макіяж', 'Техніки, тренди, тестування продуктів.', 20],
       ['fashion', 'Мода', 'Стиль, гардероб, сезонні тренди.', 30],
       ['wellness', 'Wellness', 'Психічне здоровʼя, спорт, харчування.', 40],

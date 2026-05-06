@@ -11,15 +11,13 @@ import {
 } from '../../domain/comment.errors';
 import { COMMENT_REPOSITORY, type CommentRepository } from '../../domain/ports/comment.repository';
 import { CommentCreatedEvent } from '../events/comment-created.event';
-import {
-  CreateCommentCommand,
-  type CreateCommentResult,
-} from './create-comment.command';
+import { CreateCommentCommand, type CreateCommentResult } from './create-comment.command';
 
 @CommandHandler(CreateCommentCommand)
-export class CreateCommentHandler
-  implements ICommandHandler<CreateCommentCommand, CreateCommentResult>
-{
+export class CreateCommentHandler implements ICommandHandler<
+  CreateCommentCommand,
+  CreateCommentResult
+> {
   constructor(
     @Inject(COMMENT_REPOSITORY) private readonly comments: CommentRepository,
     @Inject(POST_REPOSITORY) private readonly posts: PostRepository,
@@ -57,9 +55,7 @@ export class CreateCommentHandler
     post.incrementCommentsCount();
     await this.posts.save(post);
 
-    this.eventBus.publish(
-      new CommentCreatedEvent(comment.id, comment.postId, comment.authorId),
-    );
+    this.eventBus.publish(new CommentCreatedEvent(comment.id, comment.postId, comment.authorId));
 
     return { id: comment.id };
   }

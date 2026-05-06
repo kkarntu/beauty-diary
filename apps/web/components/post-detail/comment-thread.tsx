@@ -69,7 +69,7 @@ export function CommentThread({ postId, initialComments }: Props) {
       return (
         <div className="flex gap-3">
           <Avatar nickname={comment.author.nickname} avatarUrl={comment.author.avatarUrl} />
-          <div className="flex-1 min-w-0">
+          <div className="min-w-0 flex-1">
             <CommentEditForm
               postId={postId}
               commentId={comment.id}
@@ -89,9 +89,7 @@ export function CommentThread({ postId, initialComments }: Props) {
         canDelete={canDelete}
         canEdit={canEdit}
         onReply={
-          !isReply
-            ? () => setReplyingTo(replyingTo === comment.id ? null : comment.id)
-            : undefined
+          !isReply ? () => setReplyingTo(replyingTo === comment.id ? null : comment.id) : undefined
         }
         onEdit={() => setEditingId(comment.id)}
         onDelete={() => onDelete(comment.id)}
@@ -106,10 +104,7 @@ export function CommentThread({ postId, initialComments }: Props) {
   return (
     <div className="space-y-8">
       <div>
-        <h2
-          style={{ fontFamily: 'var(--font-display)' }}
-          className="text-2xl font-medium mb-4"
-        >
+        <h2 style={{ fontFamily: 'var(--font-display)' }} className="mb-4 text-2xl font-medium">
           {t('title', { count: comments.length })}
         </h2>
         <CommentForm postId={postId} />
@@ -123,7 +118,7 @@ export function CommentThread({ postId, initialComments }: Props) {
               {renderRow(c, false)}
 
               {childReplies.length > 0 ? (
-                <ul className="ml-12 space-y-4 border-l border-border pl-6">
+                <ul className="border-border ml-12 space-y-4 border-l pl-6">
                   {childReplies.map((reply) => (
                     <li key={reply.id}>{renderRow(reply, true)}</li>
                   ))}
@@ -131,7 +126,7 @@ export function CommentThread({ postId, initialComments }: Props) {
               ) : null}
 
               {replyingTo === c.id && user ? (
-                <div className="ml-12 pl-6 border-l border-border">
+                <div className="border-border ml-12 border-l pl-6">
                   <CommentForm
                     postId={postId}
                     parentId={c.id}
@@ -146,7 +141,7 @@ export function CommentThread({ postId, initialComments }: Props) {
       </ul>
 
       {grouped.top.length === 0 ? (
-        <p className="text-sm text-foreground-muted text-center py-8">{t('empty')}</p>
+        <p className="text-foreground-muted py-8 text-center text-sm">{t('empty')}</p>
       ) : null}
     </div>
   );
@@ -157,7 +152,7 @@ function Avatar({ nickname, avatarUrl }: { nickname: string; avatarUrl: string |
   return (
     <Link
       href={routes.author(nickname)}
-      className="h-9 w-9 flex-shrink-0 rounded-full bg-surface-muted flex items-center justify-center text-foreground-muted text-sm font-medium overflow-hidden"
+      className="bg-surface-muted text-foreground-muted flex h-9 w-9 flex-shrink-0 items-center justify-center overflow-hidden rounded-full text-sm font-medium"
     >
       {avatarUrl ? (
         // eslint-disable-next-line @next/next/no-img-element -- avatars are tiny + already CDN-served
@@ -199,11 +194,11 @@ function CommentRow({
   return (
     <article className="flex gap-3">
       <Avatar nickname={comment.author.nickname} avatarUrl={comment.author.avatarUrl} />
-      <div className="flex-1 min-w-0">
-        <header className="flex items-baseline gap-2 flex-wrap">
+      <div className="min-w-0 flex-1">
+        <header className="flex flex-wrap items-baseline gap-2">
           <Link
             href={routes.author(comment.author.nickname)}
-            className="text-sm font-medium text-foreground hover:text-primary"
+            className="text-foreground hover:text-primary text-sm font-medium"
           >
             {comment.author.nickname}
           </Link>
@@ -213,7 +208,7 @@ function CommentRow({
           </span>
         </header>
         <p className="text-foreground mt-1 whitespace-pre-wrap break-words">{comment.content}</p>
-        <footer className="flex items-center gap-3 mt-2">
+        <footer className="mt-2 flex items-center gap-3">
           {onReply && !isDeleted ? (
             <button
               type="button"

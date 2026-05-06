@@ -1,9 +1,6 @@
 import { User } from '../../../users/domain/user.entity';
 import type { UserRepository } from '../../../users/domain/ports/user.repository';
-import {
-  EmailAlreadyTakenError,
-  NicknameAlreadyTakenError,
-} from '../../domain/auth.errors';
+import { EmailAlreadyTakenError, NicknameAlreadyTakenError } from '../../domain/auth.errors';
 import type { PasswordHasher } from '../../domain/ports/password-hasher';
 import type { RefreshTokenRepository } from '../../domain/ports/refresh-token.repository';
 import type { TokenService } from '../../domain/ports/token-service';

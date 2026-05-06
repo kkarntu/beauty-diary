@@ -24,7 +24,7 @@ export function ScrollToTop() {
       className="fixed bottom-6 right-6 z-50 rounded-full shadow-lg"
       aria-label={t('scrollToTop')}
     >
-      <ArrowUp className="w-5 h-5" />
+      <ArrowUp className="h-5 w-5" />
     </Button>
   );
 }

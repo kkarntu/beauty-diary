@@ -27,13 +27,7 @@ describe('TypeOrmCommentRepository (integration)', () => {
   });
 
   beforeEach(async () => {
-    await truncateAll(pg.dataSource, [
-      'comments',
-      'post_tags',
-      'tags',
-      'posts',
-      'users',
-    ]);
+    await truncateAll(pg.dataSource, ['comments', 'post_tags', 'tags', 'posts', 'users']);
 
     const user = Object.assign(new UserOrmEntity(), {
       id: uuidv7(),

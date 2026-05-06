@@ -1,7 +1,7 @@
 import type { INestApplication } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import request from 'supertest';
-import { createTestApp } from '../../support/app-factory';
+import { createTestApp } from '../../../support/app-factory';
 
 describe('Posts + comments (integration)', () => {
   let app: INestApplication;
@@ -162,11 +162,11 @@ describe('Posts + comments (integration)', () => {
       .send({ content: 'no nesting', parentId: reply.id })
       .expect(400);
 
-    const list = await request(server)
-      .get(`/api/posts/${post.body.id}/comments`)
-      .expect(200);
+    const list = await request(server).get(`/api/posts/${post.body.id}/comments`).expect(200);
     expect(list.body).toHaveLength(3);
-    expect(list.body.filter((c: { parentId: string | null }) => c.parentId === null)).toHaveLength(1);
+    expect(list.body.filter((c: { parentId: string | null }) => c.parentId === null)).toHaveLength(
+      1,
+    );
 
     // commentsCount on the post should reflect the saved comments
     const detail = await request(server).get(`/api/posts/${post.body.slug}`).expect(200);

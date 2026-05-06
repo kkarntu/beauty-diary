@@ -23,7 +23,7 @@ export function FeedFilters({ categories, activeSlug, activeSort }: Props) {
 
   return (
     <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-      <div className="flex gap-3 overflow-x-auto pb-2 -mb-2 scrollbar-hide flex-1 min-w-0">
+      <div className="scrollbar-hide -mb-2 flex min-w-0 flex-1 gap-3 overflow-x-auto pb-2">
         <Link href="/feed" scroll={false}>
           <CategoryChip label={t('allCategories')} active={!activeSlug} />
         </Link>
@@ -34,14 +34,14 @@ export function FeedFilters({ categories, activeSlug, activeSort }: Props) {
         ))}
       </div>
 
-      <div className="flex items-center gap-1 border border-border rounded-md p-1 shrink-0">
+      <div className="border-border flex shrink-0 items-center gap-1 rounded-md border p-1">
         {(['recent', 'popular'] as const).map((sort) => (
           <Link
             key={sort}
             href={`/feed${activeSlug ? `?category=${activeSlug}&sort=${sort}` : `?sort=${sort}`}`}
             scroll={false}
             className={cn(
-              'px-3 h-8 inline-flex items-center text-sm font-medium rounded transition-colors',
+              'inline-flex h-8 items-center rounded px-3 text-sm font-medium transition-colors',
               activeSort === sort
                 ? 'bg-primary text-primary-foreground'
                 : 'text-foreground-muted hover:text-foreground hover:bg-surface-muted',

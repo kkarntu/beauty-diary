@@ -3,11 +3,7 @@ import { PostEditorForm } from '@/components/post-editor/editor-form';
 import type { Locale } from '@/i18n/routing';
 import { fetchCategories } from '@/lib/server/categories';
 
-export default async function NewPostPage({
-  params,
-}: {
-  params: Promise<{ locale: Locale }>;
-}) {
+export default async function NewPostPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const categories = await fetchCategories();

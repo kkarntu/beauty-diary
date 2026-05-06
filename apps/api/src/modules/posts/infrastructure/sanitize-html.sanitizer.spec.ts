@@ -54,9 +54,7 @@ describe('SanitizeHtmlSanitizer', () => {
   });
 
   it('keeps img with safe attributes only', () => {
-    const out = sanitizer.sanitize(
-      '<img src="https://x.com/a.jpg" alt="cover" onerror="evil()">',
-    );
+    const out = sanitizer.sanitize('<img src="https://x.com/a.jpg" alt="cover" onerror="evil()">');
     expect(out).toMatch(/src="https:\/\/x\.com\/a\.jpg"/);
     expect(out).toMatch(/alt="cover"/);
     expect(out).not.toMatch(/onerror/);

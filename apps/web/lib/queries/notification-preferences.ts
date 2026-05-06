@@ -15,9 +15,7 @@ export function useNotificationPreferences() {
   return useQuery({
     queryKey: notificationPrefKeys.current(),
     queryFn: async () => {
-      const res = await api.get<NotificationPreferencesDto>(
-        '/api/me/notification-preferences',
-      );
+      const res = await api.get<NotificationPreferencesDto>('/api/me/notification-preferences');
       return res.data;
     },
     staleTime: 5 * 60_000,

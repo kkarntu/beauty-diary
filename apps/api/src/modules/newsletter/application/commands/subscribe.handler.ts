@@ -7,9 +7,10 @@ import {
 import { SubscribeNewsletterCommand } from './subscribe.command';
 
 @CommandHandler(SubscribeNewsletterCommand)
-export class SubscribeNewsletterHandler
-  implements ICommandHandler<SubscribeNewsletterCommand, void>
-{
+export class SubscribeNewsletterHandler implements ICommandHandler<
+  SubscribeNewsletterCommand,
+  void
+> {
   constructor(
     @Inject(NEWSLETTER_SUBSCRIBER_REPOSITORY)
     private readonly subscribers: NewsletterSubscriberRepository,

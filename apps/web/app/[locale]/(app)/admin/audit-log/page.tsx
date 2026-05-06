@@ -50,17 +50,17 @@ export default async function AdminAuditLogPage({
       <div>
         <h2
           style={{ fontFamily: 'var(--font-display)' }}
-          className="text-2xl font-medium text-foreground mb-1"
+          className="text-foreground mb-1 text-2xl font-medium"
         >
           {tA('title')}
         </h2>
-        <p className="text-sm text-foreground-muted">{tA('subtitle')}</p>
+        <p className="text-foreground-muted text-sm">{tA('subtitle')}</p>
       </div>
 
       {items.length === 0 ? (
-        <p className="py-12 text-center text-foreground-muted">{tA('empty')}</p>
+        <p className="text-foreground-muted py-12 text-center">{tA('empty')}</p>
       ) : (
-        <div className="bg-surface rounded-xl border border-border overflow-hidden">
+        <div className="bg-surface border-border overflow-hidden rounded-xl border">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="bg-surface-muted text-foreground-muted">
@@ -74,8 +74,8 @@ export default async function AdminAuditLogPage({
               </thead>
               <tbody>
                 {items.map((row) => (
-                  <tr key={row.id} className="border-t border-border align-top">
-                    <td className="px-4 py-3 text-foreground-muted whitespace-nowrap">
+                  <tr key={row.id} className="border-border border-t align-top">
+                    <td className="text-foreground-muted whitespace-nowrap px-4 py-3">
                       {dateFmt.format(new Date(row.createdAt))}
                     </td>
                     <td className="px-4 py-3">
@@ -87,27 +87,23 @@ export default async function AdminAuditLogPage({
                           @{row.actorNickname}
                         </Link>
                       ) : (
-                        <span className="text-foreground-muted italic">
-                          {tA('system')}
-                        </span>
+                        <span className="text-foreground-muted italic">{tA('system')}</span>
                       )}
                     </td>
                     <td className="px-4 py-3">
-                      <code className="text-xs bg-surface-muted px-2 py-0.5 rounded">
+                      <code className="bg-surface-muted rounded px-2 py-0.5 text-xs">
                         {row.action}
                       </code>
                     </td>
-                    <td className="px-4 py-3 text-foreground-muted text-xs">
+                    <td className="text-foreground-muted px-4 py-3 text-xs">
                       <span className="font-medium">{row.targetType}</span>
                       {row.targetId ? (
-                        <span className="block opacity-70 break-all">
-                          {row.targetId}
-                        </span>
+                        <span className="block break-all opacity-70">{row.targetId}</span>
                       ) : null}
                     </td>
-                    <td className="px-4 py-3 text-foreground-muted text-xs">
+                    <td className="text-foreground-muted px-4 py-3 text-xs">
                       {Object.keys(row.metadata).length > 0 ? (
-                        <pre className="font-mono whitespace-pre-wrap break-all max-w-xs">
+                        <pre className="max-w-xs whitespace-pre-wrap break-all font-mono">
                           {JSON.stringify(row.metadata, null, 2)}
                         </pre>
                       ) : (
@@ -127,18 +123,18 @@ export default async function AdminAuditLogPage({
           {page > 1 ? (
             <Link
               href={pageHref(page - 1)}
-              className="text-sm font-medium text-foreground hover:text-primary"
+              className="text-foreground hover:text-primary text-sm font-medium"
             >
               ← {t('previous')}
             </Link>
           ) : null}
-          <span className="text-sm text-foreground-muted tabular-nums">
+          <span className="text-foreground-muted text-sm tabular-nums">
             {t('pageOf', { page, total: totalPages })}
           </span>
           {page < totalPages ? (
             <Link
               href={pageHref(page + 1)}
-              className="text-sm font-medium text-foreground hover:text-primary"
+              className="text-foreground hover:text-primary text-sm font-medium"
             >
               {t('next')} →
             </Link>

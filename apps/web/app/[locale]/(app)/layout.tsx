@@ -11,7 +11,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <SiteHeader />
-      <main id="main-content" className="min-h-screen bg-background">
+      <main id="main-content" className="bg-background min-h-screen">
         {children}
       </main>
     </>

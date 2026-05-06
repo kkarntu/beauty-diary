@@ -1,4 +1,4 @@
-import { EventBus } from '@nestjs/cqrs';
+import type { EventBus } from '@nestjs/cqrs';
 import { PostStatus } from '@beauty-diary/shared';
 import { Post } from '../../../posts/domain/post.entity';
 import type { PostRepository } from '../../../posts/domain/ports/post.repository';
@@ -57,9 +57,7 @@ describe('LikePostHandler', () => {
 
   it('does NOT publish when the like is a duplicate', async () => {
     const { handler, eventBus, post } = setup({ insertedNew: false });
-    await handler.execute(
-      new LikePostCommand('00000000-0000-7000-8000-0000000000cc', post.id),
-    );
+    await handler.execute(new LikePostCommand('00000000-0000-7000-8000-0000000000cc', post.id));
     expect(eventBus.publish).not.toHaveBeenCalled();
   });
 });

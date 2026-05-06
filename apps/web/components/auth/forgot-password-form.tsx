@@ -47,13 +47,13 @@ export function ForgotPasswordForm() {
   if (submitted) {
     return (
       <div className="space-y-6 text-center">
-        <div className="mx-auto h-12 w-12 rounded-full bg-success/10 flex items-center justify-center">
-          <MailCheck className="h-6 w-6 text-success" />
+        <div className="bg-success/10 mx-auto flex h-12 w-12 items-center justify-center rounded-full">
+          <MailCheck className="text-success h-6 w-6" />
         </div>
         <div className="space-y-2">
           <h2
             style={{ fontFamily: 'var(--font-display)' }}
-            className="text-2xl font-medium text-foreground"
+            className="text-foreground text-2xl font-medium"
           >
             {t('successTitle')}
           </h2>
@@ -95,8 +95,8 @@ export function ForgotPasswordForm() {
           {requestReset.isPending ? t('submitting') : t('submit')}
         </Button>
 
-        <p className="text-sm text-foreground-muted text-center">
-          <Link href={routes.login} className="text-primary hover:underline font-medium">
+        <p className="text-foreground-muted text-center text-sm">
+          <Link href={routes.login} className="text-primary font-medium hover:underline">
             {t('back')}
           </Link>
         </p>

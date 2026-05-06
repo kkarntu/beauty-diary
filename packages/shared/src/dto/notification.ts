@@ -5,8 +5,7 @@ export const NotificationType = {
   USER_FOLLOWED: 'user.followed',
   POST_LIKED: 'post.liked',
 } as const;
-export type NotificationType =
-  (typeof NotificationType)[keyof typeof NotificationType];
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType];
 
 export const NotificationDto = z.object({
   id: z.string().uuid(),

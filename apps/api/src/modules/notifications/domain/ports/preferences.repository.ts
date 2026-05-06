@@ -18,6 +18,4 @@ export interface NotificationPreferencesRepository {
   upsert(userId: string, patch: Partial<NotificationPreferences>): Promise<NotificationPreferences>;
 }
 
-export const NOTIFICATION_PREFERENCES_REPOSITORY = Symbol(
-  'NOTIFICATION_PREFERENCES_REPOSITORY',
-);
+export const NOTIFICATION_PREFERENCES_REPOSITORY = Symbol('NOTIFICATION_PREFERENCES_REPOSITORY');

@@ -60,18 +60,15 @@ export function PostCardStats({
   }, [socket, postId]);
 
   return (
-    <div className="flex items-center gap-3 text-foreground-muted flex-shrink-0">
+    <div className="text-foreground-muted flex flex-shrink-0 items-center gap-3">
       <div className="flex items-center gap-1 tabular-nums">
         <Heart
-          className={cn(
-            'w-4 h-4 flex-shrink-0',
-            isLikedByMe && 'fill-primary text-primary',
-          )}
+          className={cn('h-4 w-4 flex-shrink-0', isLikedByMe && 'fill-primary text-primary')}
         />
         <span className="text-sm">{stats.likesCount}</span>
       </div>
       <div className="flex items-center gap-1 tabular-nums">
-        <MessageCircle className="w-4 h-4 flex-shrink-0" />
+        <MessageCircle className="h-4 w-4 flex-shrink-0" />
         <span className="text-sm">{stats.commentsCount}</span>
       </div>
     </div>

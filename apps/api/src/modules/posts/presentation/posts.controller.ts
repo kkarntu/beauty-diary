@@ -31,7 +31,10 @@ import {
   type CreatePostResult,
 } from '../application/commands/create-post.command';
 import { DeletePostCommand } from '../application/commands/delete-post.command';
-import { ArchivePostCommand, PublishPostCommand } from '../application/commands/publish-post.command';
+import {
+  ArchivePostCommand,
+  PublishPostCommand,
+} from '../application/commands/publish-post.command';
 import { UpdatePostCommand } from '../application/commands/update-post.command';
 import {
   GetPostBySlugQuery,
@@ -132,30 +135,21 @@ export class PostsController {
   @Delete(':id')
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
-  async delete(
-    @CurrentUser() user: AuthenticatedUser,
-    @Param('id') id: string,
-  ): Promise<void> {
+  async delete(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string): Promise<void> {
     await this.commandBus.execute(new DeletePostCommand(id, user.id, user.role));
   }
 
   @Post(':id/publish')
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
-  async publish(
-    @CurrentUser() user: AuthenticatedUser,
-    @Param('id') id: string,
-  ): Promise<void> {
+  async publish(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string): Promise<void> {
     await this.commandBus.execute(new PublishPostCommand(id, user.id, user.role));
   }
 
   @Post(':id/archive')
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
-  async archive(
-    @CurrentUser() user: AuthenticatedUser,
-    @Param('id') id: string,
-  ): Promise<void> {
+  async archive(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string): Promise<void> {
     await this.commandBus.execute(new ArchivePostCommand(id, user.id, user.role));
   }
 }

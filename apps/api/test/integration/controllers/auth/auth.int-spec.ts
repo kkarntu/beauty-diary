@@ -1,7 +1,7 @@
 import type { INestApplication } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import request from 'supertest';
-import { createTestApp } from '../../support/app-factory';
+import { createTestApp } from '../../../support/app-factory';
 
 describe('Auth flow (integration)', () => {
   let app: INestApplication;
@@ -40,10 +40,7 @@ describe('Auth flow (integration)', () => {
       .expect(200);
     const cookies = login.headers['set-cookie'] as unknown as string[];
 
-    const me = await request(server)
-      .get('/api/auth/me')
-      .set('Cookie', cookies)
-      .expect(200);
+    const me = await request(server).get('/api/auth/me').set('Cookie', cookies).expect(200);
     expect(me.body.email).toBe(credentials.email);
     expect(me.body.nickname).toBe(credentials.nickname);
     expect(me.body.role).toBe('user');

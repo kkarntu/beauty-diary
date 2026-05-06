@@ -52,9 +52,7 @@ export class TypeOrmAuditLogRepository implements AuditLogRepository {
     );
   }
 
-  async list(
-    filters: AuditLogListFilters,
-  ): Promise<{ items: AuditLogListRow[]; total: number }> {
+  async list(filters: AuditLogListFilters): Promise<{ items: AuditLogListRow[]; total: number }> {
     const offset = (filters.page - 1) * filters.pageSize;
     const params: unknown[] = [];
     const conditions: string[] = [];

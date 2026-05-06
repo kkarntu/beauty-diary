@@ -35,9 +35,7 @@ interface FailedOutboxResponse {
 @UseGuards(AuthGuard, RolesGuard)
 @Roles(['admin'])
 export class AdminOutboxController {
-  constructor(
-    @Inject(EMAIL_OUTBOX_REPOSITORY) private readonly outbox: EmailOutboxRepository,
-  ) {}
+  constructor(@Inject(EMAIL_OUTBOX_REPOSITORY) private readonly outbox: EmailOutboxRepository) {}
 
   @Get('failed')
   async listFailed(

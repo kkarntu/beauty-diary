@@ -7,24 +7,24 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-surface">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-20 py-12 grid gap-8 md:grid-cols-4">
-        <div className="md:col-span-2 space-y-3">
+    <footer className="border-border bg-surface border-t">
+      <div className="mx-auto grid max-w-[1280px] gap-8 px-6 py-12 md:grid-cols-4 lg:px-20">
+        <div className="space-y-3 md:col-span-2">
           <Link href={routes.home}>
             <span
               style={{ fontFamily: 'var(--font-display)' }}
-              className="text-xl font-semibold text-foreground hover:text-primary transition-colors"
+              className="text-foreground hover:text-primary text-xl font-semibold transition-colors"
             >
               Beauty Diary
             </span>
           </Link>
-          <p className="text-sm text-foreground-muted max-w-md">{t('tagline')}</p>
+          <p className="text-foreground-muted max-w-md text-sm">{t('tagline')}</p>
         </div>
 
         <div className="space-y-3">
           <h4
             style={{ fontFamily: 'var(--font-display)' }}
-            className="text-base font-medium text-foreground"
+            className="text-foreground text-base font-medium"
           >
             {t('explore')}
           </h4>
@@ -56,7 +56,7 @@ export function SiteFooter() {
         <div className="space-y-3">
           <h4
             style={{ fontFamily: 'var(--font-display)' }}
-            className="text-base font-medium text-foreground"
+            className="text-foreground text-base font-medium"
           >
             {t('account')}
           </h4>
@@ -67,10 +67,7 @@ export function SiteFooter() {
               </Link>
             </li>
             <li>
-              <Link
-                href={routes.register}
-                className="text-foreground-muted hover:text-primary"
-              >
+              <Link href={routes.register} className="text-foreground-muted hover:text-primary">
                 {t('links.signUp')}
               </Link>
             </li>
@@ -83,8 +80,8 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t border-border">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-20 py-6 flex flex-col md:flex-row items-center justify-between gap-2">
+      <div className="border-border border-t">
+        <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-2 px-6 py-6 md:flex-row lg:px-20">
           <p className="caption text-foreground-muted">
             © {year} Beauty Diary. {t('copyright')}
           </p>

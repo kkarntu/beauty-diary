@@ -1,7 +1,7 @@
 import type { INestApplication } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import request from 'supertest';
-import { createTestApp } from '../../support/app-factory';
+import { createTestApp } from '../../../support/app-factory';
 
 /**
  * Covers ownership-protected mutations: PATCH/DELETE/publish/archive on posts,
@@ -102,10 +102,7 @@ describe('Posts + comments mutations (integration)', () => {
       const ownerCookies = await registerAndLogin('o@bd.test', 'owner');
       const post = await createPost(ownerCookies);
 
-      await request(server)
-        .patch(`/api/posts/${post.id}`)
-        .send({ title: 'hacked' })
-        .expect(401);
+      await request(server).patch(`/api/posts/${post.id}`).send({ title: 'hacked' }).expect(401);
     });
 
     it('lets admin edit any post', async () => {

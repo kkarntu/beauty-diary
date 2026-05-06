@@ -1,4 +1,4 @@
-import { EventBus } from '@nestjs/cqrs';
+import type { EventBus } from '@nestjs/cqrs';
 import { PostStatus } from '@beauty-diary/shared';
 import { Post } from '../../../posts/domain/post.entity';
 import type { PostRepository } from '../../../posts/domain/ports/post.repository';
@@ -108,12 +108,7 @@ describe('CreateCommentHandler', () => {
 
     await expect(
       handler.execute(
-        new CreateCommentCommand(
-          '00000000-0000-7000-8000-0000000000cc',
-          post.id,
-          null,
-          'hello',
-        ),
+        new CreateCommentCommand('00000000-0000-7000-8000-0000000000cc', post.id, null, 'hello'),
       ),
     ).rejects.toMatchObject({ code: 'COMMENTS_DISABLED' });
     expect(comments.save).not.toHaveBeenCalled();

@@ -35,20 +35,20 @@ export function NotificationRow({ notification: n, onClick, variant = 'dropdown'
       href={href}
       onClick={onClick}
       className={cn(
-        'flex items-start gap-3 cursor-pointer w-full transition-colors hover:bg-surface-muted',
-        variant === 'dropdown' ? 'px-3 py-3' : 'px-4 py-4 rounded-lg',
+        'hover:bg-surface-muted flex w-full cursor-pointer items-start gap-3 transition-colors',
+        variant === 'dropdown' ? 'px-3 py-3' : 'rounded-lg px-4 py-4',
         !n.readAt && (variant === 'dropdown' ? 'bg-primary/5' : 'bg-primary/5'),
       )}
     >
-      <div className="w-8 h-8 rounded-full bg-surface-muted flex items-center justify-center text-foreground-muted shrink-0">
-        <Icon className="w-4 h-4" />
+      <div className="bg-surface-muted text-foreground-muted flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
+        <Icon className="h-4 w-4" />
       </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-sm text-foreground line-clamp-2">{message}</p>
+      <div className="min-w-0 flex-1">
+        <p className="text-foreground line-clamp-2 text-sm">{message}</p>
         <p className="caption text-foreground-muted mt-0.5">{when}</p>
       </div>
       {!n.readAt ? (
-        <span aria-hidden className="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0" />
+        <span aria-hidden className="bg-primary mt-1.5 h-2 w-2 shrink-0 rounded-full" />
       ) : null}
     </Link>
   );

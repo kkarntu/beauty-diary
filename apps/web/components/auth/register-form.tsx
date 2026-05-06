@@ -78,11 +78,7 @@ export function RegisterForm() {
             <FormItem>
               <FormLabel>{t('nicknameLabel')}</FormLabel>
               <FormControl>
-                <Input
-                  autoComplete="username"
-                  placeholder={t('nicknamePlaceholder')}
-                  {...field}
-                />
+                <Input autoComplete="username" placeholder={t('nicknamePlaceholder')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -112,9 +108,9 @@ export function RegisterForm() {
           {register.isPending ? t('submitting') : t('submit')}
         </Button>
 
-        <p className="text-sm text-foreground-muted text-center">
+        <p className="text-foreground-muted text-center text-sm">
           {t('haveAccount')}{' '}
-          <Link href={routes.login} className="text-primary hover:underline font-medium">
+          <Link href={routes.login} className="text-primary font-medium hover:underline">
             {t('login')}
           </Link>
         </p>

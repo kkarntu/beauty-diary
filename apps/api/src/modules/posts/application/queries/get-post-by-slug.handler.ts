@@ -2,15 +2,13 @@ import { Inject } from '@nestjs/common';
 import { type IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { POST_REPOSITORY, type PostRepository } from '../../domain/ports/post.repository';
 import { PostNotFoundError } from '../../domain/post.errors';
-import {
-  GetPostBySlugQuery,
-  type GetPostBySlugResult,
-} from './get-post-by-slug.query';
+import { GetPostBySlugQuery, type GetPostBySlugResult } from './get-post-by-slug.query';
 
 @QueryHandler(GetPostBySlugQuery)
-export class GetPostBySlugHandler
-  implements IQueryHandler<GetPostBySlugQuery, GetPostBySlugResult>
-{
+export class GetPostBySlugHandler implements IQueryHandler<
+  GetPostBySlugQuery,
+  GetPostBySlugResult
+> {
   constructor(@Inject(POST_REPOSITORY) private readonly posts: PostRepository) {}
 
   async execute(query: GetPostBySlugQuery): Promise<GetPostBySlugResult> {

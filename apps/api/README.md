@@ -34,15 +34,15 @@ Each feature module follows Clean Architecture layering (domain / application / 
 
 ## Common commands (run from repo root)
 
-| Command | Purpose |
-|---|---|
-| `pnpm dev:api` | Watch-mode dev server (port 23001) |
-| `pnpm --filter=@beauty-diary/api build` | Compile to `dist/` |
-| `pnpm --filter=@beauty-diary/api test` | Unit tests |
-| `pnpm --filter=@beauty-diary/api test:int` | Integration tests (Testcontainers) |
-| `pnpm --filter=@beauty-diary/api test:e2e` | E2E tests |
+| Command                                     | Purpose                             |
+| ------------------------------------------- | ----------------------------------- |
+| `pnpm dev:api`                              | Watch-mode dev server (port 23001)  |
+| `pnpm --filter=@beauty-diary/api build`     | Compile to `dist/`                  |
+| `pnpm --filter=@beauty-diary/api test`      | Unit tests                          |
+| `pnpm --filter=@beauty-diary/api test:int`  | Integration tests (Testcontainers)  |
+| `pnpm --filter=@beauty-diary/api test:e2e`  | E2E tests                           |
 | `pnpm db:generate -- src/migrations/<Name>` | Generate migration from entity diff |
-| `pnpm db:migrate` | Apply pending migrations |
-| `pnpm db:revert` | Revert the last migration |
+| `pnpm db:migrate`                           | Apply pending migrations            |
+| `pnpm db:revert`                            | Revert the last migration           |
 
 See `docs/TESTING.md` for the testing layer split and recipes.

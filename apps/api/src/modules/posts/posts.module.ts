@@ -5,7 +5,10 @@ import { AuthSharedModule } from '../auth/auth-shared.module';
 import { CategoriesModule } from '../categories/categories.module';
 import { CreatePostHandler } from './application/commands/create-post.handler';
 import { DeletePostHandler } from './application/commands/delete-post.handler';
-import { ArchivePostHandler, PublishPostHandler } from './application/commands/publish-post.handler';
+import {
+  ArchivePostHandler,
+  PublishPostHandler,
+} from './application/commands/publish-post.handler';
 import { UpdatePostHandler } from './application/commands/update-post.handler';
 import { GetPostBySlugHandler } from './application/queries/get-post-by-slug.handler';
 import { ListPostsHandler } from './application/queries/list-posts.handler';

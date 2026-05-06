@@ -1,7 +1,7 @@
 import type { INestApplication } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import request from 'supertest';
-import { createTestApp } from '../../support/app-factory';
+import { createTestApp } from '../../../support/app-factory';
 
 describe('Admin (integration)', () => {
   let app: INestApplication;
@@ -150,12 +150,8 @@ describe('Admin (integration)', () => {
 
   it('admin cannot modify their own state', async () => {
     const adminCookies = await freshAdminCookies('admin@bd.test', 'adminuser');
-    const meId = (
-      await request(server)
-        .get('/api/auth/me')
-        .set('Cookie', adminCookies)
-        .expect(200)
-    ).body.id;
+    const meId = (await request(server).get('/api/auth/me').set('Cookie', adminCookies).expect(200))
+      .body.id;
 
     await request(server)
       .patch(`/api/admin/users/${meId}`)

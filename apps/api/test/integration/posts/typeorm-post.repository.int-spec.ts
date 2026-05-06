@@ -33,13 +33,7 @@ describe('TypeOrmPostRepository (integration)', () => {
   });
 
   beforeEach(async () => {
-    await truncateAll(pg.dataSource, [
-      'post_tags',
-      'tags',
-      'comments',
-      'posts',
-      'users',
-    ]);
+    await truncateAll(pg.dataSource, ['post_tags', 'tags', 'comments', 'posts', 'users']);
 
     // Categories are seeded by migration; pick one.
     const [cat] = (await pg.dataSource

@@ -1,5 +1,5 @@
 import { Post } from '../../domain/post.entity';
-import { PostOrmEntity } from '../persistence/post.orm-entity';
+import type { PostOrmEntity } from '../persistence/post.orm-entity';
 
 export class PostMapper {
   static toDomain(orm: PostOrmEntity): Post {

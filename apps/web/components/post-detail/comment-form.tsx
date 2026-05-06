@@ -7,13 +7,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import type { z } from 'zod';
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
 import { Link } from '@/i18n/navigation';
 import { useCurrentUser } from '@/lib/queries/auth';
@@ -44,13 +38,13 @@ export function CommentForm({ postId, parentId = null, onSubmitted, autoFocus }:
   });
 
   if (!mounted) {
-    return <div aria-hidden className="h-[120px] rounded-lg bg-surface-muted/40" />;
+    return <div aria-hidden className="bg-surface-muted/40 h-[120px] rounded-lg" />;
   }
 
   if (!user) {
     return (
-      <div className="rounded-lg border border-border bg-surface-muted p-4 text-sm text-foreground-muted">
-        <Link href={routes.login} className="text-primary hover:underline font-medium">
+      <div className="border-border bg-surface-muted text-foreground-muted rounded-lg border p-4 text-sm">
+        <Link href={routes.login} className="text-primary font-medium hover:underline">
           {t('signInToComment')}
         </Link>
       </div>

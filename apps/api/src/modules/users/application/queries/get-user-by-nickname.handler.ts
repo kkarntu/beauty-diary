@@ -6,15 +6,13 @@ import {
 } from '../../../follows/domain/ports/follow.repository';
 import { USER_REPOSITORY, type UserRepository } from '../../domain/ports/user.repository';
 import { UserNotFoundError } from '../../domain/user.errors';
-import {
-  GetUserByNicknameQuery,
-  type GetUserByNicknameResult,
-} from './get-user-by-nickname.query';
+import { GetUserByNicknameQuery, type GetUserByNicknameResult } from './get-user-by-nickname.query';
 
 @QueryHandler(GetUserByNicknameQuery)
-export class GetUserByNicknameHandler
-  implements IQueryHandler<GetUserByNicknameQuery, GetUserByNicknameResult>
-{
+export class GetUserByNicknameHandler implements IQueryHandler<
+  GetUserByNicknameQuery,
+  GetUserByNicknameResult
+> {
   constructor(
     @Inject(USER_REPOSITORY) private readonly users: UserRepository,
     @Optional() @Inject(FOLLOW_REPOSITORY) private readonly follows?: FollowRepository,

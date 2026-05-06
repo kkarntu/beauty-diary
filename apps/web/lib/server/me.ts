@@ -11,11 +11,6 @@ export async function fetchCurrentUser(): Promise<CurrentUserDto | null> {
   }
 }
 
-export async function fetchMyFavorites(
-  page = 1,
-  pageSize = 12,
-): Promise<PostListResponseDto> {
-  return serverFetch<PostListResponseDto>(
-    `/api/me/favorites?page=${page}&pageSize=${pageSize}`,
-  );
+export async function fetchMyFavorites(page = 1, pageSize = 12): Promise<PostListResponseDto> {
+  return serverFetch<PostListResponseDto>(`/api/me/favorites?page=${page}&pageSize=${pageSize}`);
 }

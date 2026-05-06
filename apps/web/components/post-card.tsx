@@ -39,25 +39,34 @@ export function PostCard({ post, featured = false }: Props) {
     <div className={cn(featured && 'col-span-full md:col-span-2')}>
       <Card
         onClick={handleCardClick}
-        className="group overflow-hidden border-border hover:shadow-md transition-all duration-300 cursor-pointer h-full flex flex-col hover:scale-[1.02] gap-0 p-0"
+        className="border-border group flex h-full cursor-pointer flex-col gap-0 overflow-hidden p-0 transition-all duration-300 hover:scale-[1.02] hover:shadow-md"
       >
-        <div className={cn('relative overflow-hidden flex-shrink-0 bg-surface-muted', featured ? 'h-96' : 'h-56')}>
+        <div
+          className={cn(
+            'bg-surface-muted relative flex-shrink-0 overflow-hidden',
+            featured ? 'h-96' : 'h-56',
+          )}
+        >
           {post.coverImageUrl ? (
             <Image
               src={post.coverImageUrl}
               alt={post.title}
               fill
-              sizes={featured ? '(min-width: 768px) 66vw, 100vw' : '(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw'}
+              sizes={
+                featured
+                  ? '(min-width: 768px) 66vw, 100vw'
+                  : '(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw'
+              }
               className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
           ) : null}
         </div>
 
-        <div className="p-6 flex flex-col flex-1 min-w-0">
+        <div className="flex min-w-0 flex-1 flex-col p-6">
           <Link href={routes.category(post.category.slug)}>
             <Badge
               variant="secondary"
-              className="mb-3 bg-surface-muted text-foreground border-0 hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer inline-flex w-fit"
+              className="bg-surface-muted text-foreground hover:bg-primary hover:text-primary-foreground mb-3 inline-flex w-fit cursor-pointer border-0 transition-colors"
             >
               {categoryLabel}
             </Badge>
@@ -66,7 +75,7 @@ export function PostCard({ post, featured = false }: Props) {
           <h3
             style={{ fontFamily: 'var(--font-display)' }}
             className={cn(
-              'mb-3 font-medium text-foreground line-clamp-2 break-words',
+              'text-foreground mb-3 line-clamp-2 break-words font-medium',
               featured ? 'text-2xl' : 'text-xl',
             )}
           >
@@ -84,12 +93,12 @@ export function PostCard({ post, featured = false }: Props) {
             </p>
           ) : null}
 
-          <div className="flex items-center justify-between pt-4 border-t border-border mt-auto min-w-0 gap-4">
+          <div className="border-border mt-auto flex min-w-0 items-center justify-between gap-4 border-t pt-4">
             <Link
               href={routes.author(post.author.nickname)}
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity min-w-0 flex-shrink"
+              className="flex min-w-0 flex-shrink items-center gap-2 transition-opacity hover:opacity-80"
             >
-              <div className="w-8 h-8 rounded-full bg-surface-muted flex items-center justify-center text-foreground-muted text-sm font-medium flex-shrink-0 overflow-hidden relative">
+              <div className="bg-surface-muted text-foreground-muted relative flex h-8 w-8 flex-shrink-0 items-center justify-center overflow-hidden rounded-full text-sm font-medium">
                 {post.author.avatarUrl ? (
                   <Image
                     src={post.author.avatarUrl}
@@ -103,9 +112,11 @@ export function PostCard({ post, featured = false }: Props) {
                 )}
               </div>
               <div className="min-w-0 flex-shrink overflow-hidden">
-                <p className="text-sm font-medium text-foreground truncate">{post.author.nickname}</p>
+                <p className="text-foreground truncate text-sm font-medium">
+                  {post.author.nickname}
+                </p>
                 {dateLabel ? (
-                  <p className="text-xs text-foreground-muted caption truncate">{dateLabel}</p>
+                  <p className="text-foreground-muted caption truncate text-xs">{dateLabel}</p>
                 ) : null}
               </div>
             </Link>

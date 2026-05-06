@@ -44,40 +44,41 @@ export default async function MyPostsPage({
   });
 
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-  const filterHref = (f: Filter) => (f === 'all' ? routes.myPosts : `${routes.myPosts}?status=${f}`);
+  const filterHref = (f: Filter) =>
+    f === 'all' ? routes.myPosts : `${routes.myPosts}?status=${f}`;
 
   return (
     <div className="bg-background">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-20 py-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+      <div className="mx-auto max-w-[1280px] px-6 py-8 lg:px-20">
+        <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <div>
             <h1
               style={{ fontFamily: 'var(--font-display)' }}
-              className="text-2xl sm:text-3xl font-medium text-foreground mb-2"
+              className="text-foreground mb-2 text-2xl font-medium sm:text-3xl"
             >
               {t('title')}
             </h1>
-            <p className="text-sm sm:text-base text-foreground-muted">{t('subtitle')}</p>
+            <p className="text-foreground-muted text-sm sm:text-base">{t('subtitle')}</p>
           </div>
-          <Button asChild className="gap-2 shrink-0 w-full sm:w-auto">
+          <Button asChild className="w-full shrink-0 gap-2 sm:w-auto">
             <Link href={routes.newPost}>
-              <PenSquare className="w-4 h-4" />
+              <PenSquare className="h-4 w-4" />
               {t('newPost')}
             </Link>
           </Button>
         </div>
 
         {/* Status filters */}
-        <div className="flex gap-2 mb-6 overflow-x-auto pb-2 -mb-2 scrollbar-hide">
+        <div className="scrollbar-hide -mb-2 mb-6 flex gap-2 overflow-x-auto pb-2">
           {VALID_FILTERS.map((f) => (
             <Link
               key={f}
               href={filterHref(f)}
               className={cn(
-                'px-4 h-9 inline-flex items-center text-sm font-medium rounded-md whitespace-nowrap transition-colors',
+                'inline-flex h-9 items-center whitespace-nowrap rounded-md px-4 text-sm font-medium transition-colors',
                 filter === f
                   ? 'bg-primary text-primary-foreground'
-                  : 'border border-border text-foreground-muted hover:text-foreground hover:bg-surface-muted',
+                  : 'border-border text-foreground-muted hover:text-foreground hover:bg-surface-muted border',
               )}
             >
               {t(`filters.${f}`)}
@@ -86,11 +87,8 @@ export default async function MyPostsPage({
         </div>
 
         {items.length === 0 ? (
-          <div className="text-center py-20 space-y-4">
-            <h2
-              style={{ fontFamily: 'var(--font-display)' }}
-              className="text-2xl font-medium"
-            >
+          <div className="space-y-4 py-20 text-center">
+            <h2 style={{ fontFamily: 'var(--font-display)' }} className="text-2xl font-medium">
               {t('empty.title')}
             </h2>
             <p className="text-foreground-muted">{t('empty.subtitle')}</p>
@@ -102,16 +100,14 @@ export default async function MyPostsPage({
           <ul className="space-y-3">
             {items.map((post) => {
               const status: PostStatus = post.status ?? 'published';
-              const dateLabel = post.publishedAt
-                ? formatLongDate(post.publishedAt, locale)
-                : '';
+              const dateLabel = post.publishedAt ? formatLongDate(post.publishedAt, locale) : '';
               return (
                 <li
                   key={post.id}
-                  className="bg-surface rounded-lg border border-border p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center gap-4"
+                  className="bg-surface border-border flex flex-col gap-4 rounded-lg border p-4 sm:flex-row sm:items-center sm:p-5"
                 >
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-1 flex flex-wrap items-center gap-2">
                       <Badge
                         variant="secondary"
                         className={cn(
@@ -123,45 +119,43 @@ export default async function MyPostsPage({
                       >
                         {t(`status.${status}`)}
                       </Badge>
-                      <span className="text-xs text-foreground-muted">
-                        {post.category.name}
-                      </span>
+                      <span className="text-foreground-muted text-xs">{post.category.name}</span>
                       {dateLabel ? (
-                        <span className="text-xs text-foreground-muted">· {dateLabel}</span>
+                        <span className="text-foreground-muted text-xs">· {dateLabel}</span>
                       ) : null}
                     </div>
                     <h3
                       style={{ fontFamily: 'var(--font-display)' }}
-                      className="text-lg font-medium text-foreground mb-2 truncate"
+                      className="text-foreground mb-2 truncate text-lg font-medium"
                     >
                       {post.title}
                     </h3>
                     {status === 'published' ? (
-                      <div className="flex items-center gap-4 text-xs text-foreground-muted">
+                      <div className="text-foreground-muted flex items-center gap-4 text-xs">
                         <span className="inline-flex items-center gap-1">
-                          <Heart className="w-3 h-3" />
+                          <Heart className="h-3 w-3" />
                           <span className="tabular-nums">{post.likesCount}</span>
                         </span>
                         <span className="inline-flex items-center gap-1">
-                          <MessageCircle className="w-3 h-3" />
+                          <MessageCircle className="h-3 w-3" />
                           <span className="tabular-nums">{post.commentsCount}</span>
                         </span>
                       </div>
                     ) : null}
                   </div>
 
-                  <div className="flex items-center gap-2 shrink-0">
+                  <div className="flex shrink-0 items-center gap-2">
                     {status === 'published' ? (
                       <Button asChild variant="ghost" size="sm" className="gap-1">
                         <Link href={routes.postDetail(post.slug)}>
-                          <Eye className="w-4 h-4" />
+                          <Eye className="h-4 w-4" />
                           <span className="hidden sm:inline">{t('actions.view')}</span>
                         </Link>
                       </Button>
                     ) : null}
                     <Button asChild variant="outline" size="sm" className="gap-1">
                       <Link href={routes.postEdit(post.slug)}>
-                        <PenSquare className="w-4 h-4" />
+                        <PenSquare className="h-4 w-4" />
                         <span className="hidden sm:inline">{t('actions.edit')}</span>
                       </Link>
                     </Button>
@@ -173,28 +167,24 @@ export default async function MyPostsPage({
         )}
 
         {totalPages > 1 ? (
-          <nav className="flex items-center justify-center gap-3 pt-8 mt-8 border-t border-border">
+          <nav className="border-border mt-8 flex items-center justify-center gap-3 border-t pt-8">
             {page > 1 ? (
               <Link
                 href={`${filterHref(filter)}${
-                  filter === 'all'
-                    ? page > 2
-                      ? `?page=${page - 1}`
-                      : ''
-                    : `&page=${page - 1}`
+                  filter === 'all' ? (page > 2 ? `?page=${page - 1}` : '') : `&page=${page - 1}`
                 }`}
-                className="text-sm font-medium text-foreground hover:text-primary"
+                className="text-foreground hover:text-primary text-sm font-medium"
               >
                 ← {t('previous')}
               </Link>
             ) : null}
-            <span className="text-sm text-foreground-muted tabular-nums">
+            <span className="text-foreground-muted text-sm tabular-nums">
               {t('pageOf', { page, total: totalPages })}
             </span>
             {page < totalPages ? (
               <Link
                 href={`${filterHref(filter)}${filter === 'all' ? '?' : '&'}page=${page + 1}`}
-                className="text-sm font-medium text-foreground hover:text-primary"
+                className="text-foreground hover:text-primary text-sm font-medium"
               >
                 {t('next')} →
               </Link>

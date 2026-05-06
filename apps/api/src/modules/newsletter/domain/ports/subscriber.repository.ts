@@ -7,6 +7,4 @@ export interface NewsletterSubscriberRepository {
   subscribe(email: string): Promise<boolean>;
 }
 
-export const NEWSLETTER_SUBSCRIBER_REPOSITORY = Symbol(
-  'NEWSLETTER_SUBSCRIBER_REPOSITORY',
-);
+export const NEWSLETTER_SUBSCRIBER_REPOSITORY = Symbol('NEWSLETTER_SUBSCRIBER_REPOSITORY');

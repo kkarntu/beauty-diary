@@ -6,5 +6,4 @@ import { routing } from './routing';
  * Use these instead of `next/link` and `next/navigation` so route
  * pushes/replaces preserve the active locale automatically.
  */
-export const { Link, redirect, usePathname, useRouter, getPathname } =
-  createNavigation(routing);
+export const { Link, redirect, usePathname, useRouter, getPathname } = createNavigation(routing);

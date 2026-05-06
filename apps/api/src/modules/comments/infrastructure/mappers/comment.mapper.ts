@@ -1,5 +1,5 @@
 import { Comment } from '../../domain/comment.entity';
-import { CommentOrmEntity } from '../persistence/comment.orm-entity';
+import type { CommentOrmEntity } from '../persistence/comment.orm-entity';
 
 export class CommentMapper {
   static toDomain(orm: CommentOrmEntity): Comment {

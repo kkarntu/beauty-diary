@@ -32,27 +32,24 @@ export default async function FavoritesPage({
 
   return (
     <div className="bg-background">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-20 py-8">
+      <div className="mx-auto max-w-[1280px] px-6 py-8 lg:px-20">
         <header className="mb-8">
-          <div className="flex items-center gap-2 sm:gap-3 mb-2">
-            <Bookmark className="w-6 h-6 sm:w-8 sm:h-8 text-primary flex-shrink-0" />
+          <div className="mb-2 flex items-center gap-2 sm:gap-3">
+            <Bookmark className="text-primary h-6 w-6 flex-shrink-0 sm:h-8 sm:w-8" />
             <h1
               style={{ fontFamily: 'var(--font-display)' }}
-              className="text-2xl sm:text-3xl font-medium text-foreground"
+              className="text-foreground text-2xl font-medium sm:text-3xl"
             >
               {t('title')}
             </h1>
           </div>
-          <p className="text-sm sm:text-base text-foreground-muted">{t('subtitle')}</p>
+          <p className="text-foreground-muted text-sm sm:text-base">{t('subtitle')}</p>
         </header>
 
         {items.length === 0 ? (
-          <div className="text-center py-20 space-y-4">
-            <Bookmark className="w-12 h-12 mx-auto text-foreground-muted" />
-            <h2
-              style={{ fontFamily: 'var(--font-display)' }}
-              className="text-2xl font-medium"
-            >
+          <div className="space-y-4 py-20 text-center">
+            <Bookmark className="text-foreground-muted mx-auto h-12 w-12" />
+            <h2 style={{ fontFamily: 'var(--font-display)' }} className="text-2xl font-medium">
               {t('empty.title')}
             </h2>
             <p className="text-foreground-muted">{t('empty.subtitle')}</p>
@@ -61,7 +58,7 @@ export default async function FavoritesPage({
             </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {items.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
@@ -69,22 +66,22 @@ export default async function FavoritesPage({
         )}
 
         {totalPages > 1 ? (
-          <nav className="flex items-center justify-center gap-3 pt-8 mt-8 border-t border-border">
+          <nav className="border-border mt-8 flex items-center justify-center gap-3 border-t pt-8">
             {page > 1 ? (
               <Link
                 href={`${routes.myFavorites}${page > 2 ? `?page=${page - 1}` : ''}`}
-                className="text-sm font-medium text-foreground hover:text-primary"
+                className="text-foreground hover:text-primary text-sm font-medium"
               >
                 ← {t('previous')}
               </Link>
             ) : null}
-            <span className="text-sm text-foreground-muted tabular-nums">
+            <span className="text-foreground-muted text-sm tabular-nums">
               {t('pageOf', { page, total: totalPages })}
             </span>
             {page < totalPages ? (
               <Link
                 href={`${routes.myFavorites}?page=${page + 1}`}
-                className="text-sm font-medium text-foreground hover:text-primary"
+                className="text-foreground hover:text-primary text-sm font-medium"
               >
                 {t('next')} →
               </Link>

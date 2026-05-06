@@ -14,13 +14,13 @@ export function MarketingNav() {
   const t = useTranslations('navigation');
 
   return (
-    <nav className="sticky top-0 z-50 bg-surface/95 backdrop-blur-sm border-b border-border">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-20">
-        <div className="flex items-center justify-between h-16 gap-3">
+    <nav className="bg-surface/95 border-border sticky top-0 z-50 border-b backdrop-blur-sm">
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-20">
+        <div className="flex h-16 items-center justify-between gap-3">
           <Link href={routes.home}>
             <h1
               style={{ fontFamily: 'var(--font-display)' }}
-              className="text-xl md:text-2xl font-semibold text-foreground cursor-pointer hover:text-primary transition-colors"
+              className="text-foreground hover:text-primary cursor-pointer text-xl font-semibold transition-colors md:text-2xl"
             >
               Beauty Diary
             </h1>
@@ -34,7 +34,7 @@ export function MarketingNav() {
             </Link>
             <LanguageSwitcher className="hidden sm:inline-flex" />
             <ThemeToggle />
-            <div className="hidden sm:flex items-center gap-2">
+            <div className="hidden items-center gap-2 sm:flex">
               <Link href={routes.login}>
                 <Button variant="ghost" size="sm">
                   {t('signIn')}

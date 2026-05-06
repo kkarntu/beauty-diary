@@ -38,19 +38,13 @@ export class ReactionsController {
 
   @Put('posts/:id/like')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async like(
-    @CurrentUser() user: AuthenticatedUser,
-    @Param('id') postId: string,
-  ): Promise<void> {
+  async like(@CurrentUser() user: AuthenticatedUser, @Param('id') postId: string): Promise<void> {
     await this.commandBus.execute(new LikePostCommand(user.id, postId));
   }
 
   @Delete('posts/:id/like')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async unlike(
-    @CurrentUser() user: AuthenticatedUser,
-    @Param('id') postId: string,
-  ): Promise<void> {
+  async unlike(@CurrentUser() user: AuthenticatedUser, @Param('id') postId: string): Promise<void> {
     await this.commandBus.execute(new UnlikePostCommand(user.id, postId));
   }
 

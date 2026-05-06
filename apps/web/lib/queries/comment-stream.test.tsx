@@ -49,9 +49,10 @@ describe('useCommentStream', () => {
   });
 
   function wrapper(qc: QueryClient) {
-    return ({ children }: { children: React.ReactNode }) => (
-      <QueryClientProvider client={qc}>{children}</QueryClientProvider>
-    );
+    function Wrapper({ children }: { children: React.ReactNode }) {
+      return <QueryClientProvider client={qc}>{children}</QueryClientProvider>;
+    }
+    return Wrapper;
   }
 
   it('joins the post room and invalidates the comments query on push', async () => {

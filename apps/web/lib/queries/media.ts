@@ -24,7 +24,9 @@ export class UploadValidationError extends Error {
 export function useImageUpload() {
   return useMutation({
     mutationFn: async (file: File): Promise<string> => {
-      if (!ALLOWED_IMAGE_MIME_TYPES.includes(file.type as (typeof ALLOWED_IMAGE_MIME_TYPES)[number])) {
+      if (
+        !ALLOWED_IMAGE_MIME_TYPES.includes(file.type as (typeof ALLOWED_IMAGE_MIME_TYPES)[number])
+      ) {
         throw new UploadValidationError('mime');
       }
       if (file.size > MAX_UPLOAD_BYTES) {

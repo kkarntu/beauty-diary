@@ -26,15 +26,15 @@ export function MobileMenu() {
           className="text-foreground-muted hover:text-foreground"
           aria-label={t('openMenu')}
         >
-          <Menu className="w-5 h-5" />
+          <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="w-[300px] sm:w-[400px]">
         {/* Required by Radix Dialog for screen-reader users; visually hidden. */}
         <SheetTitle className="sr-only">{t('openMenu')}</SheetTitle>
-        <div className="flex flex-col gap-6 mt-8">
+        <div className="mt-8 flex flex-col gap-6">
           <div className="space-y-1">
-            <h3 className="font-medium text-foreground mb-3 px-3">{t('categories')}</h3>
+            <h3 className="text-foreground mb-3 px-3 font-medium">{t('categories')}</h3>
             {CATEGORY_SLUGS.map((slug) => (
               <Link key={slug} href={routes.category(slug)} onClick={close}>
                 <Button variant="ghost" className="w-full justify-start text-base">
@@ -44,32 +44,32 @@ export function MobileMenu() {
             ))}
           </div>
 
-          <div className="space-y-1 pt-4 border-t border-border">
-            <h3 className="font-medium text-foreground mb-3 px-3">{t('profile')}</h3>
+          <div className="border-border space-y-1 border-t pt-4">
+            <h3 className="text-foreground mb-3 px-3 font-medium">{t('profile')}</h3>
             <Link href={routes.me} onClick={close}>
               <Button variant="ghost" className="w-full justify-start gap-3 text-base">
-                <Settings className="w-5 h-5" />
+                <Settings className="h-5 w-5" />
                 {t('settings')}
               </Button>
             </Link>
             <Link href={routes.myPosts} onClick={close}>
               <Button variant="ghost" className="w-full justify-start gap-3 text-base">
-                <FileText className="w-5 h-5" />
+                <FileText className="h-5 w-5" />
                 {t('myPosts')}
               </Button>
             </Link>
             <Link href={routes.myFavorites} onClick={close}>
               <Button variant="ghost" className="w-full justify-start gap-3 text-base">
-                <Bookmark className="w-5 h-5" />
+                <Bookmark className="h-5 w-5" />
                 {t('favorites')}
               </Button>
             </Link>
             <Link href={routes.login} onClick={close}>
               <Button
                 variant="ghost"
-                className="w-full justify-start gap-3 text-base text-destructive hover:text-destructive"
+                className="text-destructive hover:text-destructive w-full justify-start gap-3 text-base"
               >
-                <User className="w-5 h-5" />
+                <User className="h-5 w-5" />
                 {t('logout')}
               </Button>
             </Link>

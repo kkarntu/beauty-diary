@@ -32,17 +32,17 @@ export default async function AdminOutboxPage({
       <div>
         <h2
           style={{ fontFamily: 'var(--font-display)' }}
-          className="text-2xl font-medium text-foreground mb-1"
+          className="text-foreground mb-1 text-2xl font-medium"
         >
           {tO('title')}
         </h2>
-        <p className="text-sm text-foreground-muted">{tO('subtitle')}</p>
+        <p className="text-foreground-muted text-sm">{tO('subtitle')}</p>
       </div>
 
       {items.length === 0 ? (
-        <p className="py-12 text-center text-foreground-muted">{tO('empty')}</p>
+        <p className="text-foreground-muted py-12 text-center">{tO('empty')}</p>
       ) : (
-        <div className="bg-surface rounded-xl border border-border overflow-hidden">
+        <div className="bg-surface border-border overflow-hidden rounded-xl border">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="bg-surface-muted text-foreground-muted">
@@ -57,17 +57,15 @@ export default async function AdminOutboxPage({
               </thead>
               <tbody>
                 {items.map((row) => (
-                  <tr key={row.id} className="border-t border-border align-top">
-                    <td className="px-4 py-3 text-foreground-muted whitespace-nowrap">
+                  <tr key={row.id} className="border-border border-t align-top">
+                    <td className="text-foreground-muted whitespace-nowrap px-4 py-3">
                       {dateFmt.format(new Date(row.createdAt))}
                     </td>
-                    <td className="px-4 py-3 text-foreground">{row.toEmail}</td>
-                    <td className="px-4 py-3 text-foreground">{row.subject}</td>
-                    <td className="px-4 py-3 text-foreground-muted tabular-nums">
-                      {row.attempts}
-                    </td>
-                    <td className="px-4 py-3 text-foreground-muted text-xs">
-                      <pre className="font-mono whitespace-pre-wrap break-all max-w-xs">
+                    <td className="text-foreground px-4 py-3">{row.toEmail}</td>
+                    <td className="text-foreground px-4 py-3">{row.subject}</td>
+                    <td className="text-foreground-muted px-4 py-3 tabular-nums">{row.attempts}</td>
+                    <td className="text-foreground-muted px-4 py-3 text-xs">
+                      <pre className="max-w-xs whitespace-pre-wrap break-all font-mono">
                         {row.lastError ?? '—'}
                       </pre>
                     </td>
@@ -87,18 +85,18 @@ export default async function AdminOutboxPage({
           {page > 1 ? (
             <Link
               href={`/admin/email-outbox${page > 2 ? `?page=${page - 1}` : ''}`}
-              className="text-sm font-medium text-foreground hover:text-primary"
+              className="text-foreground hover:text-primary text-sm font-medium"
             >
               ← {t('previous')}
             </Link>
           ) : null}
-          <span className="text-sm text-foreground-muted tabular-nums">
+          <span className="text-foreground-muted text-sm tabular-nums">
             {t('pageOf', { page, total: totalPages })}
           </span>
           {page < totalPages ? (
             <Link
               href={`/admin/email-outbox?page=${page + 1}`}
-              className="text-sm font-medium text-foreground hover:text-primary"
+              className="text-foreground hover:text-primary text-sm font-medium"
             >
               {t('next')} →
             </Link>

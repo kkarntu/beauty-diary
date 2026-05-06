@@ -17,9 +17,7 @@ describe('TypeOrmRefreshTokenRepository (integration)', () => {
 
   beforeAll(async () => {
     pg = await setupPostgres();
-    repo = new TypeOrmRefreshTokenRepository(
-      pg.dataSource.getRepository(RefreshTokenOrmEntity),
-    );
+    repo = new TypeOrmRefreshTokenRepository(pg.dataSource.getRepository(RefreshTokenOrmEntity));
   }, 60_000);
 
   afterAll(async () => {

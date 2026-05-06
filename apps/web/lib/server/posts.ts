@@ -1,10 +1,6 @@
 import 'server-only';
 
-import type {
-  PostDetailDto,
-  PostListQueryDto,
-  PostListResponseDto,
-} from '@beauty-diary/shared';
+import type { PostDetailDto, PostListQueryDto, PostListResponseDto } from '@beauty-diary/shared';
 import { serverFetch } from './fetch';
 
 export async function fetchPosts(

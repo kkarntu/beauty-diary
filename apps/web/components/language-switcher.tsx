@@ -27,7 +27,7 @@ export function LanguageSwitcher({ className }: Props) {
   return (
     <div
       className={cn(
-        'inline-flex items-center rounded-md border border-border bg-surface text-sm overflow-hidden',
+        'border-border bg-surface inline-flex items-center overflow-hidden rounded-md border text-sm',
         className,
       )}
       role="group"
@@ -41,7 +41,7 @@ export function LanguageSwitcher({ className }: Props) {
           disabled={isPending}
           aria-pressed={locale === code}
           className={cn(
-            'px-3 h-9 font-medium transition-colors uppercase',
+            'h-9 px-3 font-medium uppercase transition-colors',
             locale === code
               ? 'bg-primary text-primary-foreground'
               : 'text-foreground-muted hover:text-foreground hover:bg-surface-muted',

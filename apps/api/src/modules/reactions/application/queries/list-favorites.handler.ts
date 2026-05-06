@@ -8,7 +8,10 @@ import {
 import { ListFavoritesQuery, type ListFavoritesResult } from './list-favorites.query';
 
 @QueryHandler(ListFavoritesQuery)
-export class ListFavoritesHandler implements IQueryHandler<ListFavoritesQuery, ListFavoritesResult> {
+export class ListFavoritesHandler implements IQueryHandler<
+  ListFavoritesQuery,
+  ListFavoritesResult
+> {
   constructor(@Inject(REACTION_REPOSITORY) private readonly reactions: ReactionRepository) {}
 
   async execute(query: ListFavoritesQuery): Promise<ListFavoritesResult> {

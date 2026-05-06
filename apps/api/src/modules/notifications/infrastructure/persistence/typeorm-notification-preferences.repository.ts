@@ -9,9 +9,7 @@ import {
 import { NotificationPreferencesOrmEntity } from './notification-preferences.orm-entity';
 
 @Injectable()
-export class TypeOrmNotificationPreferencesRepository
-  implements NotificationPreferencesRepository
-{
+export class TypeOrmNotificationPreferencesRepository implements NotificationPreferencesRepository {
   constructor(
     @InjectRepository(NotificationPreferencesOrmEntity)
     private readonly repo: Repository<NotificationPreferencesOrmEntity>,

@@ -25,8 +25,7 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const post = await fetchPostBySlug(slug);
-    const description =
-      post.excerpt ?? post.contentHtml.replace(/<[^>]*>/g, ' ').slice(0, 160);
+    const description = post.excerpt ?? post.contentHtml.replace(/<[^>]*>/g, ' ').slice(0, 160);
     const ogImages = post.coverImageUrl ? [{ url: post.coverImageUrl }] : undefined;
     return {
       title: post.title,
@@ -79,10 +78,10 @@ export default async function PostDetailPage({
   return (
     <div className="bg-background">
       {/* Back button */}
-      <div className="max-w-[900px] mx-auto px-6 lg:px-20 py-6">
+      <div className="mx-auto max-w-[900px] px-6 py-6 lg:px-20">
         <Button asChild variant="ghost" className="gap-2">
           <Link href={routes.feed}>
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="h-4 w-4" />
             {t('backToFeed')}
           </Link>
         </Button>
@@ -90,8 +89,8 @@ export default async function PostDetailPage({
 
       {/* Hero image */}
       {post.coverImageUrl ? (
-        <div className="max-w-[900px] mx-auto px-6 lg:px-20 mb-8">
-          <div className="relative w-full h-[280px] sm:h-[400px] lg:h-[500px] rounded-xl overflow-hidden bg-surface-muted">
+        <div className="mx-auto mb-8 max-w-[900px] px-6 lg:px-20">
+          <div className="bg-surface-muted relative h-[280px] w-full overflow-hidden rounded-xl sm:h-[400px] lg:h-[500px]">
             <Image
               src={post.coverImageUrl}
               alt={post.title}
@@ -105,7 +104,7 @@ export default async function PostDetailPage({
       ) : null}
 
       {/* Article */}
-      <article className="max-w-[900px] mx-auto px-6 lg:px-20 pb-16">
+      <article className="mx-auto max-w-[900px] px-6 pb-16 lg:px-20">
         <div className="mb-4">
           <Link href={routes.category(post.category.slug)}>
             <Badge className="mb-4">{categoryLabel}</Badge>
@@ -113,18 +112,18 @@ export default async function PostDetailPage({
 
           <h1
             style={{ fontFamily: 'var(--font-display)' }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-medium text-foreground mb-6 leading-tight"
+            className="text-foreground mb-6 text-3xl font-medium leading-tight sm:text-4xl lg:text-5xl"
           >
             {post.title}
           </h1>
 
           {/* Author & actions */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-4 border-y border-border">
+          <div className="border-border flex flex-col items-start justify-between gap-4 border-y py-4 sm:flex-row sm:items-center">
             <Link
               href={routes.author(post.author.nickname)}
-              className="flex items-center gap-3 hover:opacity-80 transition-opacity min-w-0 flex-1"
+              className="flex min-w-0 flex-1 items-center gap-3 transition-opacity hover:opacity-80"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-muted flex items-center justify-center text-foreground text-base sm:text-lg font-medium flex-shrink-0 overflow-hidden relative">
+              <div className="bg-surface-muted text-foreground relative flex h-10 w-10 flex-shrink-0 items-center justify-center overflow-hidden rounded-full text-base font-medium sm:h-12 sm:w-12 sm:text-lg">
                 {post.author.avatarUrl ? (
                   <Image
                     src={post.author.avatarUrl}
@@ -138,10 +137,10 @@ export default async function PostDetailPage({
                 )}
               </div>
               <div className="min-w-0">
-                <p className="font-medium text-foreground">
+                <p className="text-foreground font-medium">
                   {post.author.displayName ?? post.author.nickname}
                 </p>
-                <p className="text-xs sm:text-sm text-foreground-muted">
+                <p className="text-foreground-muted text-xs sm:text-sm">
                   {post.publishedAt ? formatLongDate(post.publishedAt, locale) : ''} ·{' '}
                   {t('readingMinutes', { count: post.readingMinutes })}
                 </p>
@@ -151,7 +150,6 @@ export default async function PostDetailPage({
             <div className="shrink-0 self-end sm:self-auto">
               <PostActions
                 postId={post.id}
-                initialLikesCount={post.likesCount}
                 initialIsLiked={post.isLikedByMe}
                 initialIsFavorited={post.isFavoritedByMe}
               />
@@ -159,7 +157,7 @@ export default async function PostDetailPage({
           </div>
 
           {post.excerpt ? (
-            <p className="text-lg text-foreground-muted leading-relaxed mt-4">{post.excerpt}</p>
+            <p className="text-foreground-muted mt-4 text-lg leading-relaxed">{post.excerpt}</p>
           ) : null}
         </div>
 
@@ -171,12 +169,12 @@ export default async function PostDetailPage({
 
         {/* Tags */}
         {post.tags.length > 0 ? (
-          <div className="flex flex-wrap gap-2 mt-8 pt-4 border-t border-border">
+          <div className="border-border mt-8 flex flex-wrap gap-2 border-t pt-4">
             {post.tags.map((tag) => (
               <Link
                 key={tag.slug}
                 href={`/feed?tag=${tag.slug}`}
-                className="px-2.5 py-1 text-sm text-foreground-muted hover:text-primary hover:bg-surface-muted rounded-full transition-colors"
+                className="text-foreground-muted hover:text-primary hover:bg-surface-muted rounded-full px-2.5 py-1 text-sm transition-colors"
               >
                 #{tag.name}
               </Link>
@@ -186,12 +184,12 @@ export default async function PostDetailPage({
 
         {/* Comments — hidden when the author disabled them on this post */}
         {post.allowComments ? (
-          <section className="mt-4 pt-4 border-t border-border">
+          <section className="border-border mt-4 border-t pt-4">
             <CommentThread postId={post.id} initialComments={comments} />
           </section>
         ) : (
-          <section className="mt-4 pt-4 border-t border-border">
-            <p className="text-sm text-foreground-muted text-center py-8">
+          <section className="border-border mt-4 border-t pt-4">
+            <p className="text-foreground-muted py-8 text-center text-sm">
               {t('comments.disabledByAuthor')}
             </p>
           </section>

@@ -32,17 +32,14 @@ export function NewsletterSignup() {
   };
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="bg-surface rounded-lg border border-border p-6 space-y-3"
-    >
+    <form onSubmit={onSubmit} className="bg-surface border-border space-y-3 rounded-lg border p-6">
       <div className="flex items-center gap-2">
-        <Mail className="w-5 h-5 text-primary" />
+        <Mail className="text-primary h-5 w-5" />
         <h3 style={{ fontFamily: 'var(--font-display)' }} className="text-lg font-medium">
           {t('title')}
         </h3>
       </div>
-      <p className="text-sm text-foreground-muted">{t('description')}</p>
+      <p className="text-foreground-muted text-sm">{t('description')}</p>
       <Input
         type="email"
         required

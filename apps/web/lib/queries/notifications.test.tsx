@@ -39,9 +39,10 @@ describe('useNotificationStream', () => {
   });
 
   function wrapper(qc: QueryClient) {
-    return ({ children }: { children: React.ReactNode }) => (
-      <QueryClientProvider client={qc}>{children}</QueryClientProvider>
-    );
+    function Wrapper({ children }: { children: React.ReactNode }) {
+      return <QueryClientProvider client={qc}>{children}</QueryClientProvider>;
+    }
+    return Wrapper;
   }
 
   it('prepends an incoming notification to the cached list and bumps the unread count', () => {

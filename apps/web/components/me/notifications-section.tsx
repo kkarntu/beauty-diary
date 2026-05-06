@@ -10,8 +10,7 @@ import {
   useUpdateNotificationPreferences,
 } from '@/lib/queries/notification-preferences';
 
-const ROW_KEYS = ['newFollower', 'newComment', 'newLike', 'newsletter'] as const;
-type RowKey = (typeof ROW_KEYS)[number];
+type RowKey = 'newFollower' | 'newComment' | 'newLike' | 'newsletter';
 
 export function NotificationsSection() {
   const t = useTranslations('profile.notifications');
@@ -20,8 +19,8 @@ export function NotificationsSection() {
 
   if (isLoading || !prefs) {
     return (
-      <div className="py-12 flex items-center justify-center text-foreground-muted">
-        <Loader2 className="w-5 h-5 animate-spin" />
+      <div className="text-foreground-muted flex items-center justify-center py-12">
+        <Loader2 className="h-5 w-5 animate-spin" />
       </div>
     );
   }
@@ -47,11 +46,11 @@ export function NotificationsSection() {
       {rows.map((row) => (
         <label
           key={row.key}
-          className="flex items-start justify-between gap-4 py-3 border-b border-border last:border-b-0 cursor-pointer"
+          className="border-border flex cursor-pointer items-start justify-between gap-4 border-b py-3 last:border-b-0"
         >
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-foreground">{row.label}</p>
-            <p className="text-xs text-foreground-muted">{row.hint}</p>
+          <div className="min-w-0 flex-1">
+            <p className="text-foreground text-sm font-medium">{row.label}</p>
+            <p className="text-foreground-muted text-xs">{row.hint}</p>
           </div>
           <Switch
             checked={prefs[row.key]}
