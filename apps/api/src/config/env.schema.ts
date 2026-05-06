@@ -19,12 +19,18 @@ export const EnvSchema = z.object({
   COOKIE_DOMAIN: z.string().default('localhost'),
   COOKIE_SECURE: booleanString.default(false),
 
-  SMTP_HOST: z.string().min(1),
-  SMTP_PORT: z.coerce.number().int().min(1).max(65535),
+  // SMTP — used by NodemailerMailer when MAIL_DRIVER=smtp.
+  SMTP_HOST: z.string().min(1).default('localhost'),
+  SMTP_PORT: z.coerce.number().int().min(1).max(65535).default(1025),
   SMTP_SECURE: booleanString.default(false),
   SMTP_USER: z.string().default(''),
   SMTP_PASS: z.string().default(''),
   MAIL_FROM: z.string().min(1),
+
+  // Resend HTTP API — used by ResendMailer when MAIL_DRIVER=resend.
+  // Required only when MAIL_DRIVER=resend.
+  MAIL_DRIVER: z.enum(['smtp', 'resend']).default('smtp'),
+  RESEND_API_KEY: z.string().optional(),
 
   S3_ENDPOINT: z.string().url(),
   S3_REGION: z.string().min(1),

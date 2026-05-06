@@ -5,8 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EnvModule } from '../../config/env.module';
 import { AuthSharedModule } from '../auth/auth-shared.module';
 import { CommentsModule } from '../comments/comments.module';
-import { MAILER } from '../auth/domain/ports/mailer';
+import { MAILER, type Mailer } from '../auth/domain/ports/mailer';
 import { NodemailerMailer } from '../auth/infrastructure/nodemailer-mailer';
+import { ResendMailer } from '../auth/infrastructure/resend-mailer';
+import { EnvService } from '../../config/env.service';
 import { PostsModule } from '../posts/posts.module';
 import { UsersModule } from '../users/users.module';
 import { CommentCreatedNotifyHandler } from './application/events/comment-created-notify.handler';
@@ -47,7 +49,14 @@ import { NotificationPreferencesController } from './presentation/preferences.co
     UserFollowedNotifyHandler,
     PostLikedNotifyHandler,
     OutboxProcessorService,
-    { provide: MAILER, useClass: NodemailerMailer },
+    NodemailerMailer,
+    ResendMailer,
+    {
+      provide: MAILER,
+      inject: [EnvService, NodemailerMailer, ResendMailer],
+      useFactory: (env: EnvService, smtp: NodemailerMailer, resend: ResendMailer): Mailer =>
+        env.mailDriver === 'resend' ? resend : smtp,
+    },
     { provide: EMAIL_OUTBOX_REPOSITORY, useClass: TypeOrmEmailOutboxRepository },
     {
       provide: NOTIFICATION_PREFERENCES_REPOSITORY,

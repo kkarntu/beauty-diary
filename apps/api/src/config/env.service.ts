@@ -109,6 +109,14 @@ export class EnvService {
     return this.env.LOG_LEVEL;
   }
 
+  get mailDriver(): 'smtp' | 'resend' {
+    return this.env.MAIL_DRIVER;
+  }
+
+  get resendApiKey(): string | undefined {
+    return this.env.RESEND_API_KEY;
+  }
+
   get adminSeed(): { email: string; password: string; nickname: string } | null {
     if (!this.env.ADMIN_SEED_EMAIL || !this.env.ADMIN_SEED_PASSWORD) return null;
     return {
