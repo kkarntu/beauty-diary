@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
       // R2 / LocalStack public URLs for real uploads.
       { protocol: 'https', hostname: '*.r2.cloudflarestorage.com' },
+      { protocol: 'https', hostname: '*.r2.dev' },
       { protocol: 'http', hostname: 'localhost' },
     ],
   },
