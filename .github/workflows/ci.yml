@@ -92,6 +92,7 @@ jobs:
       S3_ACCESS_KEY_ID: test
       S3_SECRET_ACCESS_KEY: test
       S3_FORCE_PATH_STYLE: 'true'
+      S3_PUBLIC_URL: http://localhost:4566/beauty-diary-media
       AWS_ACCESS_KEY_ID: test
       AWS_SECRET_ACCESS_KEY: test
       AWS_DEFAULT_REGION: us-east-1
