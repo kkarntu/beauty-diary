@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from '../users/users.module';
+import { NotificationsModule } from '../notifications/notifications.module';
 import { LoginUserHandler } from './application/commands/login-user.handler';
 import { LogoutUserHandler } from './application/commands/logout-user.handler';
 import { RefreshTokensHandler } from './application/commands/refresh-tokens.handler';
@@ -37,6 +38,7 @@ const queryHandlers = [GetCurrentUserHandler];
     CqrsModule,
     AuthSharedModule,
     UsersModule,
+    NotificationsModule, // for EMAIL_OUTBOX_REPOSITORY
     TypeOrmModule.forFeature([RefreshTokenOrmEntity, PasswordResetTokenOrmEntity]),
   ],
   controllers: [AuthController],

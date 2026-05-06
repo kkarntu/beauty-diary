@@ -108,4 +108,13 @@ export class EnvService {
   get logLevel(): Env['LOG_LEVEL'] {
     return this.env.LOG_LEVEL;
   }
+
+  get adminSeed(): { email: string; password: string; nickname: string } | null {
+    if (!this.env.ADMIN_SEED_EMAIL || !this.env.ADMIN_SEED_PASSWORD) return null;
+    return {
+      email: this.env.ADMIN_SEED_EMAIL,
+      password: this.env.ADMIN_SEED_PASSWORD,
+      nickname: this.env.ADMIN_SEED_NICKNAME,
+    };
+  }
 }

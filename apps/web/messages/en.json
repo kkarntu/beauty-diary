@@ -36,6 +36,7 @@
     "logout": "Log out",
     "signIn": "Sign in",
     "signUp": "Sign up",
+    "admin": "Admin panel",
     "feed": "Feed"
   },
   "categories": {

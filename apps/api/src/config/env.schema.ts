@@ -36,6 +36,12 @@ export const EnvSchema = z.object({
 
   LOG_LEVEL: z.enum(['error', 'warn', 'log', 'debug', 'verbose']).default('log'),
   RATE_LIMIT_AUTH_PER_MINUTE: z.coerce.number().int().min(1).default(10),
+
+  // Auto-seeded admin account, created on boot if no admin exists yet.
+  // Both must be set for seeding to run.
+  ADMIN_SEED_EMAIL: z.string().email().optional(),
+  ADMIN_SEED_PASSWORD: z.string().min(8).optional(),
+  ADMIN_SEED_NICKNAME: z.string().min(2).max(32).default('admin'),
 });
 
 export type Env = z.infer<typeof EnvSchema>;

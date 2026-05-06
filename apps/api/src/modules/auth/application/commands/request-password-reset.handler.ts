@@ -1,9 +1,12 @@
-import { Inject, Logger } from '@nestjs/common';
+import { Inject } from '@nestjs/common';
 import { CommandHandler, type ICommandHandler } from '@nestjs/cqrs';
 import { randomBytes, createHash } from 'node:crypto';
 import { v7 as uuidv7 } from 'uuid';
 import { USER_REPOSITORY, type UserRepository } from '../../../users/domain/ports/user.repository';
-import { MAILER, type Mailer } from '../../domain/ports/mailer';
+import {
+  EMAIL_OUTBOX_REPOSITORY,
+  type EmailOutboxRepository,
+} from '../../../notifications/domain/ports/outbox.repository';
 import {
   PASSWORD_RESET_TOKEN_REPOSITORY,
   type PasswordResetTokenRepository,
@@ -18,18 +21,17 @@ export class RequestPasswordResetHandler implements ICommandHandler<
   RequestPasswordResetCommand,
   void
 > {
-  private readonly logger = new Logger(RequestPasswordResetHandler.name);
-
   constructor(
     @Inject(USER_REPOSITORY) private readonly users: UserRepository,
     @Inject(PASSWORD_RESET_TOKEN_REPOSITORY)
     private readonly resetTokens: PasswordResetTokenRepository,
-    @Inject(MAILER) private readonly mailer: Mailer,
+    @Inject(EMAIL_OUTBOX_REPOSITORY) private readonly outbox: EmailOutboxRepository,
   ) {}
 
   /**
    * Always returns void without disclosing whether the email exists, to
-   * avoid account enumeration. Errors during send are logged, not thrown.
+   * avoid account enumeration. Email delivery is queued via the outbox so
+   * the request returns instantly even when SMTP is slow or down.
    */
   async execute(cmd: RequestPasswordResetCommand): Promise<void> {
     const email = cmd.email.toLowerCase().trim();
@@ -49,15 +51,11 @@ export class RequestPasswordResetHandler implements ICommandHandler<
     });
     await this.resetTokens.save(token);
 
-    try {
-      await this.mailer.send({
-        to: user.email,
-        subject: 'Reset your Beauty Diary password',
-        text: `Use this token to reset your password: ${rawToken}\nThis link expires in 1 hour.`,
-        html: `<p>Use this token to reset your password:</p><p><code>${rawToken}</code></p><p>This link expires in 1 hour.</p>`,
-      });
-    } catch (err) {
-      this.logger.error('Failed to send password reset email', err as Error);
-    }
+    await this.outbox.enqueue({
+      toEmail: user.email,
+      subject: 'Reset your Beauty Diary password',
+      text: `Use this token to reset your password: ${rawToken}\nThis link expires in 1 hour.`,
+      html: `<p>Use this token to reset your password:</p><p><code>${rawToken}</code></p><p>This link expires in 1 hour.</p>`,
+    });
   }
 }

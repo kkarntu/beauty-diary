@@ -55,5 +55,6 @@ import { NotificationPreferencesController } from './presentation/preferences.co
     },
     { provide: NOTIFICATION_REPOSITORY, useClass: TypeOrmNotificationRepository },
   ],
+  exports: [EMAIL_OUTBOX_REPOSITORY],
 })
 export class NotificationsModule {}

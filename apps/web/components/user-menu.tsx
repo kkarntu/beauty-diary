@@ -1,6 +1,6 @@
 'use client';
 
-import { Bookmark, FileText, LogOut, Settings, User } from 'lucide-react';
+import { Bookmark, FileText, LogOut, Settings, Shield, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import {
@@ -84,6 +84,17 @@ export function UserMenu() {
             {t('favorites')}
           </Link>
         </DropdownMenuItem>
+        {user.role === 'admin' && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link href={routes.admin} className="flex cursor-pointer items-center">
+                <Shield className="mr-2 h-4 w-4" />
+                {t('admin')}
+              </Link>
+            </DropdownMenuItem>
+          </>
+        )}
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={onLogout}
