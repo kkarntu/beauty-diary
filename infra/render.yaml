@@ -14,8 +14,10 @@ services:
       pnpm install --frozen-lockfile && \
       pnpm --filter=@beauty-diary/shared build && \
       pnpm --filter=@beauty-diary/api build
-    startCommand: pnpm --filter=@beauty-diary/api start:prod
-    preDeployCommand: pnpm --filter=@beauty-diary/api migration:run
+    # Free tier doesn't support `preDeployCommand`, so migrations run at
+    # process start. They're idempotent — TypeORM skips already-applied
+    # ones via the `migrations` ledger table.
+    startCommand: pnpm --filter=@beauty-diary/api migration:run && pnpm --filter=@beauty-diary/api start:prod
     healthCheckPath: /health
     autoDeploy: true
     branch: main
