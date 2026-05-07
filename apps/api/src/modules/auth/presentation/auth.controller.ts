@@ -12,10 +12,12 @@ import {
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { Throttle } from '@nestjs/throttler';
 import {
+  InitiateRegisterDto,
   LoginDto,
-  RegisterDto,
   RequestPasswordResetDto,
+  ResendRegisterOtpDto,
   ResetPasswordDto,
+  VerifyRegisterDto,
   type CurrentUserDto,
 } from '@beauty-diary/shared';
 import type { Request, Response } from 'express';
@@ -30,10 +32,12 @@ import {
   RefreshTokensCommand,
   type RefreshTokensResult,
 } from '../application/commands/refresh-tokens.command';
+import { InitiateRegisterCommand } from '../application/commands/initiate-register.command';
+import { ResendRegisterOtpCommand } from '../application/commands/resend-register-otp.command';
 import {
-  RegisterUserCommand,
-  type RegisterUserResult,
-} from '../application/commands/register-user.command';
+  VerifyRegisterCommand,
+  type VerifyRegisterResult,
+} from '../application/commands/verify-register.command';
 import { RequestPasswordResetCommand } from '../application/commands/request-password-reset.command';
 import { ResetPasswordCommand } from '../application/commands/reset-password.command';
 import {
@@ -52,18 +56,38 @@ export class AuthController {
     private readonly env: EnvService,
   ) {}
 
-  @Post('register')
+  @Post('register/initiate')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Throttle({ default: { limit: 5, ttl: 60_000 } })
+  async initiateRegister(
+    @Body(new ZodValidationPipe(InitiateRegisterDto)) body: InitiateRegisterDto,
+  ): Promise<void> {
+    await this.commandBus.execute(
+      new InitiateRegisterCommand(body.email, body.nickname, body.password),
+    );
+  }
+
+  @Post('register/verify')
   @HttpCode(HttpStatus.CREATED)
   @Throttle({ default: { limit: 10, ttl: 60_000 } })
-  async register(
-    @Body(new ZodValidationPipe(RegisterDto)) body: RegisterDto,
+  async verifyRegister(
+    @Body(new ZodValidationPipe(VerifyRegisterDto)) body: VerifyRegisterDto,
     @Res({ passthrough: true }) res: Response,
   ): Promise<{ id: string }> {
-    const result = await this.commandBus.execute<RegisterUserCommand, RegisterUserResult>(
-      new RegisterUserCommand(body.email, body.password, body.nickname),
+    const result = await this.commandBus.execute<VerifyRegisterCommand, VerifyRegisterResult>(
+      new VerifyRegisterCommand(body.email, body.otp),
     );
     writeAuthCookies(res, this.env, result);
     return { id: result.userId };
+  }
+
+  @Post('register/resend')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Throttle({ default: { limit: 3, ttl: 60_000 } })
+  async resendRegisterOtp(
+    @Body(new ZodValidationPipe(ResendRegisterOtpDto)) body: ResendRegisterOtpDto,
+  ): Promise<void> {
+    await this.commandBus.execute(new ResendRegisterOtpCommand(body.email));
   }
 
   @Post('login')

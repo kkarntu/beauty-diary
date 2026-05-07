@@ -22,6 +22,9 @@ const nextConfig: NextConfig = {
     if (!apiOrigin) return [];
     return [
       { source: '/api/:path*', destination: `${apiOrigin}/api/:path*` },
+      // socket.io-client polls `/socket.io` (no trailing slash) AND
+      // `/socket.io/<sid>`; both need to match.
+      { source: '/socket.io', destination: `${apiOrigin}/socket.io` },
       { source: '/socket.io/:path*', destination: `${apiOrigin}/socket.io/:path*` },
     ];
   },

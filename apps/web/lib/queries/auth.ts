@@ -9,10 +9,13 @@ import {
 import axios from 'axios';
 import type {
   CurrentUserDto,
+  InitiateRegisterDto,
   LoginDto,
   RegisterDto,
   RequestPasswordResetDto,
+  ResendRegisterOtpDto,
   ResetPasswordDto,
+  VerifyRegisterDto,
 } from '@beauty-diary/shared';
 import { api } from '@/lib/api';
 
@@ -57,6 +60,8 @@ export function useLogin(): UseMutationResult<{ id: string }, unknown, LoginDto>
 }
 
 export function useRegister(): UseMutationResult<{ id: string }, unknown, RegisterDto> {
+  // Legacy single-step register, kept for any callers/tests that still use it.
+  // The user-facing flow goes through useInitiateRegister + useVerifyRegister.
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (input) => {
@@ -65,6 +70,35 @@ export function useRegister(): UseMutationResult<{ id: string }, unknown, Regist
     },
     onSuccess: async () => {
       await qc.invalidateQueries({ queryKey: authKeys.currentUser() });
+    },
+  });
+}
+
+export function useInitiateRegister(): UseMutationResult<void, unknown, InitiateRegisterDto> {
+  return useMutation({
+    mutationFn: async (input) => {
+      await api.post('/api/auth/register/initiate', input);
+    },
+  });
+}
+
+export function useVerifyRegister(): UseMutationResult<{ id: string }, unknown, VerifyRegisterDto> {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (input) => {
+      const res = await api.post<{ id: string }>('/api/auth/register/verify', input);
+      return res.data;
+    },
+    onSuccess: async () => {
+      await qc.invalidateQueries({ queryKey: authKeys.currentUser() });
+    },
+  });
+}
+
+export function useResendRegisterOtp(): UseMutationResult<void, unknown, ResendRegisterOtpDto> {
+  return useMutation({
+    mutationFn: async (input) => {
+      await api.post('/api/auth/register/resend', input);
     },
   });
 }

@@ -27,10 +27,9 @@ export const EnvSchema = z.object({
   SMTP_PASS: z.string().default(''),
   MAIL_FROM: z.string().min(1),
 
-  // Resend HTTP API — used by ResendMailer when MAIL_DRIVER=resend.
-  // Required only when MAIL_DRIVER=resend.
-  MAIL_DRIVER: z.enum(['smtp', 'resend']).default('smtp'),
-  RESEND_API_KEY: z.string().optional(),
+  // Mail driver selection. Each driver has its own optional credentials.
+  MAIL_DRIVER: z.enum(['smtp', 'brevo']).default('smtp'),
+  BREVO_API_KEY: z.string().optional(),
 
   S3_ENDPOINT: z.string().url(),
   S3_REGION: z.string().min(1),

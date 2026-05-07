@@ -1,17 +1,20 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 import { LanguageSwitcher } from '@/components/language-switcher';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { UserMenu } from '@/components/user-menu';
+import { fetchCurrentUser } from '@/lib/server/me';
 import { routes } from '@/lib/routes';
 
 /**
- * Slim nav for the landing page only — no search, no user menu.
- * Logged-in users still see their own surface elsewhere; landing keeps
- * the chrome quiet so the hero stays the focal point.
+ * Slim nav for the landing page. Renders differently for anonymous vs
+ * signed-in users: anonymous see Sign in / Sign up, signed-in see the
+ * UserMenu so the same identity surface is available everywhere.
  */
-export function MarketingNav() {
-  const t = useTranslations('navigation');
+export async function MarketingNav() {
+  const t = await getTranslations('navigation');
+  const me = await fetchCurrentUser();
 
   return (
     <nav className="bg-surface/95 border-border sticky top-0 z-50 border-b backdrop-blur-sm">
@@ -34,16 +37,22 @@ export function MarketingNav() {
             </Link>
             <LanguageSwitcher className="hidden sm:inline-flex" />
             <ThemeToggle />
-            <div className="hidden items-center gap-2 sm:flex">
-              <Link href={routes.login}>
-                <Button variant="ghost" size="sm">
-                  {t('signIn')}
-                </Button>
-              </Link>
-              <Link href={routes.register}>
-                <Button size="sm">{t('signUp')}</Button>
-              </Link>
-            </div>
+            {me ? (
+              <div className="hidden sm:block">
+                <UserMenu />
+              </div>
+            ) : (
+              <div className="hidden items-center gap-2 sm:flex">
+                <Link href={routes.login}>
+                  <Button variant="ghost" size="sm">
+                    {t('signIn')}
+                  </Button>
+                </Link>
+                <Link href={routes.register}>
+                  <Button size="sm">{t('signUp')}</Button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -26,8 +26,6 @@ const messages = {
       newCommentHint: '',
       newLike: 'Likes',
       newLikeHint: '',
-      newsletter: 'Newsletter',
-      newsletterHint: '',
       saveError: "Couldn't save preferences",
     },
   },
@@ -47,7 +45,7 @@ function renderSection() {
 describe('NotificationsSection', () => {
   it('loads preferences from /api/me/notification-preferences and reflects them in switches', async () => {
     apiMock.get.mockReset().mockResolvedValue({
-      data: { newFollower: true, newComment: false, newLike: false, newsletter: false },
+      data: { newFollower: true, newComment: false, newLike: false },
     });
 
     renderSection();
@@ -59,17 +57,17 @@ describe('NotificationsSection', () => {
 
     // Switches expose their state via aria-checked
     const switches = await screen.findAllByRole('switch');
-    expect(switches).toHaveLength(4);
+    expect(switches).toHaveLength(3);
     expect(switches[0]).toHaveAttribute('aria-checked', 'true');
     expect(switches[1]).toHaveAttribute('aria-checked', 'false');
   });
 
   it('PATCHes the new value when a switch is toggled', async () => {
     apiMock.get.mockReset().mockResolvedValue({
-      data: { newFollower: true, newComment: true, newLike: false, newsletter: false },
+      data: { newFollower: true, newComment: true, newLike: false },
     });
     apiMock.patch.mockReset().mockResolvedValue({
-      data: { newFollower: false, newComment: true, newLike: false, newsletter: false },
+      data: { newFollower: false, newComment: true, newLike: false },
     });
 
     renderSection();

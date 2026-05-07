@@ -56,7 +56,7 @@ export class TypeOrmCommentRepository implements CommentRepository {
       FROM comments c
       INNER JOIN users u ON u.id = c.author_id
       WHERE c.post_id = $1
-      ORDER BY c.created_at ASC
+      ORDER BY c.created_at DESC
     `;
     const rows = (await this.repo.query(sql, [postId])) as ListSqlRow[];
     return rows.map((row) => ({

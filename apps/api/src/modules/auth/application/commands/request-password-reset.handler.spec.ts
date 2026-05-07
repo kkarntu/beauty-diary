@@ -2,6 +2,7 @@ import { User } from '../../../users/domain/user.entity';
 import type { UserRepository } from '../../../users/domain/ports/user.repository';
 import type { EmailOutboxRepository } from '../../../notifications/domain/ports/outbox.repository';
 import type { PasswordResetTokenRepository } from '../../domain/ports/password-reset-token.repository';
+import type { EnvService } from '../../../config/env.service';
 import { RequestPasswordResetCommand } from './request-password-reset.command';
 import { RequestPasswordResetHandler } from './request-password-reset.handler';
 
@@ -27,11 +28,12 @@ describe('RequestPasswordResetHandler', () => {
       listFailed: jest.fn(),
       requeue: jest.fn(),
     };
+    const env = { webOrigin: 'https://example.com' } as EnvService;
     return {
       users,
       resetTokens,
       outbox,
-      handler: new RequestPasswordResetHandler(users, resetTokens, outbox),
+      handler: new RequestPasswordResetHandler(users, resetTokens, outbox, env),
     };
   };
 

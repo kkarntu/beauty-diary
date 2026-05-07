@@ -2,6 +2,7 @@ import { Inject } from '@nestjs/common';
 import { CommandHandler, type ICommandHandler } from '@nestjs/cqrs';
 import { randomBytes, createHash } from 'node:crypto';
 import { v7 as uuidv7 } from 'uuid';
+import { EnvService } from '../../../../config/env.service';
 import { USER_REPOSITORY, type UserRepository } from '../../../users/domain/ports/user.repository';
 import {
   EMAIL_OUTBOX_REPOSITORY,
@@ -11,6 +12,10 @@ import {
   PASSWORD_RESET_TOKEN_REPOSITORY,
   type PasswordResetTokenRepository,
 } from '../../domain/ports/password-reset-token.repository';
+import {
+  renderActionEmail,
+  renderActionEmailText,
+} from '../../../notifications/infrastructure/email-templates';
 import { PasswordResetToken } from '../../domain/password-reset-token.entity';
 import { RequestPasswordResetCommand } from './request-password-reset.command';
 
@@ -26,6 +31,7 @@ export class RequestPasswordResetHandler implements ICommandHandler<
     @Inject(PASSWORD_RESET_TOKEN_REPOSITORY)
     private readonly resetTokens: PasswordResetTokenRepository,
     @Inject(EMAIL_OUTBOX_REPOSITORY) private readonly outbox: EmailOutboxRepository,
+    private readonly env: EnvService,
   ) {}
 
   /**
@@ -51,11 +57,28 @@ export class RequestPasswordResetHandler implements ICommandHandler<
     });
     await this.resetTokens.save(token);
 
+    const url = `${this.env.webOrigin.replace(/\/$/, '')}/reset-password?token=${rawToken}`;
+    const heading = 'Reset your password';
+    const intro =
+      "We received a request to reset the password for your Beauty Diary account. Tap the button below to choose a new one. The link is valid for 1 hour.";
+    const ctaLabel = 'Reset password';
+    const fallbackNote = "Button not working? Copy and paste this link into your browser:";
+    const footerNote =
+      "If you didn't request a password reset, you can safely ignore this email — your password won't change.";
+
     await this.outbox.enqueue({
       toEmail: user.email,
       subject: 'Reset your Beauty Diary password',
-      text: `Use this token to reset your password: ${rawToken}\nThis link expires in 1 hour.`,
-      html: `<p>Use this token to reset your password:</p><p><code>${rawToken}</code></p><p>This link expires in 1 hour.</p>`,
+      text: renderActionEmailText({ heading, intro, ctaLabel, ctaUrl: url, footerNote }),
+      html: renderActionEmail({
+        preheader: 'Reset your Beauty Diary password — link expires in 1 hour.',
+        heading,
+        intro,
+        ctaLabel,
+        ctaUrl: url,
+        fallbackNote,
+        footerNote,
+      }),
     });
   }
 }

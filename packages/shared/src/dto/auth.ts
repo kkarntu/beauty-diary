@@ -28,3 +28,20 @@ export const ResetPasswordDto = z.object({
   password: z.string().min(LIMITS.PASSWORD_MIN).max(LIMITS.PASSWORD_MAX),
 });
 export type ResetPasswordDto = z.infer<typeof ResetPasswordDto>;
+
+// Email-OTP register flow.
+// Step 1 — submit email/nickname/password, receive OTP by email.
+// Step 2 — submit email + 6-digit OTP, account is created and cookies issued.
+export const InitiateRegisterDto = RegisterDto;
+export type InitiateRegisterDto = z.infer<typeof InitiateRegisterDto>;
+
+export const VerifyRegisterDto = z.object({
+  email: z.string().email().toLowerCase(),
+  otp: z.string().regex(/^[0-9]{6}$/, 'Must be 6 digits'),
+});
+export type VerifyRegisterDto = z.infer<typeof VerifyRegisterDto>;
+
+export const ResendRegisterOtpDto = z.object({
+  email: z.string().email().toLowerCase(),
+});
+export type ResendRegisterOtpDto = z.infer<typeof ResendRegisterOtpDto>;

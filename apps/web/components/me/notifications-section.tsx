@@ -10,7 +10,7 @@ import {
   useUpdateNotificationPreferences,
 } from '@/lib/queries/notification-preferences';
 
-type RowKey = 'newFollower' | 'newComment' | 'newLike' | 'newsletter';
+type RowKey = 'newFollower' | 'newComment' | 'newLike';
 
 export function NotificationsSection() {
   const t = useTranslations('profile.notifications');
@@ -38,7 +38,6 @@ export function NotificationsSection() {
     { key: 'newFollower', label: t('newFollower'), hint: t('newFollowerHint') },
     { key: 'newComment', label: t('newComment'), hint: t('newCommentHint') },
     { key: 'newLike', label: t('newLike'), hint: t('newLikeHint') },
-    { key: 'newsletter', label: t('newsletter'), hint: t('newsletterHint') },
   ];
 
   return (

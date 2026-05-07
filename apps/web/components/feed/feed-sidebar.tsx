@@ -3,7 +3,6 @@ import { TrendingUp } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
-import { NewsletterSignup } from './newsletter-signup';
 
 interface Props {
   activeTag?: string;
@@ -45,8 +44,6 @@ export function FeedSidebar({ activeTag, trendingTags }: Props) {
           </div>
         </div>
       ) : null}
-
-      <NewsletterSignup />
     </aside>
   );
 }

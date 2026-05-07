@@ -7,7 +7,7 @@ import { AuthSharedModule } from '../auth/auth-shared.module';
 import { CommentsModule } from '../comments/comments.module';
 import { MAILER, type Mailer } from '../auth/domain/ports/mailer';
 import { NodemailerMailer } from '../auth/infrastructure/nodemailer-mailer';
-import { ResendMailer } from '../auth/infrastructure/resend-mailer';
+import { BrevoMailer } from '../auth/infrastructure/brevo-mailer';
 import { EnvService } from '../../config/env.service';
 import { PostsModule } from '../posts/posts.module';
 import { UsersModule } from '../users/users.module';
@@ -50,12 +50,12 @@ import { NotificationPreferencesController } from './presentation/preferences.co
     PostLikedNotifyHandler,
     OutboxProcessorService,
     NodemailerMailer,
-    ResendMailer,
+    BrevoMailer,
     {
       provide: MAILER,
-      inject: [EnvService, NodemailerMailer, ResendMailer],
-      useFactory: (env: EnvService, smtp: NodemailerMailer, resend: ResendMailer): Mailer =>
-        env.mailDriver === 'resend' ? resend : smtp,
+      inject: [EnvService, NodemailerMailer, BrevoMailer],
+      useFactory: (env: EnvService, smtp: NodemailerMailer, brevo: BrevoMailer): Mailer =>
+        env.mailDriver === 'brevo' ? brevo : smtp,
     },
     { provide: EMAIL_OUTBOX_REPOSITORY, useClass: TypeOrmEmailOutboxRepository },
     {

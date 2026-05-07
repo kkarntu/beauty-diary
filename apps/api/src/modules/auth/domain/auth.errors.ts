@@ -1,7 +1,9 @@
 import {
   ConflictError,
   NotFoundError,
+  RateLimitError,
   UnauthorizedError,
+  ValidationError,
 } from '../../../common/errors/domain.errors';
 
 export class InvalidCredentialsError extends UnauthorizedError {
@@ -43,5 +45,23 @@ export class EmailAlreadyTakenError extends ConflictError {
 export class NicknameAlreadyTakenError extends ConflictError {
   constructor() {
     super('Nickname is already taken', 'NICKNAME_TAKEN');
+  }
+}
+
+export class InvalidOtpError extends ValidationError {
+  constructor() {
+    super('OTP is invalid or expired', 'INVALID_OTP');
+  }
+}
+
+export class OtpResendCooldownError extends RateLimitError {
+  constructor(secondsRemaining: number) {
+    super(`Resend available in ${secondsRemaining}s`, 'OTP_RESEND_COOLDOWN');
+  }
+}
+
+export class PendingRegistrationNotFoundError extends NotFoundError {
+  constructor() {
+    super('No pending registration for this email', 'PENDING_REGISTRATION_NOT_FOUND');
   }
 }

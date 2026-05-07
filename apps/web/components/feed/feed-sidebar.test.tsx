@@ -11,22 +11,10 @@ vi.mock('@/i18n/navigation', () => ({
   ),
 }));
 
-vi.mock('./newsletter-signup', () => ({
-  NewsletterSignup: () => <div data-testid="newsletter" />,
-}));
-
 const messages = {
   feed: {
     sidebar: {
       trendingTitle: 'Trending topics',
-      newsletter: {
-        title: 'Newsletter',
-        description: '',
-        placeholder: '',
-        submit: '',
-        submitting: '',
-        success: '',
-      },
     },
   },
 };
@@ -68,6 +56,5 @@ describe('FeedSidebar', () => {
   it('hides the trending block when no tags are returned', () => {
     renderSidebar({ trendingTags: [] });
     expect(screen.queryByText('Trending topics')).not.toBeInTheDocument();
-    expect(screen.getByTestId('newsletter')).toBeInTheDocument();
   });
 });
