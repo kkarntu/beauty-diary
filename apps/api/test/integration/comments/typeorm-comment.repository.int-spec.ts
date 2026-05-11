@@ -72,7 +72,7 @@ describe('TypeOrmCommentRepository (integration)', () => {
     expect(found!.postId).toBe(postId);
   });
 
-  it('listByPostId orders ascending and includes author info', async () => {
+  it('listByPostId orders newest-first and includes author info', async () => {
     const a = newComment(null, 'first');
     await repo.save(a);
     await new Promise((r) => setTimeout(r, 5));
@@ -81,8 +81,8 @@ describe('TypeOrmCommentRepository (integration)', () => {
 
     const list = await repo.listByPostId(postId);
     expect(list).toHaveLength(2);
-    expect(list[0]!.content).toBe('first');
-    expect(list[1]!.content).toBe('second');
+    expect(list[0]!.content).toBe('second');
+    expect(list[1]!.content).toBe('first');
     expect(list[0]!.author.nickname).toBe('commenttester');
   });
 

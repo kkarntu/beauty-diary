@@ -4,6 +4,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  NotFoundException,
   Post,
   Req,
   Res,
@@ -14,6 +15,7 @@ import { Throttle } from '@nestjs/throttler';
 import {
   InitiateRegisterDto,
   LoginDto,
+  RegisterDto,
   RequestPasswordResetDto,
   ResendRegisterOtpDto,
   ResetPasswordDto,
@@ -33,6 +35,10 @@ import {
   type RefreshTokensResult,
 } from '../application/commands/refresh-tokens.command';
 import { InitiateRegisterCommand } from '../application/commands/initiate-register.command';
+import {
+  RegisterUserCommand,
+  type RegisterUserResult,
+} from '../application/commands/register-user.command';
 import { ResendRegisterOtpCommand } from '../application/commands/resend-register-otp.command';
 import {
   VerifyRegisterCommand,
@@ -55,6 +61,29 @@ export class AuthController {
     private readonly queryBus: QueryBus,
     private readonly env: EnvService,
   ) {}
+
+  /**
+   * Direct one-step registration. Available only when NODE_ENV=test so
+   * integration tests can set up users without driving the OTP flow.
+   * Production users always go through register/initiate + register/verify.
+   */
+  @Post('register')
+  @HttpCode(HttpStatus.CREATED)
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
+  async register(
+    @Body(new ZodValidationPipe(RegisterDto)) body: RegisterDto,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<{ id: string }> {
+    if (this.env.nodeEnv !== 'test') {
+      // Hide the route entirely outside of test runs.
+      throw new NotFoundException();
+    }
+    const result = await this.commandBus.execute<RegisterUserCommand, RegisterUserResult>(
+      new RegisterUserCommand(body.email, body.password, body.nickname),
+    );
+    writeAuthCookies(res, this.env, result);
+    return { id: result.userId };
+  }
 
   @Post('register/initiate')
   @HttpCode(HttpStatus.NO_CONTENT)
