@@ -20,17 +20,15 @@ import {
 import { TOKEN_SERVICE, type TokenService } from '../../domain/ports/token-service';
 import { RefreshToken } from '../../domain/refresh-token.entity';
 import { hashOtp } from './initiate-register.handler';
-import {
-  VerifyRegisterCommand,
-  type VerifyRegisterResult,
-} from './verify-register.command';
+import { VerifyRegisterCommand, type VerifyRegisterResult } from './verify-register.command';
 
 const MAX_OTP_ATTEMPTS = 5;
 
 @CommandHandler(VerifyRegisterCommand)
-export class VerifyRegisterHandler
-  implements ICommandHandler<VerifyRegisterCommand, VerifyRegisterResult>
-{
+export class VerifyRegisterHandler implements ICommandHandler<
+  VerifyRegisterCommand,
+  VerifyRegisterResult
+> {
   constructor(
     @Inject(PENDING_REGISTRATION_REPOSITORY)
     private readonly pending: PendingRegistrationRepository,

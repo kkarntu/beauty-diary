@@ -5,10 +5,7 @@ import {
   type EmailOutboxRepository,
 } from '../../../notifications/domain/ports/outbox.repository';
 import { renderOtpEmail } from '../../../notifications/infrastructure/email-templates';
-import {
-  OtpResendCooldownError,
-  PendingRegistrationNotFoundError,
-} from '../../domain/auth.errors';
+import { OtpResendCooldownError, PendingRegistrationNotFoundError } from '../../domain/auth.errors';
 import {
   PENDING_REGISTRATION_REPOSITORY,
   type PendingRegistrationRepository,
@@ -20,9 +17,7 @@ const RESEND_COOLDOWN_MS = 60_000;
 const OTP_TTL_MS = 10 * 60 * 1000;
 
 @CommandHandler(ResendRegisterOtpCommand)
-export class ResendRegisterOtpHandler
-  implements ICommandHandler<ResendRegisterOtpCommand, void>
-{
+export class ResendRegisterOtpHandler implements ICommandHandler<ResendRegisterOtpCommand, void> {
   constructor(
     @Inject(PENDING_REGISTRATION_REPOSITORY)
     private readonly pending: PendingRegistrationRepository,
@@ -48,8 +43,7 @@ export class ResendRegisterOtpHandler
     const heading = 'Verify your email';
     const intro =
       'Here is a fresh 6-digit code to finish creating your Beauty Diary account. The code is valid for 10 minutes.';
-    const footerNote =
-      "If you didn't request this code, you can safely ignore this email.";
+    const footerNote = "If you didn't request this code, you can safely ignore this email.";
 
     await this.outbox.enqueue({
       toEmail: email,

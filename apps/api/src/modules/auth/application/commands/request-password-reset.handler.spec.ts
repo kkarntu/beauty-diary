@@ -2,7 +2,7 @@ import { User } from '../../../users/domain/user.entity';
 import type { UserRepository } from '../../../users/domain/ports/user.repository';
 import type { EmailOutboxRepository } from '../../../notifications/domain/ports/outbox.repository';
 import type { PasswordResetTokenRepository } from '../../domain/ports/password-reset-token.repository';
-import type { EnvService } from '../../../config/env.service';
+import type { EnvService } from '../../../../config/env.service';
 import { RequestPasswordResetCommand } from './request-password-reset.command';
 import { RequestPasswordResetHandler } from './request-password-reset.handler';
 

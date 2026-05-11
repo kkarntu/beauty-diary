@@ -77,13 +77,12 @@ All outbound mail flows through the **outbox table** — handlers enqueue, a 30-
 
 ## Production deployment overview
 
-| Service            | Provider          | What's deployed                                     |
-| ------------------ | ----------------- | --------------------------------------------------- |
-| Web (Next.js)      | Vercel            | Auto-build from `main`. Proxies `/api`, `/socket.io` to Render. |
-| API (NestJS)       | Render (free Web) | Auto-build from `main`. Migrations run on start.    |
-| Database           | Neon (Postgres)   | Connection string in `DATABASE_URL`.                |
-| Object storage     | Cloudflare R2     | Public bucket for cover images / avatars.           |
-| Email              | Brevo HTTP API    | `MAIL_DRIVER=brevo` on Render.                      |
+| Service        | Provider          | What's deployed                                                 |
+| -------------- | ----------------- | --------------------------------------------------------------- |
+| Web (Next.js)  | Vercel            | Auto-build from `main`. Proxies `/api`, `/socket.io` to Render. |
+| API (NestJS)   | Render (free Web) | Auto-build from `main`. Migrations run on start.                |
+| Database       | Neon (Postgres)   | Connection string in `DATABASE_URL`.                            |
+| Object storage | Cloudflare R2     | Public bucket for cover images / avatars.                       |
+| Email          | Brevo HTTP API    | `MAIL_DRIVER=brevo` on Render.                                  |
 
 The web app proxies `/api/*` and `/socket.io/*` through Next.js rewrites so cookies are first-party (avoids cross-origin cookie limits between Vercel and Render).
-

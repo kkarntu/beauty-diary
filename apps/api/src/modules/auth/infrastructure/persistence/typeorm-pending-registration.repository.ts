@@ -48,10 +48,7 @@ export class TypeOrmPendingRegistrationRepository implements PendingRegistration
   }
 
   async rotateOtp(email: string, otpHash: string, expiresAt: Date, now: Date): Promise<void> {
-    await this.repo.update(
-      { email },
-      { otpHash, expiresAt, lastResentAt: now, attempts: 0 },
-    );
+    await this.repo.update({ email }, { otpHash, expiresAt, lastResentAt: now, attempts: 0 });
   }
 
   async incrementAttempts(email: string): Promise<void> {

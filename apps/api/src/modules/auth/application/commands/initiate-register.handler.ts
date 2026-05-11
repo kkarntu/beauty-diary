@@ -6,15 +6,10 @@ import {
   EMAIL_OUTBOX_REPOSITORY,
   type EmailOutboxRepository,
 } from '../../../notifications/domain/ports/outbox.repository';
-import {
-  renderOtpEmail,
-} from '../../../notifications/infrastructure/email-templates';
+import { renderOtpEmail } from '../../../notifications/infrastructure/email-templates';
 import { USER_REPOSITORY, type UserRepository } from '../../../users/domain/ports/user.repository';
 import { EmailAlreadyTakenError, NicknameAlreadyTakenError } from '../../domain/auth.errors';
-import {
-  PASSWORD_HASHER,
-  type PasswordHasher,
-} from '../../domain/ports/password-hasher';
+import { PASSWORD_HASHER, type PasswordHasher } from '../../domain/ports/password-hasher';
 import {
   PENDING_REGISTRATION_REPOSITORY,
   type PendingRegistrationRepository,

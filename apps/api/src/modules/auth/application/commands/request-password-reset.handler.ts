@@ -60,9 +60,9 @@ export class RequestPasswordResetHandler implements ICommandHandler<
     const url = `${this.env.webOrigin.replace(/\/$/, '')}/reset-password?token=${rawToken}`;
     const heading = 'Reset your password';
     const intro =
-      "We received a request to reset the password for your Beauty Diary account. Tap the button below to choose a new one. The link is valid for 1 hour.";
+      'We received a request to reset the password for your Beauty Diary account. Tap the button below to choose a new one. The link is valid for 1 hour.';
     const ctaLabel = 'Reset password';
-    const fallbackNote = "Button not working? Copy and paste this link into your browser:";
+    const fallbackNote = 'Button not working? Copy and paste this link into your browser:';
     const footerNote =
       "If you didn't request a password reset, you can safely ignore this email — your password won't change.";
 

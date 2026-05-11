@@ -17,10 +17,8 @@ const COLOR = {
   border: '#ebd9d9',
 } as const;
 
-const FONT_BODY =
-  '"Helvetica Neue", Helvetica, Arial, "Segoe UI", Roboto, sans-serif';
-const FONT_DISPLAY =
-  'Georgia, "Times New Roman", "Playfair Display", serif';
+const FONT_BODY = '"Helvetica Neue", Helvetica, Arial, "Segoe UI", Roboto, sans-serif';
+const FONT_DISPLAY = 'Georgia, "Times New Roman", "Playfair Display", serif';
 
 interface ActionEmailInput {
   preheader: string;
@@ -33,15 +31,7 @@ interface ActionEmailInput {
 }
 
 export function renderActionEmail(input: ActionEmailInput): string {
-  const {
-    preheader,
-    heading,
-    intro,
-    ctaLabel,
-    ctaUrl,
-    fallbackNote,
-    footerNote,
-  } = input;
+  const { preheader, heading, intro, ctaLabel, ctaUrl, fallbackNote, footerNote } = input;
 
   return `<!doctype html>
 <html lang="en">

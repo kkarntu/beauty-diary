@@ -21,11 +21,7 @@ import { Input } from '@/components/ui/input';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { Link, useRouter } from '@/i18n/navigation';
 import { getApiErrorCode } from '@/lib/api';
-import {
-  useInitiateRegister,
-  useResendRegisterOtp,
-  useVerifyRegister,
-} from '@/lib/queries/auth';
+import { useInitiateRegister, useResendRegisterOtp, useVerifyRegister } from '@/lib/queries/auth';
 import { routes } from '@/lib/routes';
 
 type FormValues = z.infer<typeof RegisterDto>;

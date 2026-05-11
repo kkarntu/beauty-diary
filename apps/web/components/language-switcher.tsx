@@ -47,10 +47,7 @@ export function LanguageSwitcher({ className }: Props) {
           size="sm"
           aria-label={t('label')}
           disabled={isPending}
-          className={cn(
-            'text-foreground-muted hover:text-foreground gap-1.5 px-2.5',
-            className,
-          )}
+          className={cn('text-foreground-muted hover:text-foreground gap-1.5 px-2.5', className)}
         >
           <Globe className="h-4 w-4" />
           <span className="text-xs font-semibold tracking-wide">{active.short}</span>
@@ -77,7 +74,7 @@ export function LanguageSwitcher({ className }: Props) {
                 >
                   {l.label}
                 </span>
-                <span className="text-foreground-muted text-[11px] tracking-wide uppercase">
+                <span className="text-foreground-muted text-[11px] uppercase tracking-wide">
                   {l.short}
                 </span>
               </span>
